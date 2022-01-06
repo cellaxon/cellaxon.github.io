@@ -54,7 +54,7 @@
     var rWidth  = 2;
     var rHeight = 3;
     
-    var callDelay = 50;     // 함수 호출 딜레이
+    var callDelay = 100;     // 함수 호출 딜레이
     var moveRangeVert = 5;  // 좌우 이동
     var moveRangeHori = 2;  // 상하 이동
     var moveRangeVertRange = 5;  // 좌우 이동 범위
