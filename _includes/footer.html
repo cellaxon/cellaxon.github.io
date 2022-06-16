@@ -1,15 +1,16 @@
 <footer id="footer" class="panel">
-  <div class="inner split">
+  <!--<div class="inner split">-->
     <div>
       <section>
         <h2>{{ site.title }}</h2>
         <p>{{ site.description }}</p>
-        <p>Address: {{ site.address }}</p>
-        <p>Phone: {{ site.phone }}</p>
-        <p>Fax: {{ site.fax }}</p>
+        <p>{{ site.address }}<br>
+        Phone: {{ site.phone }}<br>
+        Fax: {{ site.fax }}</p>
       </section>
       {%- include social.html -%}
     </div>
+    <!--
     <div>
       <section>
         <h2>Get in touch</h2>
@@ -32,5 +33,6 @@
         </form>
       </section>
     </div>
-  </div>
+    -->
+  <!--</div>-->
 </footer>
