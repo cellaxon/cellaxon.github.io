@@ -215,8 +215,8 @@ async function connect() {
   
   time_start = +new Date();
 
-  await stop_all_notifications();
-  await start_all_notifications();
+  //await stop_all_notifications();
+  //await start_all_notifications();
 }
 
 function onDisconnectButtonClick() {
@@ -246,7 +246,7 @@ function start_all_notifications() {
   .then(characteristic => {
     main_characteristic_respiratory_rate = characteristic;
     return main_characteristic_respiratory_rate.startNotifications().then(_ => {
-      log('> Main / Respiratory Rate Notifications started');
+      log('> Main / Respiratory rate notifications started');
       main_characteristic_respiratory_rate.addEventListener('characteristicvaluechanged',
         handle_main_respiratory_rate_notifications);
     });
@@ -259,7 +259,7 @@ function start_all_notifications() {
   .then(characteristic => {
     main_characteristic_heart_rate = characteristic;
     return main_characteristic_heart_rate.startNotifications().then(_ => {
-      log('> Main / Heart Rate Notifications started');
+      log('> Main / Heart rate notifications started');
       main_characteristic_heart_rate.addEventListener('characteristicvaluechanged',
           handle_main_heart_rate_notifications);
     });
@@ -272,7 +272,7 @@ function start_all_notifications() {
   .then(characteristic => {
     schedule_characteristic_respiratory_rate = characteristic;
     return schedule_characteristic_respiratory_rate.startNotifications().then(_ => {
-      log('> Schedule / Respiratory Rate Notifications started');
+      log('> Schedule / Respiratory rate notifications started');
       schedule_characteristic_respiratory_rate.addEventListener('characteristicvaluechanged',
         handle_schedule_respiratory_rate_notifications);
     });
@@ -285,7 +285,7 @@ function start_all_notifications() {
   .then(characteristic => {
     schedule_characteristic_heart_rate = characteristic;
     return schedule_characteristic_heart_rate.startNotifications().then(_ => {
-      log('> Schedule / Heart Rate Notifications started');
+      log('> Schedule / Heart rate notifications started');
       schedule_characteristic_heart_rate.addEventListener('characteristicvaluechanged',
           handle_schedule_heart_rate_notifications);
     });
@@ -299,7 +299,7 @@ function stop_all_notifications() {
   if (main_characteristic_respiratory_rate) {
     main_characteristic_respiratory_rate.stopNotifications()
     .then(_ => {
-      log('> Main / Respiratory Rate Notifications stopped');
+      log('> Main / Respiratory rate notifications stopped');
       main_characteristic_respiratory_rate.removeEventListener('characteristicvaluechanged',
         handle_main_respiratory_rate_notifications);
     })
@@ -311,7 +311,7 @@ function stop_all_notifications() {
   if (main_characteristic_heart_rate) {
     main_characteristic_heart_rate.stopNotifications()
     .then(_ => {
-      log('> Main / Heart Rate Notifications stopped');
+      log('> Main / Heart rate notifications stopped');
       main_characteristic_heart_rate.removeEventListener('characteristicvaluechanged',
         handle_main_heart_rate_notifications);
     })
@@ -323,7 +323,7 @@ function stop_all_notifications() {
   if (schedule_characteristic_respiratory_rate) {
     schedule_characteristic_respiratory_rate.stopNotifications()
     .then(_ => {
-      log('> Schedule / Respiratory Rate Notifications stopped');
+      log('> Schedule / Respiratory rate notifications stopped');
       schedule_characteristic_respiratory_rate.removeEventListener('characteristicvaluechanged',
         handle_schedule_respiratory_rate_notifications);
     })
@@ -335,7 +335,7 @@ function stop_all_notifications() {
   if (schedule_characteristic_heart_rate) {
     schedule_characteristic_heart_rate.stopNotifications()
     .then(_ => {
-      log('> Schedule / Heart Rate Notifications stopped');
+      log('> Schedule / Heart rate notifications stopped');
       schedule_characteristic_heart_rate.removeEventListener('characteristicvaluechanged',
         handle_schedule_heart_rate_notifications);
     })
