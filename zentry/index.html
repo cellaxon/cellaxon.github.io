@@ -88,6 +88,9 @@
   <br>
   <button id="start">Start</button>
   <button id="stop">Stop</button>
+  <br>
+  <input id="flag_show_notification_on_log_area" type="checkbox">
+  <label for="flag_show_notification_on_log_area">Show notification data on log area</label>
 </form>
 
 
@@ -212,8 +215,8 @@ async function connect() {
   
   time_start = +new Date();
 
-  await start_all_notification_disable();
-  await start_all_notification_enable();
+  await stop_all_notifications();
+  await start_all_notifications();
 }
 
 function onDisconnectButtonClick() {
@@ -234,7 +237,7 @@ function onDisconnected(event) {
 }
 
 
-function start_all_notification_enable() {
+function start_all_notifications() {
   if (!bluetooth_device) {
     return;
   }
@@ -292,7 +295,7 @@ function start_all_notification_enable() {
   });
 }
 
-function stop_all_notification_disable() {
+function stop_all_notifications() {
   if (main_characteristic_respiratory_rate) {
     main_characteristic_respiratory_rate.stopNotifications()
     .then(_ => {
@@ -342,13 +345,22 @@ function stop_all_notification_disable() {
   }
 }
 
+function check_show_notification_on_log_area()
+{
+  return document.querySelector('#flag_show_notification_on_log_area').checked;
+}
+
 function handle_main_respiratory_rate_notifications(event) {
   let value = event.target.value;
 
   let value_respiratory_rate = value.getInt32(0, true);
 
   add_main_respiratory_rate(value_respiratory_rate);
-  log('> Main / Respiratory rate: ' + value_respiratory_rate);
+
+  if ( check_show_notification_on_log_area() )
+  {
+    log('> Main / Respiratory rate: ' + value_respiratory_rate);
+  }
 }
 
 function handle_main_heart_rate_notifications(event) {
@@ -357,7 +369,11 @@ function handle_main_heart_rate_notifications(event) {
   let value_heart_rate = value.getInt32(0, true);
 
   add_main_heart_rate(value_heart_rate);
-  log('> Main / Heart rate: ' + value_heart_rate);
+  
+  if ( check_show_notification_on_log_area() )
+  {
+    log('> Main / Heart rate: ' + value_heart_rate);
+  }
 }
 
 function handle_schedule_respiratory_rate_notifications(event) {
@@ -365,7 +381,11 @@ function handle_schedule_respiratory_rate_notifications(event) {
 
   let value_respiratory_rate = value.getUint32(0, true);
 
-  log('> Schedule / Respiratory rate: ' + value_respiratory_rate);
+  
+  if ( check_show_notification_on_log_area() )
+  {
+    log('> Schedule / Respiratory rate: ' + value_respiratory_rate);
+  }
 }
 
 function handle_schedule_heart_rate_notifications(event) {
@@ -375,7 +395,11 @@ function handle_schedule_heart_rate_notifications(event) {
   let value_heart_rate_db = value.getInt32(4, true);
 
   add_schedule_heart_rate_db(value_heart_rate_db);
-  log('> Schedule / Heart rate: ' + value_heart_rate + " / dB: " +  value_heart_rate_db);
+  
+  if ( check_show_notification_on_log_area() )
+  {
+    log('> Schedule / Heart rate: ' + value_heart_rate + " / dB: " +  value_heart_rate_db);
+  }
 }
 
 
@@ -490,7 +514,7 @@ function add_schedule_heart_rate_db(value) {
     event.preventDefault();
 
     if (isWebBluetoothEnabled()) {
-      start_all_notification_enable();
+      start_all_notifications();
     }
   });
   document.querySelector('#stop').addEventListener('click', function(event) {
@@ -498,7 +522,7 @@ function add_schedule_heart_rate_db(value) {
     event.preventDefault();
 
     if (isWebBluetoothEnabled()) {
-      stop_all_notification_disable();
+      stop_all_notifications();
     }
   });
 </script>
