@@ -1,17 +1,16 @@
-title: Multiverse by HTML5 UP
-author: João Neto
-email: joao@neto.pt
+title: CELLAXON
+author: Sanghyo Lee
+email: ryan@cellaxon.com
 description: >-
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  CELLAXON Inc.
+company_name: CELLAXON Inc.
+address: 202-2409, 142, Dongtangambaesan-ro, Hwaseong-si, Gyeonggi-do, Republic of Korea
+phone: +82-31-8043-3215
+fax: +82-31-8043-3216
 
 social:
-  twitter: joaomlneto
-  facebook: joaomlneto
-  instagram: joaomlneto
-  github: joaomlneto
-  linkedin:
+  github: cellaxon
+  linkedin: cellaxon
 
 # Build settings
 markdown: kramdown
