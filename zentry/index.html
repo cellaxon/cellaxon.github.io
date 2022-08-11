@@ -24,16 +24,13 @@
 
     <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="main.css">
-    
+    <!-- HTML !-->
+
   </head>
 
   <body>
     <h1>Dolittle Monitor</h1>
-    <p class="availability">
-      Available in <a target="_blank" href="https://www.chromestatus.com/feature/5264933985976320">Chrome 55+</a>
-    </p>
-
-
+    <br>
 <script>
   if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js');
@@ -83,14 +80,14 @@
 
 <form>
   <input id="namePrefix" type="text" placeholder="Device Name Prefix" value="Dolit">
-  <button id="scan">Scan</button>
-  <button id="disconnect">Disconnect</button>
-  <br>
-  <button id="start">Start</button>
-  <button id="stop">Stop</button>
-  <br>
-  <input id="flag_show_notification_on_log_area" type="checkbox">
-  <label for="flag_show_notification_on_log_area">Show notification data on log area</label>
+  <button class="button-17" role="button" id="scan">Scan</button>
+  <button class="button-17" role="button" id="disconnect">Disconnect</button>
+  <button class="button-17" role="button" id="start">Start Notifications</button>
+  <button class="button-17" role="button" id="stop">Stop Notifications</button>
+  <label class="switch">
+    <input id="flag_show_notification_on_log_area" type="checkbox">
+    <span class="slider round"></span>
+  </label>
 </form>
 
 
@@ -122,9 +119,9 @@
   };
 </script>
 
-<div><canvas id="chart_respiratory_rate" width="800" height="300"></canvas></div>
-<div><canvas id="chart_heart_rate" width="800" height="300"></canvas></div>
-<div><canvas id="chart_heart_rate_db" width="800" height="300"></canvas></div>
+<div><canvas id="chart_respiratory_rate" width="800" height="400"></canvas></div>
+<div><canvas id="chart_heart_rate" width="800" height="400"></canvas></div>
+<div><canvas id="chart_heart_rate_db" width="800" height="400"></canvas></div>
 
 <h3>Live Output</h3>
 <div id="output" class="output">
