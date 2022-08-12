@@ -19,10 +19,9 @@
         }
       });
     </script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>-->
-    <script src="chart.min.js"></script>
-
-    <link rel="icon" href="icon.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    
+    <link rel="icon" href="../icon.png">
     <link rel="stylesheet" href="main.css">
     <!-- HTML !-->
 
@@ -84,6 +83,7 @@
   <button class="button-17" role="button" id="disconnect">Disconnect</button>
   <button class="button-17" role="button" id="start">Start Notifications</button>
   <button class="button-17" role="button" id="stop">Stop Notifications</button>
+  <input id="length_of_chart" type="text" value="120">
   <label class="switch">
     <input id="flag_show_notification_on_log_area" type="checkbox">
     <span class="slider round"></span>
@@ -119,9 +119,9 @@
   };
 </script>
 
-<div><canvas id="chart_respiratory_rate" width="800" height="400"></canvas></div>
-<div><canvas id="chart_heart_rate" width="800" height="400"></canvas></div>
-<div><canvas id="chart_heart_rate_db" width="800" height="400"></canvas></div>
+<div><canvas id="chart_respiratory_rate" width="100%" height="30%"></canvas></div>
+<div><canvas id="chart_heart_rate" width="100%" height="30%"></canvas></div>
+<div><canvas id="chart_heart_rate_db" width="100%" height="30%"></canvas></div>
 
 <h3>Live Output</h3>
 <div id="output" class="output">
@@ -167,8 +167,6 @@ var count_updated_schedule_heart_rate_db = 0;
 
 var time_start = +new Date();
 
-const length_of_chart = 50;
-
 async function onScanButtonClick() {
   let options = {filters: []};
 
@@ -212,8 +210,8 @@ async function connect() {
   
   time_start = +new Date();
 
-  //await stop_all_notifications();
-  //await start_all_notifications();
+  await stop_all_notifications();
+  await start_all_notifications();
 }
 
 function onDisconnectButtonClick() {
@@ -416,13 +414,18 @@ function handleNotifications(event) {
 }
 
 
+function get_length_of_chart() {
+  let length_of_chart = parseInt(document.querySelector('#length_of_chart').value);
+  length_of_chart = length_of_chart || 120;
+  return length_of_chart;
+}
+
 
 function add_main_respiratory_rate(value) {
   let data = chart_respiratory_rate.data;
-
   if (data.datasets.length > 0) {
 
-    while (data.datasets[0].data.length >= length_of_chart)
+    while (data.datasets[0].data.length >= get_length_of_chart())
     {
         data.datasets[0].data.shift();
         data.labels.shift();        
@@ -444,7 +447,7 @@ function add_main_heart_rate(value) {
 
   if (data.datasets.length > 0) {
 
-    while (data.datasets[0].data.length >= length_of_chart)
+    while (data.datasets[0].data.length >= get_length_of_chart())
     {
         data.datasets[0].data.shift();
         data.labels.shift();        
@@ -466,7 +469,7 @@ function add_schedule_heart_rate_db(value) {
 
   if (data.datasets.length > 0) {
 
-    while (data.datasets[0].data.length >= length_of_chart)
+    while (data.datasets[0].data.length >= get_length_of_chart())
     {
         data.datasets[0].data.shift();
         data.labels.shift();        

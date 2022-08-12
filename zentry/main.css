@@ -1,12 +1,11 @@
 body {
   background-color: #ffffff;
-  box-sizing: border-box;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
-@media screen and (min-width: 832px) {
+@media screen {
   body {
-    width: 800px;
+    width: 96%;
     margin: 0 auto;
     background: #0f2027; /* fallback for old browsers */
     background: linear-gradient(to right,#ffffff, #fafff7, #efffee);
