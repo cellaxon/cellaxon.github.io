@@ -620,17 +620,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
-// Redirect users based on browser language
-document.addEventListener('DOMContentLoaded', () => {
-    const userLang = navigator.language || navigator.userLanguage;
-    const isKorean = userLang.startsWith('ko');
-
-    // Redirect to Korean page if the user's language is Korean
-    if (isKorean) {
-        const currentPath = window.location.pathname;
-        if (!currentPath.startsWith('/ko/')) {
-            window.location.href = '/ko/' + currentPath;
-        }
-    }
-});
