@@ -504,3 +504,176 @@ body {
     }
 }
 
+/* index.html에서 이동된 CSS */
+:root {
+    --primary-gradient: linear-gradient(135deg, #0ea5a4 0%, #6366f1 60%);
+    --primary-teal: #0ea5a4;
+    --primary-indigo: #6366f1;
+    --primary-accent: #06b6d4;
+    --text-dark: #333333;
+    --text-light: #666666;
+    --background-light: #FAFAFA;
+    --background-white: #FFFFFF;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --border-light: #E5E5E5;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--background-light);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 4px 20px var(--shadow);
+}
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+.hero {
+    padding: 4rem 0;
+    background: var(--background-white);
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+.hero.header-merged {
+    background: var(--primary-gradient);
+    color: white;
+}
+
+.hero.header-merged .hero-header {
+    margin-bottom: 1rem;
+}
+
+.hero.header-merged .logo, .hero.header-merged .tagline {
+    color: white;
+}
+
+.hero.header-merged .cta-button.secondary {
+    border-color: rgba(255,255,255,0.6);
+    color: white;
+}
+
+.hero.header-merged .cta-button.secondary:hover {
+    background: rgba(255,255,255,0.12);
+    color: white;
+}
+
+.hero.header-merged h1 {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: white !important;
+    color: white !important;
+}
+
+.hero.header-merged p {
+    color: rgba(255,255,255,0.92) !important;
+}
+
+.hero.header-merged .cta-button {
+    background: white !important;
+    color: var(--primary-purple) !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.hero.header-merged .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.16);
+}
+
+.hero.header-merged .cta-button.secondary {
+    background: transparent !important;
+    color: white !important;
+    border-color: rgba(255,255,255,0.8) !important;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button {
+    display: inline-block;
+    background: var(--primary-gradient);
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(75, 0, 130, 0.3);
+}
+
+.cta-button.secondary {
+    background: transparent;
+    color: var(--primary-purple);
+    border: 2px solid var(--primary-purple);
+}
+
+.cta-button.secondary:hover {
+    background: var(--primary-purple);
+    color: white;
+}
+
+.hero-ctas {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.lang-switch {
+    margin-top: 2rem;
+}
+
+.lang-switch a {
+    color: rgba(255,255,255,0.9);
+    font-size: 0.95rem;
+    text-decoration: underline;
+}
+
