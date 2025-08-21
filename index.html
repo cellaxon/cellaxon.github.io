@@ -30,58 +30,572 @@
     <link href="assets/css/main.css" rel="stylesheet">
     
     <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        :root {
+            --primary-gradient: linear-gradient(135deg, #FF69B4 0%, #9370DB 50%, #4169E1 100%);
+            --primary-pink: #FF69B4;
+            --primary-purple: #9370DB;
+            --primary-blue: #4169E1;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --background-light: #FAFAFA;
+            --background-white: #FFFFFF;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --border-light: #E5E5E5;
         }
-        .hero-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            background: var(--background-white);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero.header-merged {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .hero.header-merged .hero-header {
+            margin-bottom: 1.25rem;
+        }
+
+        .hero.header-merged .logo, .hero.header-merged .tagline {
+            color: white;
+        }
+
+        .hero.header-merged .cta-button.secondary {
+            border-color: rgba(255,255,255,0.6);
+            color: white;
+        }
+
+        .hero.header-merged .cta-button.secondary:hover {
+            background: rgba(255,255,255,0.12);
+            color: white;
+        }
+
+        /* Ensure high contrast for hero when header is merged into the gradient background */
+        .hero.header-merged h1 {
+            /* remove gradient-text clipping and force solid white for readability */
+            background: none !important;
+            -webkit-background-clip: initial !important;
+            -webkit-text-fill-color: white !important;
+            color: white !important;
+        }
+
+        .hero.header-merged p {
+            color: rgba(255,255,255,0.92) !important;
+        }
+
+        .hero.header-merged .cta-button {
+            /* primary CTA: white background, brand-colored text for strong contrast */
+            background: white !important;
+            color: var(--primary-purple) !important;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .hero.header-merged .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.16);
+        }
+
+        .hero.header-merged .cta-button.secondary {
+            /* secondary CTA: transparent with white border and white text */
+            background: transparent !important;
+            color: white !important;
+            border-color: rgba(255,255,255,0.8) !important;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 4rem 0;
+            background: var(--background-light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
         .feature-card {
-            transition: all 0.3s ease;
+            background: var(--background-white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 8px 30px var(--shadow);
         }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Technology Stack */
+        .tech-stack {
+            padding: 4rem 0;
+            background: var(--background-white);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .tech-item {
+            padding: 1.5rem;
+            background: var(--background-light);
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .tech-item:hover {
+            border-color: var(--primary-purple);
+        }
+
+        .tech-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .tech-item p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Problem & Solution */
+        .problem-solution {
+            padding: 4rem 0;
+            background: var(--background-light);
+        }
+
+        .problem-solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .problem-card, .solution-card {
+            background: var(--background-white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .problem-card {
+            border-left: 4px solid var(--primary-pink);
+        }
+
+        .solution-card {
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .problem-card h3, .solution-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .problem-card ul, .solution-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .problem-card li, .solution-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .problem-card li::before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+        }
+
+        .solution-card li::before {
+            content: '✅';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 4rem 0;
+            background: var(--background-white);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
         .pricing-card {
-            transition: all 0.3s ease;
+            background: var(--background-white);
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary-purple);
             transform: scale(1.05);
         }
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transition: all 0.3s ease;
+
+        .pricing-card.featured::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
-        .btn-primary:hover {
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-period {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .plan-features li {
+            padding: 0.5rem 0;
+            color: var(--text-light);
+        }
+
+        /* CTA Buttons */
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 20px rgba(75, 0, 130, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--primary-purple);
+            border: 2px solid var(--primary-purple);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--primary-purple);
+            color: white;
+        }
+
+        /* Hero CTAs wrapper to avoid inline styles */
+        .hero-ctas {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Download Section */
+        .download {
+            padding: 4rem 0;
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .download h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .download p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .download-button {
+            background: white;
+            color: var(--primary-purple);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 4rem 0;
+            background: var(--background-white);
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            padding: 1.5rem;
+            background: var(--background-light);
+            border-radius: 8px;
+        }
+
+        .contact-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .contact-item p {
+            color: var(--text-light);
+        }
+
+        .contact-item a {
+            color: var(--primary-purple);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid #444;
+            padding-top: 1rem;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .problem-solution-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
         }
     </style>
 </head>
 <body class="bg-gray-50">
     <!-- Navigation removed - single-page fullpage layout -->
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white fullpage-section">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="max-w-4xl mx-auto">
-                <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                    AI로 찾는<br>
-                    <span class="text-yellow-300">로컬 파일</span>
-                </h1>
-                <p class="text-xl md:text-2xl mb-8 text-gray-100 leading-relaxed">
-                    사진, 문서, PDF를 AI가 분석하여 자연어로 검색할 수 있는<br>
-                    혁신적인 로컬 AI 검색 플랫폼
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                                    <a href="#download" class="bg-white text-gray-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors inline-block cta-pulse">
-                    <i class="fab fa-apple mr-2"></i>macOS 다운로드
-                </a>
-                    <a href="#features" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-gray-800 transition-colors">
-                        자세히 보기
-                    </a>
-                </div>
+    <!-- Hero (header merged) -->
+    <section class="hero header-merged fullpage-section">
+        <div class="container text-center">
+            <div class="hero-header">
+                <div class="logo">CELLAXON AI Finder</div>
+                <div class="tagline">혁신적인 로컬 AI 검색 플랫폼</div>
+            </div>
+            <h1>사진, 문서, PDF를 AI가 분석하여<br>자연어로 검색할 수 있는<br>혁신적인 로컬 AI 검색 플랫폼</h1>
+            <p>기존 파일 검색과는 완전히 다른 AI 기반의 지능형 검색 경험을 제공합니다.<br>모든 데이터는 로컬에서 처리되어 개인정보 유출 걱정이 없습니다.</p>
+            <div class="hero-ctas">
+                <a href="#features" class="cta-button secondary">자세히 알아보기</a>
             </div>
         </div>
     </section>
@@ -96,140 +610,32 @@
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="feature-card bg-white p-8 rounded-xl shadow-lg border border-gray-100 card-hover">
-                    <div class="w-16 h-16 icon-bg-blue rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-brain text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">멀티모달 AI 분석</h3>
-                    <p class="text-gray-600">
-                        이미지, 문서, PDF를 AI가 자동으로 분석하여 객체, 텍스트, 내용을 이해하고 인덱싱합니다
-                    </p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>멀티모달 AI 인덱싱</h3>
+                    <p>이미지, 문서, PDF를 AI가 자동으로 분석하여 객체, 텍스트, 내용을 이해하고 인덱싱합니다. OCR, 객체 감지, 캡션 생성을 통해 모든 콘텐츠를 검색 가능하게 만듭니다.</p>
                 </div>
-
-                <div class="feature-card bg-white p-8 rounded-xl shadow-lg border border-gray-100 card-hover">
-                    <div class="w-16 h-16 icon-bg-green rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-shield-alt text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">100% 로컬 처리</h3>
-                    <p class="text-gray-600">
-                        모든 데이터는 로컬에서 처리되어 개인정보 유출 걱정이 없습니다
-                    </p>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>완전 로컬 처리</h3>
+                    <p>모든 데이터는 로컬에서 처리되어 개인정보 유출 걱정이 없습니다. 인터넷 연결 없이도 모든 기능을 사용할 수 있으며, 기업의 보안 정책을 준수합니다.</p>
                 </div>
-
-                <div class="feature-card bg-white p-8 rounded-xl shadow-lg border border-gray-100 card-hover">
-                    <div class="w-16 h-16 icon-bg-purple rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-search text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">자연어 검색</h3>
-                    <p class="text-gray-600">
-                        "지난 6월 회의 자료 중 매출 그래프가 있는 슬라이드" 같은 직관적인 검색이 가능합니다
-                    </p>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>자연어 검색</h3>
+                    <p>"지난 6월 회의 자료 중 매출 그래프가 있는 슬라이드" 같은 직관적인 검색이 가능합니다. RAG 기반으로 관련 문서를 찾고 요약까지 제공합니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>시각화 대시보드</h3>
+                    <p>3단 구조(폴더 트리, 검색 결과, 미리보기)의 직관적인 UI와 문서 분포, 유사도 네트워크 등을 시각화하여 정보 탐색을 효율적으로 만듭니다.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-20 bg-gray-50 fullpage-section">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">요금제</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    개인부터 기업까지 모든 사용자에게 최적화된 요금제를 제공합니다
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="pricing-card bg-white p-8 rounded-xl shadow-lg border-2 border-gray-200 card-hover">
-                    <div class="text-center mb-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Personal</h3>
-                        <p class="text-gray-600">개인 사용자</p>
-                    </div>
-                    <div class="text-center mb-8">
-                        <div class="text-4xl font-bold text-gray-900 mb-2">₩9,900</div>
-                        <div class="text-gray-600">월</div>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-3"></i>
-                            기본 폴더 3개 지정
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-3"></i>
-                            최대 10만 개 문서·이미지
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-3"></i>
-                            기본 AI 검색·OCR
-                        </li>
-                    </ul>
-                    <button class="w-full bg-gray-800 text-white py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors">
-                        시작하기
-                    </button>
-                </div>
-
-                <div class="pricing-card bg-white p-8 rounded-xl shadow-lg border-2 border-blue-500 relative card-hover">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">인기</span>
-                    </div>
-                    <div class="text-center mb-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Professional</h3>
-                        <p class="text-gray-600">전문가·프리랜서</p>
-                    </div>
-                    <div class="text-center mb-8">
-                        <div class="text-4xl font-bold text-gray-900 mb-2">₩29,900</div>
-                        <div class="text-gray-600">월</div>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-3"></i>
-                            Personal 기능 모두 포함
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-3"></i>
-                            폴더 무제한 지정
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-3"></i>
-                            동영상·오디오 분석
-                        </li>
-                    </ul>
-                    <button class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                        시작하기
-                    </button>
-                </div>
-
-                <div class="pricing-card bg-white p-8 rounded-xl shadow-lg border-2 border-gray-200 card-hover">
-                    <div class="text-center mb-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
-                        <p class="text-gray-600">소규모 팀·기업</p>
-                    </div>
-                    <div class="text-center mb-8">
-                        <div class="text-4xl font-bold text-gray-900 mb-2">₩59,900</div>
-                        <div class="text-gray-600">월</div>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-3"></i>
-                            Professional 기능 모두 포함
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-3"></i>
-                            사용자·권한 관리
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-3"></i>
-                            감사 로그
-                        </li>
-                    </ul>
-                    <button class="w-full bg-gray-800 text-white py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors">
-                        문의하기
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Pricing section removed -->
 
     <!-- Download Section -->
     <section id="download" class="py-20 bg-white fullpage-section">
@@ -263,82 +669,43 @@
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white fullpage-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold text-gray-900 mb-4">문의하기</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    CELLAXON AI Finder에 대한 문의사항이나 기업용 라이선스 문의가 있으시면 언제든 연락주세요
-                </p>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">CELLAXON Inc. 연락처 정보입니다. 기업 문의는 아래 정보를 참고해 주시기 바랍니다.</p>
             </div>
-            
-            <div class="grid md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">연락처</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <i class="fas fa-envelope text-blue-600 mr-3 w-6"></i>
-                            <span class="text-gray-700">contact@cellaxon.com</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-globe text-blue-600 mr-3 w-6"></i>
-                            <span class="text-gray-700">www.cellaxon.com</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt text-blue-600 mr-3 w-6"></i>
-                            <span class="text-gray-700">서울특별시, 대한민국</span>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-8">
-                        <h4 class="text-lg font-semibold text-gray-900 mb-4">기업 문의</h4>
-                        <p class="text-gray-600 mb-4">
-                            기업용 라이선스, 대량 구매, 맞춤형 솔루션에 대한 문의사항이 있으시면 별도로 연락드립니다.
-                        </p>
-                        <a href="mailto:enterprise@cellaxon.com" class="text-blue-600 hover:text-blue-700 font-semibold">
-                            enterprise@cellaxon.com →
-                        </a>
-                    </div>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>회사명</h4>
+                    <p>CELLAXON Inc.</p>
                 </div>
-                
-                <div>
-                    <form class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">이름</label>
-                            <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">이메일</label>
-                            <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        </div>
-                        <div>
-                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">제목</label>
-                            <input type="text" id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">메시지</label>
-                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                            메시지 보내기
-                        </button>
-                    </form>
+                <div class="contact-item">
+                    <h4>주소</h4>
+                    <p>202-2409, 142, Dongtangambaesan-ro,<br>Hwaseong-si, Gyeonggi-do, Republic of Korea</p>
+                </div>
+                <div class="contact-item">
+                    <h4>전화</h4>
+                    <p><a href="tel:+823180433215">+82-31-8043-3215</a></p>
+                </div>
+                <div class="contact-item">
+                    <h4>팩스</h4>
+                    <p>+82-31-8043-3216</p>
+                </div>
+                <div class="contact-item">
+                    <h4>웹 & 블로그</h4>
+                    <p><a href="https://blog.cellaxon.com" target="_blank" rel="noopener">blog.cellaxon.com</a></p>
+                    <p><a href="https://www.linkedin.com/company/cellaxon" target="_blank" rel="noopener">LinkedIn /cellaxon</a></p>
+                </div>
+                <div class="contact-item">
+                    <h4>이메일</h4>
+                    <p>
+                        <button class="email-canvas" data-user="contact" data-domain="cellaxon.com" aria-label="이메일 보내기" title="이메일 보내기"></button>
+                        <noscript><a href="mailto:contact@cellaxon.com">contact@cellaxon.com</a></noscript>
+                    </p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h3 class="text-2xl font-bold mb-4">CELLAXON</h3>
-                <p class="text-gray-400 mb-4">
-                    로컬 AI 검색의 혁신을 이끄는 CELLAXON AI Finder
-                </p>
-                <p class="text-gray-500">&copy; 2024 CELLAXON. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
     <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
 </body>

@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initFullpageNavigation();
     initWheelFullpage();
     initMobileTapNavigation();
+    initEmailCanvasButtons();
 });
 
 // Navigation functionality
@@ -47,6 +48,72 @@ function initNavigation() {
             if (link.getAttribute('href') === `#${current}`) {
                 link.classList.add('nav-active');
             }
+        });
+    });
+}
+
+// Email canvas buttons: render email text as image on a canvas to reduce scraping
+function initEmailCanvasButtons() {
+    const buttons = document.querySelectorAll('button.email-canvas');
+    if (!buttons.length) return;
+
+    buttons.forEach(btn => {
+        const user = btn.dataset.user || 'contact';
+        const domain = btn.dataset.domain || 'example.com';
+        const email = `${user}@${domain}`;
+
+        // create canvas
+        const canvas = document.createElement('canvas');
+        const width = 260;
+        const height = 40;
+        canvas.width = width;
+        canvas.height = height;
+        canvas.style.width = `${width/1.5}px`;
+        canvas.style.height = `${height/1.5}px`;
+        canvas.style.border = 'none';
+        canvas.style.background = 'transparent';
+        canvas.setAttribute('aria-hidden', 'true');
+
+        const ctx = canvas.getContext('2d');
+        // background rounded rect
+        const radius = 8;
+        ctx.fillStyle = '#fff';
+        ctx.beginPath();
+        ctx.moveTo(radius, 0);
+        ctx.lineTo(width - radius, 0);
+        ctx.quadraticCurveTo(width, 0, width, radius);
+        ctx.lineTo(width, height - radius);
+        ctx.quadraticCurveTo(width, height, width - radius, height);
+        ctx.lineTo(radius, height);
+        ctx.quadraticCurveTo(0, height, 0, height - radius);
+        ctx.lineTo(0, radius);
+        ctx.quadraticCurveTo(0, 0, radius, 0);
+        ctx.closePath();
+        ctx.fill();
+
+        // icon circle
+        ctx.fillStyle = '#667eea';
+        ctx.beginPath();
+        ctx.arc(24, height/2, 12, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#fff';
+        ctx.font = '16px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('@', 24, height/2 + 1);
+
+        // email text
+        ctx.fillStyle = '#333';
+        ctx.font = 'bold 14px system-ui, -apple-system, Segoe UI, Roboto, Arial';
+        ctx.textAlign = 'left';
+        ctx.fillText(email, 48, height/2 + 1);
+
+        // append canvas to button
+        btn.appendChild(canvas);
+
+        // click opens mail client
+        btn.addEventListener('click', function() {
+            window.location.href = `mailto:${email}`;
         });
     });
 }
@@ -231,15 +298,15 @@ function showNotification(message, type = 'info') {
 function initSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            const target = document.querySelector(href);
+            if (!target) return;
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const offsetTop = target.offsetTop - 80; // Account for fixed navigation
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
+            // If a fixed nav exists, keep the legacy offset. Otherwise scroll to exact section top
+            const hasFixedNav = !!document.querySelector('nav');
+            const navOffset = hasFixedNav ? 80 : 0;
+            const top = target.offsetTop - navOffset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
         });
     });
 }
