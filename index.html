@@ -365,8 +365,8 @@
             }
 
             body {
-                overflow: hidden;
-                touch-action: none;
+                overflow: auto;
+                touch-action: auto;
             }
         }
 
@@ -454,6 +454,14 @@
                 font-size: 0.8rem;
                 padding: 0.7rem 1.3rem;
             }
+        }
+
+        /* Fullpage section style for smooth scrolling */
+        .fullpage-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
     </style>
 </head>
