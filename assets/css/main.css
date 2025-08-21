@@ -419,3 +419,61 @@ body {
 /* Container helper */
 .container { width: 100%; max-width: 72rem; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
 
+/* Common layout utilities */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.gap-6 { gap: 1.5rem; }
+.justify-center { justify-content: center; }
+.items-center { align-items: center; }
+.text-left { text-align: left; }
+
+/* Responsive helpers (md:) */
+@media (min-width: 768px) {
+    .md\:flex-row { flex-direction: row; }
+}
+
+/* Spacing & sizing */
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
+.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.mr-3 { margin-right: 0.75rem; }
+
+/* Borders / radius */
+.rounded-lg { border-radius: 0.5rem; }
+
+/* Typography */
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.font-semibold { font-weight: 600; }
+
+/* Colors */
+.bg-black { background-color: #000; }
+.bg-blue-600 { background-color: #2563eb; }
+.bg-blue-700 { background-color: #1d4ed8; }
+.hover\:bg-gray-800:hover { background-color: #1f2937 !important; }
+.hover\:bg-blue-700:hover { background-color: #1d4ed8 !important; }
+.text-white { color: #fff; }
+
+/* Transitions */
+.transition-colors { transition: color 0.18s ease, background-color 0.18s ease; }
+
+
+/* Contact area: fixed pixel max-width for desktop, full width on small screens */
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+    max-width: 480px; /* fixed pixel width (2/5 of 1200px container) */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    .contact-info {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        margin: 0;
+    }
+}
+
