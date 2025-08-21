@@ -234,179 +234,6 @@
             line-height: 1.6;
         }
 
-        /* Technology Stack */
-        .tech-stack {
-            padding: 4rem 0;
-            background: var(--background-white);
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            text-align: center;
-        }
-
-        .tech-item {
-            padding: 1.5rem;
-            background: var(--background-light);
-            border-radius: 8px;
-            border: 2px solid transparent;
-            transition: border-color 0.3s ease;
-        }
-
-        .tech-item:hover {
-            border-color: var(--primary-purple);
-        }
-
-        .tech-item h4 {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
-
-        .tech-item p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        /* Problem & Solution */
-        .problem-solution {
-            padding: 4rem 0;
-            background: var(--background-light);
-        }
-
-        .problem-solution-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 2rem;
-        }
-
-        .problem-card, .solution-card {
-            background: var(--background-white);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px var(--shadow);
-        }
-
-        .problem-card {
-            border-left: 4px solid var(--primary-pink);
-        }
-
-        .solution-card {
-            border-left: 4px solid var(--primary-blue);
-        }
-
-        .problem-card h3, .solution-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
-        .problem-card ul, .solution-card ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .problem-card li, .solution-card li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            color: var(--text-light);
-        }
-
-        .problem-card li::before {
-            content: '⚠️';
-            position: absolute;
-            left: 0;
-        }
-
-        .solution-card li::before {
-            content: '✅';
-            position: absolute;
-            left: 0;
-        }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 4rem 0;
-            background: var(--background-white);
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .pricing-card {
-            background: var(--background-white);
-            border: 2px solid var(--border-light);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px var(--shadow);
-        }
-
-        .pricing-card.featured {
-            border-color: var(--primary-purple);
-            transform: scale(1.05);
-        }
-
-        .pricing-card.featured::before {
-            content: 'POPULAR';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary-gradient);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .plan-name {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
-        .plan-price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        .plan-period {
-            color: var(--text-light);
-            margin-bottom: 2rem;
-        }
-
-        .plan-features {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .plan-features li {
-            padding: 0.5rem 0;
-            color: var(--text-light);
-        }
-
         /* CTA Buttons */
         .cta-button {
             display: inline-block;
@@ -499,7 +326,8 @@
 
         .contact-info {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            /* Desktop/tablet: two columns for contact items */
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin-top: 2rem;
         }
@@ -603,7 +431,6 @@
             <h1>사진·문서·PDF를 AI가 분석하여<br>자연어로 바로 찾아드립니다</h1>
             <p>로컬에서 안전하게, 빠르고 정확한 AI 검색.</p>
             <div class="hero-ctas">
-                <a href="#download" class="cta-button">무료 체험하기</a>
                 <a href="#features" class="cta-button secondary">제품 소개 보기</a>
             </div>
         </div>
@@ -623,22 +450,22 @@
                 <div class="feature-card">
                     <div class="feature-icon">🔍</div>
                     <h3>멀티모달 AI 인덱싱</h3>
-                    <p>이미지, 문서, PDF를 AI가 자동으로 분석하여 객체, 텍스트, 내용을 이해하고 인덱싱합니다. OCR, 객체 감지, 캡션 생성을 통해 모든 콘텐츠를 검색 가능하게 만듭니다.</p>
+                    <p>이미지·문서·PDF를 AI가 자동 분석해 텍스트·객체·의미를 추출하고 고품질 인덱스를 생성합니다. OCR, 객체 감지, 캡션으로 어떤 콘텐츠든 자연어로 빠르게 검색할 수 있습니다.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🛡️</div>
                     <h3>완전 로컬 처리</h3>
-                    <p>모든 데이터는 로컬에서 처리되어 개인정보 유출 걱정이 없습니다. 인터넷 연결 없이도 모든 기능을 사용할 수 있으며, 기업의 보안 정책을 준수합니다.</p>
+                    <p>데이터는 기기 내에서만 처리되어 외부 유출 위험이 없습니다. 인터넷이 없어도 동작하며 기업 보안 정책과 규정 준수 환경에 적합합니다.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">💬</div>
-                    <h3>자연어 검색</h3>
-                    <p>"지난 6월 회의 자료 중 매출 그래프가 있는 슬라이드" 같은 직관적인 검색이 가능합니다. RAG 기반으로 관련 문서를 찾고 요약까지 제공합니다.</p>
+                  <div class="feature-icon">💬</div>
+                  <h3>자연어 검색</h3>
+                    <p>"지난 6월 회의에서 매출 그래프가 포함된 슬라이드"처럼 자연어로 직관적 검색이 가능합니다. RAG 기반으로 관련 문서를 찾아 연관성 순으로 제시하고 요약까지 제공합니다.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📊</div>
                     <h3>시각화 대시보드</h3>
-                    <p>3단 구조(폴더 트리, 검색 결과, 미리보기)의 직관적인 UI와 문서 분포, 유사도 네트워크 등을 시각화하여 정보 탐색을 효율적으로 만듭니다.</p>
+                    <p>직관적 3단 구조(폴더 트리·검색 결과·미리보기)로 구성된 대시보드에서 검색 결과의 미리보기, 요약, 파일 바로가기, 유사도 네트워크 등을 한눈에 확인해 빠르고 효율적으로 탐색할 수 있습니다.</p>
                 </div>
             </div>
         </div>
@@ -649,6 +476,8 @@
     <!-- Download Section -->
     <section id="download" class="py-20 bg-white fullpage-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-gray-900 mb-8">출시 예정: 2025년 12월</h2>
+            <!--
             <h2 class="text-4xl font-bold text-gray-900 mb-8">지금 다운로드하세요</h2>
             <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
                 macOS와 Windows에서 CELLAXON AI Finder를 경험해보세요.<br>
@@ -672,6 +501,7 @@
                     </div>
                 </a>
             </div>
+            -->
         </div>
     </section>
 
@@ -680,7 +510,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold text-gray-900 mb-4">문의하기</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">CELLAXON Inc. 연락처 정보입니다. 기업 문의는 아래 정보를 참고해 주시기 바랍니다.</p>
             </div>
 
             <div class="contact-info">
