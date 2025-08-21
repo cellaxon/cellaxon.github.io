@@ -374,3 +374,48 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.06);
 }
+
+/* ------------------------------------------------------------------
+     Minimal Tailwind utility fallbacks (conservative subset)
+     These are small mappings so we can remove the Tailwind CDN safely.
+     Add only what's used in the current HTML (bg-*, spacing, text sizing).
+ ------------------------------------------------------------------ */
+
+/* Backgrounds */
+.bg-gray-50 { background-color: #f9fafb; }
+.bg-white { background-color: #ffffff; }
+
+/* Text alignment & weight */
+.text-center { text-align: center; }
+.font-bold { font-weight: 700; }
+
+/* Max width helpers */
+.max-w-3xl { max-width: 48rem; width: 100%; }
+.max-w-7xl { max-width: 80rem; width: 100%; }
+
+/* Spacing: margin-bottom */
+.mb-4 { margin-bottom: 1rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-12 { margin-bottom: 3rem; }
+.mb-16 { margin-bottom: 4rem; }
+
+/* Spacing: padding horizontal */
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+
+/* Spacing: vertical */
+.py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+
+/* Utility */
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* Text sizes & colors (approximate Tailwind values) */
+.text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.text-gray-600 { color: #4b5563; }
+.text-gray-900 { color: #111827; }
+
+/* Container helper */
+.container { width: 100%; max-width: 72rem; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+
