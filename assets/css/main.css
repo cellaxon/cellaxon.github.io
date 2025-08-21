@@ -171,10 +171,12 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    /* Center content vertically by default */
     justify-content: center;
     align-items: center;
     scroll-snap-align: start;
     padding-top: 0; /* remove extra top padding from previous nav */
+    box-sizing: border-box;
 }
 
 .fullpage-section > .max-w-7xl,
@@ -182,7 +184,20 @@ body {
 .fullpage-section .max-w-7xl {
     display: flex;
     flex-direction: column;
+    /* Allow inner content to scroll if taller than viewport to avoid clipping other sections */
+    max-height: calc(100vh - 4rem);
+    overflow: auto;
+    margin: auto 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+/* Explicitly center vertically for hero and download sections which require full centering */
+.hero, .download {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 /* Alternate section backgrounds for visual separation */
@@ -232,6 +247,16 @@ body {
         scroll-snap-type: none;
     }
     .page-indicator { display: none; }
+    /* On small screens, allow full natural flow and remove inner scroll limits */
+    .fullpage-section > .max-w-7xl,
+    .fullpage-section > .max-w-4xl,
+    .fullpage-section .max-w-7xl {
+        max-height: none;
+        overflow: visible;
+        margin: 0;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
 }
 
 /* Custom scrollbar */
@@ -332,4 +357,20 @@ body {
     100% {
         box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
     }
+}
+
+/* Email canvas button styling */
+.email-canvas {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.email-canvas canvas {
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
 }
