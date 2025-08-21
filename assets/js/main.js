@@ -134,8 +134,8 @@ function initScrollAnimations() {
         });
     }, observerOptions);
     
-    // Observe elements for animation
-    const animateElements = document.querySelectorAll('.feature-card, .pricing-card, .animate-on-scroll');
+    // Observe elements for animation (exclude feature-card to remove the upward float effect)
+    const animateElements = document.querySelectorAll('.pricing-card, .animate-on-scroll');
     animateElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
