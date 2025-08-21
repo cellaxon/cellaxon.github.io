@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initWheelFullpage();
     initMobileTapNavigation();
     initEmailCanvasButtons();
+    initParallax();
+    initMobileMenu();
+    initLazyLoading();
 });
 
 // Navigation functionality
@@ -576,9 +579,44 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Initialize additional features
-document.addEventListener('DOMContentLoaded', function() {
-    initParallax();
-    initMobileMenu();
-    initLazyLoading();
+// Smooth scrolling between sections when reaching the bottom of a section
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.fullpage-section');
+    let isScrolling = false;
+
+    window.addEventListener('scroll', () => {
+        if (isScrolling) return;
+
+        const currentSection = Array.from(sections).find(section => {
+            const rect = section.getBoundingClientRect();
+            return rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2;
+        });
+
+        if (!currentSection) return;
+
+        const rect = currentSection.getBoundingClientRect();
+
+        if (rect.bottom <= window.innerHeight && window.scrollY + window.innerHeight < document.body.scrollHeight) {
+            isScrolling = true;
+            const nextSection = currentSection.nextElementSibling;
+            if (nextSection && nextSection.classList.contains('fullpage-section')) {
+                nextSection.scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => (isScrolling = false), 1000);
+            } else {
+                isScrolling = false;
+            }
+        }
+
+        // Scroll to the previous section when reaching the top
+        if (rect.top >= 0 && window.scrollY > 0) {
+            isScrolling = true;
+            const prevSection = currentSection.previousElementSibling;
+            if (prevSection && prevSection.classList.contains('fullpage-section')) {
+                prevSection.scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => (isScrolling = false), 1000);
+            } else {
+                isScrolling = false;
+            }
+        }
+    });
 });
