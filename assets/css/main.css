@@ -312,20 +312,21 @@ body {
 }
 
 /* Feature grid responsive */
-.feature-grid {
+.features-grid {
     display: grid;
     gap: 2rem;
+    grid-template-columns: 1fr; /* 모바일 기본 1컬럼 */
 }
 
-@media (min-width: 640px) {
-    .feature-grid {
-        grid-template-columns: repeat(2, 1fr);
+@media (min-width: 768px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr); /* 태블릿 2컬럼 */
     }
 }
 
 @media (min-width: 1024px) {
-    .feature-grid {
-        grid-template-columns: repeat(3, 1fr);
+    .features-grid {
+        grid-template-columns: repeat(4, 1fr); /* 데스크탑 4컬럼 */
     }
 }
 
@@ -474,6 +475,32 @@ body {
         grid-template-columns: 1fr;
         max-width: 100%;
         margin: 0;
+    }
+}
+
+/* 모바일 폰트 크기 축소 */
+@media (max-width: 768px) {
+    body {
+        font-size: 0.8rem;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem; /* 기존 1.8rem에서 축소 */
+        line-height: 1.2; /* 줄 간격 조정 */
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .hero p, .download p, .contact-item p {
+        font-size: 0.8rem; /* 기존 0.9rem에서 축소 */
+        line-height: 1.4; /* 줄 간격 조정 */
+    }
+
+    .cta-button {
+        font-size: 0.8rem;
+        padding: 0.7rem 1.3rem;
     }
 }
 
