@@ -159,6 +159,81 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Fullpage sections: center content and snap scrolling */
+html, body {
+    height: 100%;
+}
+body {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+}
+.fullpage-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    padding-top: 0; /* remove extra top padding from previous nav */
+}
+
+.fullpage-section > .max-w-7xl,
+.fullpage-section > .max-w-4xl,
+.fullpage-section .max-w-7xl {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Alternate section backgrounds for visual separation */
+.fullpage-section:nth-of-type(odd) {
+    background-color: transparent; /* keep original backgrounds when present */
+}
+.fullpage-section:nth-of-type(even) {
+    background-color: rgba(250,250,250,0.9);
+}
+
+/* Page indicator (right side dots) */
+.page-indicator {
+    position: fixed;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 60;
+}
+.page-indicator button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.6);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.18s ease;
+    padding: 0;
+}
+.page-indicator button.active {
+    background: #667eea;
+    transform: scale(1.35);
+}
+
+/* Reduce section padding for tighter centering */
+.fullpage-section {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+/* Disable forced scroll-snap on small screens for natural touch scroll */
+@media (max-width: 768px) {
+    body {
+        scroll-snap-type: none;
+    }
+    .page-indicator { display: none; }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
     width: 8px;

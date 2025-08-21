@@ -8,11 +8,16 @@ document.addEventListener('DOMContentLoaded', function() {
     initContactForm();
     initSmoothScrolling();
     initFeatureCards();
+    initFullpageNavigation();
+    initWheelFullpage();
+    initMobileTapNavigation();
 });
 
 // Navigation functionality
 function initNavigation() {
+    // If nav doesn't exist (we removed it for fullpage layout), skip nav behaviors
     const nav = document.querySelector('nav');
+    if (!nav) return;
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
     
     // Add scroll effect to navigation
@@ -294,6 +299,190 @@ function initLazyLoading() {
     });
     
     images.forEach(img => imageObserver.observe(img));
+}
+
+// Fullpage navigation: right-side dots + keyboard support
+function initFullpageNavigation() {
+    const sections = Array.from(document.querySelectorAll('.fullpage-section'));
+    if (!sections.length) return;
+
+    // Create indicator
+    const indicator = document.createElement('div');
+    indicator.className = 'page-indicator';
+    sections.forEach((s, i) => {
+        const btn = document.createElement('button');
+        btn.setAttribute('aria-label', `Go to section ${i+1}`);
+        btn.addEventListener('click', () => {
+            window.scrollTo({ top: s.offsetTop, behavior: 'smooth' });
+        });
+        indicator.appendChild(btn);
+    });
+    document.body.appendChild(indicator);
+
+    const buttons = Array.from(indicator.querySelectorAll('button'));
+
+    function updateActive() {
+        const scrollTop = window.scrollY;
+        let activeIndex = 0;
+        sections.forEach((sec, idx) => {
+            if (scrollTop >= sec.offsetTop - sec.clientHeight/2) {
+                activeIndex = idx;
+            }
+        });
+        buttons.forEach(b => b.classList.remove('active'));
+        if (buttons[activeIndex]) buttons[activeIndex].classList.add('active');
+    }
+
+    // Initial active
+    updateActive();
+
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        // throttle updates
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateActive, 80);
+    });
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+        if (document.activeElement && ['INPUT','TEXTAREA','SELECT','BUTTON'].includes(document.activeElement.tagName)) return;
+        if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+            e.preventDefault();
+            const next = Math.min(sections.length - 1, buttons.findIndex(b => b.classList.contains('active')) + 1 || 1);
+            sections[next] && window.scrollTo({ top: sections[next].offsetTop, behavior: 'smooth' });
+        }
+        if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+            e.preventDefault();
+            const prevIdx = Math.max(0, (buttons.findIndex(b => b.classList.contains('active')) - 1) || 0);
+            sections[prevIdx] && window.scrollTo({ top: sections[prevIdx].offsetTop, behavior: 'smooth' });
+        }
+    });
+}
+
+// Wheel-based fullpage scrolling: jump one section per wheel event (desktop only)
+function initWheelFullpage() {
+    const sections = Array.from(document.querySelectorAll('.fullpage-section'));
+    if (!sections.length) return;
+
+    let isLocked = false;
+    const lockDuration = 800; // ms
+
+    function getCurrentIndex() {
+        const scrollTop = window.scrollY;
+        let idx = 0;
+        sections.forEach((sec, i) => {
+            if (scrollTop >= sec.offsetTop - sec.clientHeight / 2) idx = i;
+        });
+        return idx;
+    }
+
+        // wheel handler (robust normalization for different event types)
+        function onWheel(rawEvent) {
+            const e = rawEvent || window.event;
+            // disable on small screens / touch devices
+            if (window.innerWidth <= 768) return;
+            if (document.activeElement && ['INPUT','TEXTAREA','SELECT','BUTTON'].includes(document.activeElement.tagName)) return;
+            if (isLocked) return;
+
+            // Normalize delta from different event models
+            let delta = 0;
+            if (typeof e.deltaY === 'number') {
+                delta = e.deltaY;
+            } else if (typeof e.wheelDelta === 'number') {
+                // wheelDelta is typically ±120 per tick, invert to match deltaY direction
+                delta = -e.wheelDelta;
+            } else if (typeof e.detail === 'number') {
+                delta = e.detail * 16;
+            }
+
+            // Normalize deltaMode (1 = lines)
+            if (e.deltaMode === 1) {
+                delta = delta * 16;
+            }
+
+            // Small noise guard
+            if (Math.abs(delta) < 0.5) return;
+
+            // Prevent default scrolling when we will snap
+            try { e.preventDefault(); } catch (err) {}
+
+            const current = getCurrentIndex();
+            const nextIndex = Math.max(0, Math.min(sections.length - 1, current + (delta > 0 ? 1 : -1)));
+            if (nextIndex === current) return;
+
+            isLocked = true;
+            window.scrollTo({ top: sections[nextIndex].offsetTop, behavior: 'smooth' });
+            setTimeout(() => { isLocked = false; }, lockDuration);
+        }
+
+        // Register wheel-like events with passive:false if supported; fallback to legacy addEventListener signature
+        const addListener = (target, name) => {
+            try {
+                target.addEventListener(name, onWheel, { passive: false, capture: true });
+            } catch (err) {
+                try { target.addEventListener(name, onWheel, false); } catch (err2) {}
+            }
+        };
+
+        ['wheel', 'mousewheel', 'DOMMouseScroll'].forEach(evt => {
+            addListener(window, evt);
+            addListener(document, evt);
+        });
+
+    window.addEventListener('wheel', onWheel, { passive: false });
+}
+
+// Mobile tap navigation: touch top/bottom areas to go prev/next (mobile only)
+function initMobileTapNavigation() {
+    const sections = Array.from(document.querySelectorAll('.fullpage-section'));
+    if (!sections.length) return;
+
+    let isLocked = false;
+    const lockDuration = 600; // ms
+
+    function getCurrentIndex() {
+        const scrollTop = window.scrollY;
+        let idx = 0;
+        sections.forEach((sec, i) => {
+            if (scrollTop >= sec.offsetTop - sec.clientHeight / 2) idx = i;
+        });
+        return idx;
+    }
+
+    function onTouchEnd(e) {
+        if (window.innerWidth > 768) return; // only mobile
+        if (!e.changedTouches || e.changedTouches.length === 0) return;
+        // ignore if interacting with form elements
+        if (document.activeElement && ['INPUT','TEXTAREA','SELECT','BUTTON'].includes(document.activeElement.tagName)) return;
+        if (isLocked) return;
+
+        const touch = e.changedTouches[0];
+        const y = touch.clientY;
+        const h = window.innerHeight;
+
+        // Define top/bottom zones (top 25%, bottom 25%)
+        const topZone = h * 0.25;
+        const bottomZone = h * 0.75;
+
+        const current = getCurrentIndex();
+        let targetIndex = null;
+        if (y <= topZone) {
+            targetIndex = Math.max(0, current - 1);
+        } else if (y >= bottomZone) {
+            targetIndex = Math.min(sections.length - 1, current + 1);
+        } else {
+            return; // middle tap: ignore
+        }
+
+        if (targetIndex === current || targetIndex === null) return;
+
+        isLocked = true;
+        window.scrollTo({ top: sections[targetIndex].offsetTop, behavior: 'smooth' });
+        setTimeout(() => { isLocked = false; }, lockDuration);
+    }
+
+    // Use touchend to detect taps; don't interfere with scrolling gestures
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
 }
 
 // Analytics tracking (example)
