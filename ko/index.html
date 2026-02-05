@@ -1,155 +1,228 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELLAXON AI Finder - 로컬 AI 검색 플랫폼</title>
-    <meta name="description" content="내 컴퓨터의 사진·문서·PDF를 AI로 자동 분석해, 자연어로 즉시 찾아주는 로컬 AI 검색 솔루션 — 안전하고 빠른 파일 검색입니다.">
-    <meta name="keywords" content="AI, 로컬 검색, 문서 검색, 이미지 검색, OCR, RAG, macOS, Windows">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://cellaxon.com/">
-    <meta property="og:title" content="CELLAXON AI Finder - 로컬 AI 검색 플랫폼">
-    <meta property="og:description" content="로컬 컴퓨터의 사진과 문서를 AI로 분석하고 정리하여 자연어 검색으로 원하는 파일을 찾을 수 있는 혁신적인 프로그램">
-    <meta property="og:image" content="https://cellaxon.com/images/og-image.jpg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CELLAXON — 회사 정보</title>
+  <meta name="description" content="CELLAXON 회사 정보와 Ranvier Studio 공식 링크를 안내합니다.">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #0f172a;
+      --muted: #556070;
+      --accent: #0f766e;
+      --accent-soft: #cfe9e6;
+      --panel: rgba(255, 255, 255, 0.88);
+      --border: rgba(15, 23, 42, 0.14);
+      --shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+      --bg-1: #f5f1ea;
+      --bg-2: #e7eef4;
+    }
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://cellaxon.com/">
-    <meta property="twitter:title" content="CELLAXON AI Finder - 로컬 AI 검색 플랫폼">
-    <meta property="twitter:description" content="로컬 컴퓨터의 사진과 문서를 AI로 분석하고 정리하여 자연어 검색으로 원하는 파일을 찾을 수 있는 혁신적인 프로그램">
-    <meta property="twitter:image" content="https://cellaxon.com/images/og-image.jpg">
+    * {
+      box-sizing: border-box;
+    }
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
-    <!-- CSS -->
-    <link href="/assets/css/main.css" rel="stylesheet">
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Iowan Old Style", "Palatino", "Palatino Linotype", "Georgia", serif;
+      color: var(--ink);
+      background: radial-gradient(1200px 800px at 10% 10%, #fff7e8 0%, transparent 60%),
+        radial-gradient(1000px 700px at 85% 20%, #e2f4ff 0%, transparent 55%),
+        linear-gradient(130deg, var(--bg-1), var(--bg-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(24px, 4vw, 64px);
+    }
+
+    main {
+      width: min(920px, 100%);
+      position: relative;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: clamp(28px, 5vw, 56px);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      animation: float-in 0.8s ease-out both;
+    }
+
+    .eyebrow {
+      font-family: "Avenir Next", "Avenir", "Gill Sans", sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      margin: 12px 0 10px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-family: "Avenir Next", "Avenir", "Gill Sans", sans-serif;
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin: 0 0 28px;
+      max-width: 46ch;
+    }
+
+    .link-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      margin-bottom: 28px;
+      animation: reveal 0.8s ease-out both;
+      animation-delay: 0.1s;
+    }
+
+    .link-block span {
+      font-family: "Avenir Next", "Avenir", "Gill Sans", sans-serif;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .link-block a {
+      margin-left: auto;
+      text-decoration: none;
+      color: var(--accent);
+      font-family: "Avenir Next", "Avenir", "Gill Sans", sans-serif;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .link-block a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(15, 118, 110, 0.2);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .info-item {
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      animation: reveal 0.8s ease-out both;
+    }
+
+    .info-item:nth-child(2) { animation-delay: 0.12s; }
+    .info-item:nth-child(3) { animation-delay: 0.2s; }
+    .info-item:nth-child(4) { animation-delay: 0.28s; }
+
+    .info-item h2 {
+      font-size: 0.95rem;
+      margin: 0 0 6px;
+      font-family: "Avenir Next", "Avenir", "Gill Sans", sans-serif;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .info-item p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .info-item a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .note {
+      font-family: "Avenir Next", "Avenir", "Gill Sans", sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 22px;
+    }
+
+    @keyframes float-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .link-block {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .link-block a {
+        margin-left: 0;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Hero (header merged) -->
-    <section class="hero header-merged fullpage-section">
-        <div class="container text-center">
-            <div class="hero-header">
-                <div class="logo">CELLAXON AI Finder</div>
-            </div>
-            <h1>내 컴퓨터의 사진·문서·PDF를 AI로 분석해,<br>자연어로 즉시 찾아드립니다</h1>
-            <p>내 기기에서 안전하게 처리되는 빠르고 정확한 AI 검색으로, 원하는 파일을 즉시 찾아보세요.</p>
-            <div class="hero-ctas">
-                <a href="#features" class="cta-button secondary">제품 소개 보기</a>
-            </div>
-            <div class="lang-switch"><a href="/" rel="alternate" hreflang="en">English</a></div>
-        </div>
-    </section>
+<body>
+  <main>
+    <section class="card">
+      <div class="eyebrow">Company</div>
+      <h1>CELLAXON Inc.</h1>
+      <p class="subtitle">회사 정보와 Ranvier Studio 공식 링크를 안내합니다.</p>
 
-    <!-- Features Section -->
-    <section id="features" class="py-20 bg-white fullpage-section">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">왜 CELLAXON AI Finder인가요?</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    기존 파일 검색과는 완전히 다른 AI 기반의 지능형 검색 경험을 제공합니다
-                </p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
-                    <h3>멀티모달 AI 인덱싱</h3>
-                    <p>이미지·문서·PDF를 AI가 자동 분석해 텍스트·객체·의미를 추출하고 고품질 인덱스를 생성합니다. OCR, 객체 감지, 캡션으로 어떤 콘텐츠든 자연어로 빠르게 검색할 수 있습니다.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>완전 로컬 처리</h3>
-                    <p>데이터는 기기 내에서만 처리되어 외부 유출 위험이 없습니다. 인터넷이 없어도 동작하며 기업 보안 정책과 규정 준수 환경에 적합합니다.</p>
-                </div>
-                <div class="feature-card">
-                  <div class="feature-icon">💬</div>
-                  <h3>자연어 검색</h3>
-                    <p>"지난 6월 회의에서 매출 그래프가 포함된 슬라이드"처럼 자연어로 직관적 검색이 가능합니다. RAG 기반으로 관련 문서를 찾아 연관성 순으로 제시하고 요약까지 제공합니다.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>시각화 대시보드</h3>
-                    <p>직관적 3단 구조(폴더 트리·검색 결과·미리보기)로 구성된 대시보드에서 검색 결과의 미리보기, 요약, 파일 바로가기, 유사도 네트워크 등을 한눈에 확인해 빠르고 효율적으로 탐색할 수 있습니다.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="link-block">
+        <span>Ranvier Studio</span>
+        <a href="https://ranvier.studio/" target="_blank" rel="noopener">ranvier.studio 방문</a>
+      </div>
 
-    <!-- Download Section -->
-    <section id="download" class="py-20 bg-white fullpage-section">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl font-bold text-gray-900 mb-8">출시 예정: 2025년 12월</h2>
-            <!--
-            <h2 class="text-4xl font-bold text-gray-900 mb-8">지금 다운로드하세요</h2>
-            <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
-                macOS와 Windows에서 CELLAXON AI Finder를 경험해보세요.<br>
-                무료 체험판으로 모든 기능을 테스트할 수 있습니다.
-            </p>
-            
-            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-                <a href="#" class="bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-800 transition-colors flex items-center">
-                    <i class="fab fa-apple text-2xl mr-3"></i>
-                    <div class="text-left">
-                        <div class="text-xs">Download on the</div>
-                        <div class="text-lg">Mac App Store</div>
-                    </div>
-                </a>
-                
-                <a href="#" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors flex items-center">
-                    <i class="fab fa-microsoft text-2xl mr-3"></i>
-                    <div class="text-left">
-                        <div class="text-xs">Get it from</div>
-                        <div class="text-lg">Microsoft Store</div>
-                    </div>
-                </a>
-            </div>
-            -->
+      <div class="info-grid">
+        <div class="info-item">
+          <h2>주소</h2>
+          <p>202-2409, 143, Dongtangambaesan-ro,<br>Hwaseong-si, Gyeonggi-do,<br>Republic of Korea</p>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white fullpage-section">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">문의하기</h2>
-            </div>
-
-            <div class="contact-info">
-                <div class="contact-item">
-                    <h4>회사명</h4>
-                    <p>CELLAXON Inc.</p>
-                </div>
-                <div class="contact-item">
-                    <h4>주소</h4>
-                    <p>202-2409,<br>143, Dongtangambaesan-ro,<br>Hwaseong-si, Gyeonggi-do,<br>Republic of Korea</p>
-                </div>
-                <div class="contact-item">
-                    <h4>전화</h4>
-                    <p><a href="tel:+823180433215">+82-31-8043-3215</a></p>
-                </div>
-                <div class="contact-item">
-                    <h4>팩스</h4>
-                    <p>+82-31-8043-3216</p>
-                </div>
-                <div class="contact-item">
-                    <h4>웹 & 블로그</h4>
-                    <p><a href="https://blog.cellaxon.com" target="_blank" rel="noopener">blog.cellaxon.com</a></p>
-                    <p><a href="https://www.linkedin.com/company/cellaxon" target="_blank" rel="noopener">LinkedIn /cellaxon</a></p>
-                </div>
-                <div class="contact-item">
-                    <h4>이메일</h4>
-                    <p>
-                        <button class="email-canvas" data-user="contact" data-domain="cellaxon.com" aria-label="이메일 보내기" title="이메일 보내기"></button>
-                        <noscript><a href="mailto:contact@cellaxon.com">contact@cellaxon.com</a></noscript>
-                    </p>
-                </div>
-            </div>
+        <div class="info-item">
+          <h2>전화</h2>
+          <p><a href="tel:+823180433215">+82-31-8043-3215</a></p>
         </div>
+        <div class="info-item">
+          <h2>팩스</h2>
+          <p>+82-31-8043-3216</p>
+        </div>
+        <div class="info-item">
+          <h2>이메일</h2>
+          <p><a href="mailto:contact@cellaxon.com">contact@cellaxon.com</a></p>
+        </div>
+      </div>
+
+      <p class="note">협업 및 문의는 위 연락처로 부탁드립니다.</p>
     </section>
-    <!-- JavaScript -->
-    <script src="/assets/js/main.js"></script>
+  </main>
 </body>
 </html>
