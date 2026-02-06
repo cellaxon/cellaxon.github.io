@@ -2,15 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = document.getElementById('shortcut-grid');
   const pageTitle = document.getElementById('page-title');
   const themeToggle = document.getElementById('theme-toggle');
+  const settingsPanel = document.getElementById('settings-panel');
+  const settingsClose = document.getElementById('settings-close');
 
   // Edit Mode Elements
   const editModeToggle = document.getElementById('edit-mode-toggle');
-  const columnControl = document.getElementById('column-control');
   const columnInput = document.getElementById('column-count');
-  const titleControl = document.getElementById('title-control');
   const titleInput = document.getElementById('title-input');
   const titleVisible = document.getElementById('title-visible');
-  const extraActions = document.getElementById('extra-actions');
   const resetBtn = document.getElementById('reset-shortcuts');
   const importBtn = document.getElementById('server-sync');
   const exportBtn = document.getElementById('export-json');
@@ -366,32 +365,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- Edit Mode Actions ---
-  editModeToggle.addEventListener('click', () => {
-    isEditMode = !isEditMode;
-    toggleEditControls();
-    if (isEditMode) {
-      editModeToggle.classList.add('active');
-    } else {
-      editModeToggle.classList.remove('active');
-    }
-    render(); // Re-render to show/hide edit actions
-  });
-
-
-  function toggleEditControls() {
-    if (isEditMode) {
-      extraActions.classList.remove('hidden');
-      columnControl.classList.remove('hidden');
-      titleControl.classList.remove('hidden');
-      themeToggle.classList.remove('hidden');
-    } else {
-      extraActions.classList.add('hidden');
-      columnControl.classList.add('hidden');
-      titleControl.classList.add('hidden');
-      themeToggle.classList.add('hidden');
-    }
+  // --- Settings Panel / Edit Mode ---
+  function openSettings() {
+    isEditMode = true;
+    document.body.classList.add('settings-open');
+    settingsPanel.classList.remove('hidden');
+    editModeToggle.classList.add('hidden');
+    editModeToggle.classList.add('active');
+    render();
   }
+
+  function closeSettings() {
+    isEditMode = false;
+    document.body.classList.remove('settings-open');
+    settingsPanel.classList.add('hidden');
+    editModeToggle.classList.remove('hidden');
+    editModeToggle.classList.remove('active');
+    render();
+  }
+
+  editModeToggle.addEventListener('click', openSettings);
+  settingsClose.addEventListener('click', closeSettings);
 
   columnInput.addEventListener('change', (e) => {
     let val = parseInt(e.target.value);
@@ -715,8 +709,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!modal.classList.contains('hidden')) {
         closeModal();
       } else if (isEditMode) {
-        // Exit edit mode
-        editModeToggle.click();
+        closeSettings();
       }
     }
   });
