@@ -1,0 +1,175 @@
+{
+  "config": {
+    "columns": 2,
+    "title": "Shortcuts",
+    "showTitle": false
+  },
+  "shortcuts": [
+    {
+      "name": "GitHub",
+      "href": "https://github.com",
+      "iconType": "image",
+      "iconValue": "https://github.com/favicon.ico",
+      "customColors": false,
+      "bgcolor": "#24292e",
+      "forecolor": "#ffffff"
+    },
+    {
+      "name": "Stack Overflow",
+      "href": "https://stackoverflow.com",
+      "iconType": "image",
+      "iconValue": "https://stackoverflow.com/favicon.ico",
+      "customColors": false,
+      "bgcolor": "var(--quinary)"
+    },
+    {
+      "name": "MDN Web Docs",
+      "href": "https://developer.mozilla.org",
+      "iconType": "text",
+      "iconValue": "📚",
+      "customColors": true,
+      "colors": {
+        "lightBg": "#111111",
+        "lightFg": "#ffffff",
+        "darkBg": "#111111",
+        "darkFg": "#ffffff"
+      }
+    },
+    {
+      "name": "DevDocs",
+      "href": "https://devdocs.io",
+      "iconType": "text",
+      "iconValue": "📘",
+      "customColors": false,
+      "bgcolor": "var(--secondary)"
+    },
+    {
+      "name": "npm",
+      "href": "https://www.npmjs.com",
+      "iconType": "text",
+      "iconValue": "📦",
+      "customColors": true,
+      "colors": {
+        "lightBg": "#cb3837",
+        "lightFg": "#ffffff",
+        "darkBg": "#cb3837",
+        "darkFg": "#ffffff"
+      }
+    },
+    {
+      "name": "PyPI",
+      "href": "https://pypi.org",
+      "iconType": "text",
+      "iconValue": "🐍",
+      "customColors": true,
+      "colors": {
+        "lightBg": "#3775A9",
+        "lightFg": "#FFD343",
+        "darkBg": "#3775A9",
+        "darkFg": "#FFD343"
+      }
+    },
+    {
+      "name": "Docker Hub",
+      "href": "https://hub.docker.com",
+      "iconType": "text",
+      "iconValue": "🐳",
+      "customColors": true,
+      "colors": {
+        "lightBg": "#0db7ed",
+        "lightFg": "#ffffff",
+        "darkBg": "#0db7ed",
+        "darkFg": "#ffffff"
+      }
+    },
+    {
+      "name": "Kubernetes Docs",
+      "href": "https://kubernetes.io/docs/",
+      "iconType": "text",
+      "iconValue": "☸️",
+      "customColors": false,
+      "bgcolor": "var(--senary)"
+    },
+    {
+      "name": "AWS Console",
+      "href": "https://console.aws.amazon.com",
+      "iconType": "text",
+      "iconValue": "☁️",
+      "customColors": true,
+      "colors": {
+        "lightBg": "#232f3e",
+        "lightFg": "#ff9900",
+        "darkBg": "#232f3e",
+        "darkFg": "#ff9900"
+      }
+    },
+    {
+      "name": "Vercel",
+      "href": "https://vercel.com/dashboard",
+      "iconType": "text",
+      "iconValue": "▲",
+      "customColors": true,
+      "colors": {
+        "lightBg": "#000000",
+        "lightFg": "#ffffff",
+        "darkBg": "#000000",
+        "darkFg": "#ffffff"
+      }
+    },
+    {
+      "name": "Cloudflare",
+      "href": "https://dash.cloudflare.com",
+      "iconType": "text",
+      "iconValue": "☁",
+      "customColors": true,
+      "colors": {
+        "lightBg": "#f38020",
+        "lightFg": "#ffffff",
+        "darkBg": "#f38020",
+        "darkFg": "#ffffff"
+      }
+    },
+    {
+      "name": "Sentry",
+      "href": "https://sentry.io",
+      "iconType": "text",
+      "iconValue": "🚨",
+      "customColors": true,
+      "colors": {
+        "lightBg": "#362d59",
+        "lightFg": "#ffffff",
+        "darkBg": "#362d59",
+        "darkFg": "#ffffff"
+      }
+    },
+    {
+      "name": "Linear",
+      "href": "https://linear.app",
+      "iconType": "text",
+      "iconValue": "🧭",
+      "customColors": true,
+      "colors": {
+        "lightBg": "#5E6AD2",
+        "lightFg": "#ffffff",
+        "darkBg": "#5E6AD2",
+        "darkFg": "#ffffff"
+      }
+    },
+    {
+      "name": "Localhost:8080",
+      "href": "http://localhost:8080",
+      "iconType": "text",
+      "iconValue": "🏠",
+      "customColors": false,
+      "bgcolor": "var(--tertiary)"
+    },
+    {
+      "name": "CELLAXON Home",
+      "href": "../index.html",
+      "iconType": "text",
+      "iconValue": "🏢",
+      "customColors": false,
+      "bgcolor": "var(--primary)"
+    }
+  ]
+}
