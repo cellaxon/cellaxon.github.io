@@ -9,26 +9,43 @@
 </head>
 
 <body>
-  <div class="controls">
-    <div id="extra-actions" class="hidden">
-      <button id="server-sync" title="Reset to Server Defaults">Reset</button>
-      <button id="import-json-btn" title="Import JSON from PC">Import</button>
-      <input type="file" id="import-file-input" accept=".json" style="display: none;">
-      <button id="export-json" title="Export to JSON">Export</button>
-      <button id="reset-shortcuts" title="Clear All Shortcuts">Clear</button>
+  <button id="edit-mode-toggle" aria-label="Open Settings" title="Settings">⚙️</button>
+
+  <div id="settings-panel" class="controls hidden">
+    <div class="controls-categories">
+      <section class="control-group">
+        <div class="group-row">
+          <div id="title-control" class="edit-controls">
+            <span class="label">TITLE</span>
+            <input type="checkbox" id="title-visible" title="Show/Hide Title">
+            <input type="text" id="title-input" placeholder="PAGE TITLE" style="width: 150px; padding: 2px;">
+          </div>
+          <div id="column-control" class="edit-controls">
+            <span class="label">COLS</span>
+            <input type="number" id="column-count" min="1" max="10" value="4" style="width: 40px; padding: 2px;">
+          </div>
+        </div>
+      </section>
+
+      <section class="control-group">
+        <div id="extra-actions" class="group-row">
+          <button id="server-sync" title="Reset to Server Defaults">RESET</button>
+          <button id="import-json-btn" title="Import JSON from PC">IMPORT</button>
+          <input type="file" id="import-file-input" accept=".json" style="display: none;">
+          <button id="export-json" title="Export to JSON">EXPORT</button>
+          <button id="reset-shortcuts" title="Clear All Shortcuts">CLEAR</button>
+        </div>
+      </section>
+
+      <section class="control-group">
+        <div class="group-row">
+          <button id="theme-toggle" aria-label="Toggle Theme">🌓</button>
+        </div>
+      </section>
     </div>
-    <div id="title-control" class="edit-controls hidden">
-      <span class="label">Title</span>
-      <input type="checkbox" id="title-visible" title="Show/Hide Title">
-      <input type="text" id="title-input" placeholder="Page Title" style="width: 150px; padding: 2px;">
-    </div>
-    <div id="column-control" class="edit-controls hidden">
-      <span class="label">Cols</span>
-      <input type="number" id="column-count" min="1" max="10" value="4" style="width: 40px; padding: 2px;">
-    </div>
-    <button id="theme-toggle" aria-label="Toggle Theme" class="hidden">🌓</button>
-    <button id="edit-mode-toggle" aria-label="Toggle Edit Mode" title="Edit Mode">⚙️</button>
+    <button id="settings-close" aria-label="Close Settings" title="Close">✕</button>
   </div>
+
   <div class="container">
     <h1 id="page-title">Shortcuts</h1>
     <div id="shortcut-grid">
