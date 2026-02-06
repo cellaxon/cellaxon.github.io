@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shortcuts</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="controls">
+    <div id="extra-actions" class="hidden">
+      <button id="server-sync" title="Reset to Server Defaults">Reset</button>
+      <button id="import-json-btn" title="Import JSON from PC">Import</button>
+      <input type="file" id="import-file-input" accept=".json" style="display: none;">
+      <button id="export-json" title="Export to JSON">Export</button>
+      <button id="reset-shortcuts" title="Clear All Shortcuts">Clear</button>
+    </div>
+    <div id="title-control" class="edit-controls hidden">
+      <span class="label">Title</span>
+      <input type="checkbox" id="title-visible" title="Show/Hide Title">
+      <input type="text" id="title-input" placeholder="Page Title" style="width: 150px; padding: 2px;">
+    </div>
+    <div id="column-control" class="edit-controls hidden">
+      <span class="label">Cols</span>
+      <input type="number" id="column-count" min="1" max="10" value="4" style="width: 40px; padding: 2px;">
+    </div>
+    <button id="theme-toggle" aria-label="Toggle Theme" class="hidden">🌓</button>
+    <button id="edit-mode-toggle" aria-label="Toggle Edit Mode" title="Edit Mode">⚙️</button>
+  </div>
+  <div class="container">
+    <h1 id="page-title">Shortcuts</h1>
+    <div id="shortcut-grid">
+      <!-- Shortcuts will be computed here -->
+    </div>
+  </div>
+
+  <!-- Modal Dialog -->
+  <div id="shortcut-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="modal-title">Edit Shortcut</h2>
+      <div id="shortcut-preview-container" class="preview-container">
+        <!-- Live Preview will be rendered here -->
+      </div>
+      <form id="shortcut-form">
+        <input type="hidden" id="shortcut-index">
+        <div class="form-group">
+          <label for="shortcut-name">Name</label>
+          <input type="text" id="shortcut-name" required>
+        </div>
+        <div class="form-group">
+          <label for="shortcut-href">URL</label>
+          <input type="url" id="shortcut-href" required>
+        </div>
+        <div class="form-group">
+          <label>Icon Type</label>
+          <div class="radio-group">
+            <label><input type="radio" name="icon-type" value="text" checked> Emoji/Text</label>
+            <label><input type="radio" name="icon-type" value="image"> Image URL</label>
+          </div>
+        </div>
+        <div class="form-group" id="group-icon-text">
+          <label for="shortcut-icon">Icon (Emoji or Text)</label>
+          <input type="text" id="shortcut-icon" maxlength="4">
+        </div>
+        <div class="form-group hidden" id="group-icon-image">
+          <label for="shortcut-image">Image URL</label>
+          <input type="url" id="shortcut-image" placeholder="https://example.com/favicon.ico">
+        </div>
+        <div class="form-group">
+          <label for="shortcut-color">Color Preset</label>
+          <select id="shortcut-color">
+            <option value="">Default (Muted)</option>
+            <option value="var(--primary)">Primary (Peach)</option>
+            <option value="var(--secondary)">Secondary (Blue)</option>
+            <option value="var(--tertiary)">Tertiary (Green)</option>
+            <option value="var(--quaternary)">Quaternary (Purple)</option>
+            <option value="var(--quinary)">Quinary (Yellow)</option>
+            <option value="var(--senary)">Senary (Teal)</option>
+            <option value="#24292e">GitHub (Dark)</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+
+        <div id="custom-colors" class="form-group border-group hidden">
+          <label>Custom Colors</label>
+          <div class="color-grid">
+            <div>
+              <label class="sub-label">Light BG</label>
+              <input type="color" id="color-bg-light">
+            </div>
+            <div>
+              <label class="sub-label">Light FG</label>
+              <input type="color" id="color-fg-light">
+            </div>
+            <div>
+              <label class="sub-label">Dark BG</label>
+              <input type="color" id="color-bg-dark">
+            </div>
+            <div>
+              <label class="sub-label">Dark FG</label>
+              <input type="color" id="color-fg-dark">
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="modal-cancel">Cancel</button>
+          <button type="submit" id="modal-save">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
