@@ -26,6 +26,8 @@ The gradient is a signature treatment for primary actions and selected display t
 - Body and UI: Noto Sans KR Variable.
 - Display headings use compact tracking and restrained weights rather than extra-bold defaults.
 - Body copy targets a `1.6–1.7` line height.
+- Korean display text uses Noto Sans KR directly with looser tracking and line height than the Latin display system.
+- Korean prose uses `word-break: keep-all` so words do not split between syllables on narrow cards and mobile screens.
 
 ## Layout and spacing
 
