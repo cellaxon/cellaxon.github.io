@@ -9,13 +9,35 @@ import {
 import { copy, type Language } from "./content";
 
 const CONTACT_EMAIL = "contact@cellaxon.com";
-const POC_MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("CELLAXON PoC inquiry")}`;
+const PILOT_MAILTO = {
+  en: `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("CELLAXON pilot inquiry")}`,
+  ko: `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("CELLAXON PoC 문의")}`,
+} as const;
+
+const languageMetadata = {
+  en: {
+    path: "/",
+    locale: "en_US",
+    title: "CELLAXON — Complex systems, made visible.",
+    description: "CELLAXON builds software that makes decisions transparent and keeps development and field records trustworthy.",
+  },
+  ko: {
+    path: "/ko/",
+    locale: "ko_KR",
+    title: "CELLAXON — 복잡한 시스템을 한눈에.",
+    description: "CELLAXON은 의사결정 과정을 투명하게 만들고, 개발과 현장의 기록을 신뢰할 수 있게 하는 소프트웨어를 만듭니다.",
+  },
+} as const;
+
+function setMetaContent(selector: string, value: string) {
+  document.querySelector<HTMLMetaElement>(selector)?.setAttribute("content", value);
+}
 
 function initialLanguage(): Language {
   const params = new URLSearchParams(window.location.search);
   const queryLanguage = params.get("lang");
   if (queryLanguage === "ko" || queryLanguage === "en") return queryLanguage;
-  return window.localStorage.getItem("cellaxon-language") === "ko" ? "ko" : "en";
+  return window.location.pathname.startsWith("/ko") ? "ko" : "en";
 }
 
 function ExternalArrow() {
@@ -30,7 +52,7 @@ function Header({ language, onLanguageChange }: { language: Language; onLanguage
   return (
     <header className="site-header">
       <div className="shell header-inner">
-        <a className="brand" href="#top" aria-label="CELLAXON home" onClick={closeMenu}>
+        <a className="brand" href="#top" aria-label={text.home} onClick={closeMenu}>
           <img src="/assets/brand/cellaxon-lockup.png" alt="CELLAXON" />
         </a>
 
@@ -45,14 +67,14 @@ function Header({ language, onLanguageChange }: { language: Language; onLanguage
           {menuOpen ? <X aria-hidden="true" /> : <List aria-hidden="true" />}
         </button>
 
-        <nav id="primary-navigation" className={menuOpen ? "primary-nav is-open" : "primary-nav"} aria-label="Primary navigation">
+        <nav id="primary-navigation" className={menuOpen ? "primary-nav is-open" : "primary-nav"} aria-label={text.primaryLabel}>
           <a href="#products" onClick={closeMenu}>{text.products}</a>
           <a href="#exploring" onClick={closeMenu}>{text.exploring}</a>
           <a href="#company" onClick={closeMenu}>{text.company}</a>
         </nav>
 
         <div className={menuOpen ? "header-actions is-open" : "header-actions"}>
-          <div className="language-control" aria-label="Language selector">
+          <div className="language-control" aria-label={text.languageLabel}>
             <button type="button" className={language === "en" ? "is-active" : ""} aria-pressed={language === "en"} onClick={() => onLanguageChange("en")}>EN</button>
             <span aria-hidden="true">/</span>
             <button type="button" className={language === "ko" ? "is-active" : ""} aria-pressed={language === "ko"} onClick={() => onLanguageChange("ko")}>KR</button>
@@ -80,7 +102,7 @@ function Hero({ language }: { language: Language }) {
             {text.primary}
             <ArrowRight aria-hidden="true" weight="bold" />
           </a>
-          <a className="button button-outline" href={POC_MAILTO}>{text.secondary}</a>
+          <a className="button button-outline" href={PILOT_MAILTO[language]}>{text.secondary}</a>
         </div>
       </div>
       <figure className="hero-visual" aria-label={text.visualAlt}>
@@ -144,7 +166,7 @@ function FlightOpsCard({ language }: { language: Language }) {
       </div>
       <div className="flightops-actions">
         <span className="validation-label">{text.status}</span>
-        <a className="button button-outline" href={POC_MAILTO}>{text.action}</a>
+        <a className="button button-outline" href={PILOT_MAILTO[language]}>{text.action}</a>
       </div>
     </article>
   );
@@ -214,17 +236,26 @@ export default function App() {
   const [language, setLanguage] = useState<Language>(initialLanguage);
 
   useEffect(() => {
+    const metadata = languageMetadata[language];
     document.documentElement.lang = language;
-    window.localStorage.setItem("cellaxon-language", language);
     const url = new URL(window.location.href);
-    url.searchParams.set("lang", language);
+    url.pathname = metadata.path;
+    url.searchParams.delete("lang");
     window.history.replaceState({}, "", url);
-    document.title = language === "ko" ? "CELLAXON — 복잡한 시스템을 한눈에." : "CELLAXON — Complex systems, made visible.";
+    document.title = metadata.title;
+    setMetaContent('meta[name="description"]', metadata.description);
+    setMetaContent('meta[property="og:title"]', metadata.title);
+    setMetaContent('meta[property="og:description"]', metadata.description);
+    setMetaContent('meta[property="og:locale"]', metadata.locale);
+    setMetaContent('meta[property="og:url"]', `https://cellaxon.com${metadata.path}`);
+    document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute("href", `https://cellaxon.com${metadata.path}`);
   }, [language]);
+
+  const text = copy[language];
 
   return (
     <>
-      <a className="skip-link" href="#main-content">Skip to content</a>
+      <a className="skip-link" href="#main-content">{text.nav.skip}</a>
       <Header language={language} onLanguageChange={setLanguage} />
       <main id="main-content">
         <Hero language={language} />

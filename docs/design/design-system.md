@@ -28,6 +28,7 @@ The gradient is a signature treatment for primary actions and selected display t
 - Body copy targets a `1.6–1.7` line height.
 - Korean display text uses Noto Sans KR directly with looser tracking and line height than the Latin display system.
 - Korean prose uses `word-break: keep-all` so words do not split between syllables on narrow cards and mobile screens.
+- English mobile display text uses a dedicated three-line scale so the hero keeps a comparable first-viewport rhythm across languages.
 
 ## Layout and spacing
 
@@ -45,6 +46,14 @@ The gradient is a signature treatment for primary actions and selected display t
 ## Interaction and accessibility
 
 - All core actions have visible text labels and keyboard focus rings.
+- Focus rings use opaque brand magenta rather than transparent color so the indicator remains distinct on white surfaces.
 - External destinations use an external-link icon and `target="_blank"` with `rel="noreferrer"`.
 - Motion is subtle and disabled when `prefers-reduced-motion` is active.
 - Decorative imagery is hidden from assistive technology; meaningful product screenshots have descriptive alternative text.
+
+## Localization
+
+- English is served at `/`; Korean is served at `/ko/`.
+- Both language routes expose their own title, description, Open Graph metadata, canonical URL, and `hreflang` alternates.
+- Runtime language switching keeps the current hash while replacing the route and localized metadata.
+- Navigation labels, skip links, and accessible control names are localized alongside visible copy.
