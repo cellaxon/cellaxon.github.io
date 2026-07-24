@@ -219,7 +219,7 @@ export default function App() {
     const url = new URL(window.location.href);
     url.searchParams.set("lang", language);
     window.history.replaceState({}, "", url);
-    document.title = language === "ko" ? "CELLAXON — 복잡한 시스템을, 보이게." : "CELLAXON — Complex systems, made visible.";
+    document.title = language === "ko" ? "CELLAXON — 복잡한 시스템을 한눈에." : "CELLAXON — Complex systems, made visible.";
   }, [language]);
 
   return (

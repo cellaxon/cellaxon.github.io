@@ -61,4 +61,43 @@ Changes: converted the desktop hero visual to a layered right-side composition, 
 - TypeScript check and Vite production build passed.
 - Browser console warnings/errors: none.
 
+## Korean copy and typography follow-up — 2026-07-24
+
+### Comparison setup
+
+- Source/problem evidence: `C:\Users\realwolf\AppData\Local\Temp\codex-clipboard-a5a9027b-c8b8-4185-9344-81fa52bd67f8.png`
+- Desktop implementation: `C:\Users\realwolf\.codex\visualizations\2026\07\24\019f920c-a2b7-7b21-880d-b7b82d1dc135\02-korean-home-typography-fixed-desktop.png`
+- Mobile implementation: `C:\Users\realwolf\.codex\visualizations\2026\07\24\019f920c-a2b7-7b21-880d-b7b82d1dc135\03-korean-home-typography-fixed-mobile.png`
+- Viewports: desktop 1680 × 850, mobile 390 × 844
+- State: Korean, page top, mobile navigation closed
+
+### Findings and iteration
+
+1. **P1 — translated tone and abstract positioning.** The previous hero used noun-heavy phrases such as “명시적 의사결정, 로컬 인텔리전스, 검증 가능한 운영,” which read as translated product language rather than a natural Korean company introduction.
+2. **P1 — Latin display metrics on Korean.** The previous Korean hero inherited Space Grotesk display metrics, producing overly tight strokes, tracking, and line rhythm.
+3. **P2 — syllable-level wrapping.** Product and FlightOps copy could break inside Korean words, weakening scanning and making the validation card look unfinished.
+4. **P2 — product-state labels.** “이용 가능” and “검토 중” did not clearly distinguish public products from concepts under business review.
+
+Changes: rewrote the Korean hero, product descriptions, FlightOps framing, company introduction, navigation, and CTAs in direct Korean; changed the Korean hero display face to Noto Sans KR; adjusted weight, tracking, line height, and responsive sizes; applied `word-break: keep-all`; and renamed the portfolio states to “공개 제품” and “사업 검토 중.”
+
+### Post-fix evidence
+
+- Desktop hero holds the intended two lines at 1680 × 850: “복잡한 시스템을” / “한눈에.”
+- Desktop hero uses Noto Sans KR at 87.36px, weight 650, and 92.60px line height.
+- Mobile hero holds the same two-line hierarchy at 390 × 844 with no horizontal overflow.
+- Korean body and card copy wrap at word boundaries; the longer DevPulse description remains within the card hierarchy.
+- English → Korean → English/Korean state transitions update the visible copy, document language, title, and pressed state.
+- Mobile navigation opens and closes with the correct expanded state.
+- Browser console warnings/errors: none.
+
+### Fidelity surfaces
+
+| Surface | Result |
+| --- | --- |
+| Content hierarchy | Passed — public products and business-review concepts remain clearly separated |
+| Korean typography | Passed — Noto Sans KR metrics, two-line hero, and word-safe wrapping verified |
+| Brand continuity | Passed — original CELLAXON palette, neural visual, logo, and card system preserved |
+| Responsive layout | Passed — 1680 × 850 and 390 × 844 checked with no horizontal overflow |
+| Interaction and runtime | Passed — language switch, mobile menu, links, and console state verified |
+
 final result: passed

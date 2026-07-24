@@ -884,6 +884,56 @@ a.product-media {
   }
 }
 
+html[lang="ko"] body {
+  word-break: keep-all;
+}
+
+html[lang="ko"] .hero h1 {
+  font-family: "Noto Sans KR Variable", "Noto Sans KR", system-ui, sans-serif;
+  font-size: clamp(3.8rem, 5.2vw, 5.8rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+}
+
+html[lang="ko"] .hero-copy > p {
+  line-height: 1.75;
+}
+
+html[lang="ko"] .section-label {
+  letter-spacing: 0.06em;
+}
+
+html[lang="ko"] .product-subtitle,
+html[lang="ko"] .product-statement,
+html[lang="ko"] .flightops-title {
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+html[lang="ko"] .product-statement,
+html[lang="ko"] .flightops-title {
+  font-family: "Noto Sans KR Variable", "Noto Sans KR", system-ui, sans-serif;
+}
+
+html[lang="ko"] .company-intro h2 {
+  letter-spacing: -0.025em;
+  line-height: 1.16;
+}
+
+@media (max-width: 820px) {
+  html[lang="ko"] .hero h1 {
+    font-size: clamp(3.2rem, 9.5vw, 4.4rem);
+  }
+}
+
+@media (max-width: 560px) {
+  html[lang="ko"] .hero h1 {
+    font-size: clamp(2.65rem, 11vw, 3.25rem);
+    line-height: 1.08;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
