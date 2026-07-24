@@ -100,4 +100,69 @@ Changes: rewrote the Korean hero, product descriptions, FlightOps framing, compa
 | Responsive layout | Passed — 1680 × 850 and 390 × 844 checked with no horizontal overflow |
 | Interaction and runtime | Passed — language switch, mobile menu, links, and console state verified |
 
+## Bilingual parity and accessibility follow-up — 2026-07-24
+
+### Comparison target
+
+- Source visual truth (pre-fix desktop): `C:\Users\realwolf\.codex\visualizations\2026\07\24\019f920c-a2b7-7b21-880d-b7b82d1dc135\audit-02-en-desktop-top.png`
+- Source visual truth (pre-fix English mobile): `C:\Users\realwolf\.codex\visualizations\2026\07\24\019f920c-a2b7-7b21-880d-b7b82d1dc135\audit-04-en-mobile-top.png`
+- Source visual truth (pre-fix Korean company mobile): `C:\Users\realwolf\.codex\visualizations\2026\07\24\019f920c-a2b7-7b21-880d-b7b82d1dc135\audit-08-ko-mobile-company.png`
+- Desktop implementation: `C:\Users\realwolf\.codex\visualizations\2026\07\24\019f920c-a2b7-7b21-880d-b7b82d1dc135\improvement-01-en-desktop.png`
+- Korean desktop regression capture: `C:\Users\realwolf\.codex\visualizations\2026\07\24\019f920c-a2b7-7b21-880d-b7b82d1dc135\improvement-02-ko-desktop.png`
+- English mobile implementation: `C:\Users\realwolf\.codex\visualizations\2026\07\24\019f920c-a2b7-7b21-880d-b7b82d1dc135\improvement-03-en-mobile.png`
+- Mobile focus implementation: `C:\Users\realwolf\.codex\visualizations\2026\07\24\019f920c-a2b7-7b21-880d-b7b82d1dc135\improvement-04-en-mobile-menu-focus.png`
+- Korean company mobile implementation: `C:\Users\realwolf\.codex\visualizations\2026\07\24\019f920c-a2b7-7b21-880d-b7b82d1dc135\improvement-05-ko-mobile-company.png`
+- Viewports and pixels: desktop 1440 × 900; mobile 390 × 844; narrow-mobile regression 320 × 800; CSS viewport and screenshot pixels were compared at 1:1 density.
+- State: page top for hero comparisons; mobile menu open for focus; `#company` for contact-layout comparison.
+
+### Full-view and focused comparison evidence
+
+The pre-fix and post-fix English mobile hero plus the pre-fix and post-fix Korean company section were opened together in the same image comparison input. The English headline changed from four lines and 245px high to three lines and 149px high at 390px without changing the selected desktop composition. The Korean contact rows changed from alternating outlined blocks to one consistent stacked divider system.
+
+Focused review covered headline wrapping and paragraph density, DevPulse and FlightOps card copy, the mobile menu focus ring, company detail borders, and localized metadata/accessible names. Additional crops were unnecessary because these areas were readable at their captured viewport sizes.
+
+### Comparison history
+
+#### Pass 1 — audit findings
+
+- P1: Korean title changed at runtime, but description/Open Graph metadata remained English and no language alternates existed.
+- P1: English hero, DevPulse, and company copy used abstract internal terminology and did not match Korean clarity.
+- P2: English mobile hero occupied four lines and 245px, delaying the visual and product evidence.
+- P2: Focus outline used 30% alpha magenta and measured about 1.75:1 against white.
+- P2: Odd mobile contact rows retained a right border because of selector specificity, creating alternating boxes.
+
+Changes: introduced deterministic `/` and `/ko/` routes with localized static and runtime metadata, canonical links, and `hreflang`; rewrote English copy; added an English-only mobile headline scale; changed focus outlines to opaque brand magenta; and explicitly removed odd-row borders at the mobile breakpoint.
+
+#### Pass 2 — implementation review
+
+- P2: “Discuss a pilot” still opened a mail subject saying “PoC inquiry,” creating a visible copy mismatch after interaction.
+
+Change: introduced localized inquiry links with “CELLAXON pilot inquiry” in English and “CELLAXON PoC 문의” in Korean.
+
+#### Pass 3 — post-fix evidence
+
+- English desktop and Korean desktop retain the selected brand composition with no horizontal overflow.
+- English mobile headline is three lines at 390px and remains three lines at 320px; both viewports have no horizontal overflow.
+- Korean mobile contact rows all measure 343px wide with identical 22px vertical padding, 1px bottom borders, and no right border.
+- Focus state renders as solid `rgb(195, 0, 118)` at 3px on the 44 × 44px menu button.
+- Language switching changes path, visible copy, `lang`, title, description, Open Graph values, canonical URL, accessible navigation names, and inquiry subject.
+- Browser console warnings/errors: none.
+
+### Required fidelity surfaces
+
+| Surface | Result |
+| --- | --- |
+| Fonts and typography | Passed — desktop hierarchy preserved; English mobile now uses a balanced three-line display at 390px and 320px |
+| Spacing and layout rhythm | Passed — hero rhythm improved and mobile contact rows now use one consistent divider system |
+| Colors and visual tokens | Passed — brand palette preserved and focus uses opaque magenta with materially stronger contrast |
+| Image quality and asset fidelity | Passed — official logo, neural image, product logos, and product screenshots remain unchanged and sharp |
+| Copy and content | Passed — English copy matches Korean clarity; Concepts/Under review and localized pilot/PoC subjects are consistent |
+
+### Interaction and runtime check
+
+- English `/` loads with English metadata; Korean `/ko/` loads directly without a meta-refresh redirect and exposes Korean metadata before runtime rendering.
+- English → Korean changes the route to `/ko/`; Korean navigation, language selector, home label, and skip link are localized.
+- Mobile navigation opens and closes with the correct expanded state and visible focus indicator.
+- `npm run check` passes, and the 320px, 390px, and 1440px checks show no horizontal overflow.
+
 final result: passed

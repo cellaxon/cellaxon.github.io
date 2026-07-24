@@ -213,7 +213,7 @@ img {
 .language-control button:focus-visible,
 .menu-button:focus-visible,
 .product-media:focus-visible {
-  outline: 3px solid rgba(195, 0, 118, 0.3);
+  outline: 3px solid var(--color-magenta);
   outline-offset: 4px;
 }
 
@@ -877,10 +877,19 @@ a.product-media {
   }
 
   .company-details > div,
+  .company-details > div:nth-child(odd),
   .company-details > div:nth-child(even) {
     min-height: 0;
     padding: 22px 0;
     border-right: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  html[lang="en"] .hero h1 {
+    font-size: clamp(3rem, 13vw, 3.3rem);
+    letter-spacing: -0.045em;
+    line-height: 0.98;
   }
 }
 
