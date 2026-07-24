@@ -31,7 +31,9 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
-        run: npm ci
+        # npm ci can reject a Windows-generated lockfile when resolving
+        # Rolldown's cross-platform optional WASM peers on Linux runners.
+        run: npm install --include=optional
 
       - name: Build
         run: npm run build
