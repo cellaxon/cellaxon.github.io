@@ -28,8 +28,9 @@ export const copy = {
       ranvierSubtitle: "Typed Decision Engine for Rust",
       ranvierStatement: "Every decision visible. Every branch auditable.",
       ranvierPrimary: "Explore Ranvier",
-      devpulseSubtitle: "A VS Code extension that analyzes development data without sending it outside your environment.",
-      devpulsePrimary: "View Cellaxon DevPulse in the VS Code Marketplace",
+      devpulseSubtitle: "Local-first Git analytics and AI agent work tracking for VS Code.",
+      devpulseStatement: "Connect Codex and Claude sessions to file, test, diff, and commit evidence—without uploading repository or agent data.",
+      devpulsePrimary: "View CELLAXON DevPulse in the VS Code Marketplace",
     },
     flightops: {
       label: "Under review / FlightOps",
@@ -83,8 +84,9 @@ export const copy = {
       ranvierSubtitle: "Rust로 만든 타입 기반 의사결정 엔진",
       ranvierStatement: "모든 결정과 분기를 코드에 명확하게 남깁니다.",
       ranvierPrimary: "Ranvier 살펴보기",
-      devpulseSubtitle: "개발 데이터를 외부로 보내지 않고 분석하는 VS Code 확장입니다.",
-      devpulsePrimary: "VS Code Marketplace에서 Cellaxon DevPulse 보기",
+      devpulseSubtitle: "Git 활동과 AI 에이전트 작업을 VS Code 안에서 분석합니다.",
+      devpulseStatement: "저장소나 에이전트 데이터를 외부로 보내지 않고 Codex·Claude 세션을 파일·테스트·변경 내역·커밋 근거와 함께 추적합니다.",
+      devpulsePrimary: "VS Code Marketplace에서 CELLAXON DevPulse 보기",
     },
     flightops: {
       label: "사업 검토 / FlightOps",

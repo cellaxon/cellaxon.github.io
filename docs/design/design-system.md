@@ -2,7 +2,7 @@
 
 ## Direction
 
-The company site uses a true-white editorial canvas with the official CELLAXON coral–magenta–violet signature. Product identities stay scoped: Ranvier keeps cyan/orange, while DevPulse keeps its dark dashboard palette. FlightOps is always presented as concept validation rather than a released product.
+The company site uses a true-white editorial canvas with the official CELLAXON coral–magenta–violet signature. Product identities stay scoped: Ranvier keeps cyan/orange, while CELLAXON DevPulse keeps its dark dashboard palette. FlightOps is always presented as concept validation rather than a released product.
 
 ## Brand tokens
 
@@ -40,7 +40,7 @@ The gradient is a signature treatment for primary actions and selected display t
 ## Product hierarchy
 
 1. Ranvier is presented as one complete product. Supporting developer tooling is intentionally omitted from the company homepage to keep the portfolio legible.
-2. Cellaxon DevPulse is presented as a separate VS Code product.
+2. CELLAXON DevPulse is presented as a separate VS Code product covering local-first Git analytics and AI agent work tracking.
 3. FlightOps is presented only as concept validation and never receives fabricated product UI.
 
 ## Interaction and accessibility
