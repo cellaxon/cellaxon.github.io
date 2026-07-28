@@ -139,14 +139,15 @@ function DevPulseCard({ language }: { language: Language }) {
   return (
     <article className="product-card">
       <div className="product-summary">
-        <img className="product-logo" src="/assets/products/devpulse-icon.png" alt="Cellaxon DevPulse icon" />
+        <img className="product-logo" src="/assets/products/devpulse-icon.png" alt="CELLAXON DevPulse icon" />
         <div>
-          <h3><a href={marketplaceUrl} target="_blank" rel="noreferrer">Cellaxon DevPulse<ExternalArrow /></a></h3>
+          <h3><a href={marketplaceUrl} target="_blank" rel="noreferrer">CELLAXON DevPulse<ExternalArrow /></a></h3>
           <p className="product-subtitle">{text.devpulseSubtitle}</p>
+          <p className="product-statement">{text.devpulseStatement}</p>
         </div>
       </div>
       <a className="product-media" href={marketplaceUrl} target="_blank" rel="noreferrer" aria-label={text.devpulsePrimary}>
-        <img src="/assets/products/devpulse-dashboard.png" alt="Cellaxon DevPulse repository statistics dashboard" />
+        <img src="/assets/products/devpulse-dashboard.png" alt="CELLAXON DevPulse Git activity analytics dashboard" />
       </a>
     </article>
   );
