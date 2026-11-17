@@ -23,13 +23,13 @@ const languageMetadata = {
     path: "/",
     locale: "en_US",
     title: "CELLAXON — Complex systems, made visible.",
-    description: "CELLAXON builds developer tools that make decisions, engineering work, and container environments easy to see and verify.",
+    description: "CELLAXON builds developer tools that make decision logic, engineering activity, and container environments easy to inspect and verify.",
   },
   ko: {
     path: "/ko/",
     locale: "ko_KR",
     title: "CELLAXON — 복잡한 시스템을 한눈에.",
-    description: "CELLAXON은 코드 속 의사결정, 개발 작업 내역, 컨테이너 상태를 화면에서 바로 확인할 수 있게 하는 개발자 도구를 만듭니다.",
+    description: "CELLAXON은 의사결정 로직, 개발 및 AI 작업 이력, 로컬 컨테이너 환경을 직관적으로 확인하고 검증하는 개발자 도구를 만듭니다.",
   },
 } as const;
 
@@ -107,6 +107,15 @@ function Header({ language, onLanguageChange }: { language: Language; onLanguage
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
   return (
     <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
       <div className="shell header-inner">
@@ -133,11 +142,11 @@ function Header({ language, onLanguageChange }: { language: Language; onLanguage
 
         <div className={menuOpen ? "header-actions is-open" : "header-actions"}>
           <div className="language-control" aria-label={text.languageLabel}>
-            <button type="button" className={language === "en" ? "is-active" : ""} aria-pressed={language === "en"} onClick={() => onLanguageChange("en")}>EN</button>
+            <button type="button" className={language === "en" ? "is-active" : ""} aria-pressed={language === "en"} onClick={() => { onLanguageChange("en"); closeMenu(); }}>EN</button>
             <span aria-hidden="true">/</span>
-            <button type="button" className={language === "ko" ? "is-active" : ""} aria-pressed={language === "ko"} onClick={() => onLanguageChange("ko")}>KR</button>
+            <button type="button" className={language === "ko" ? "is-active" : ""} aria-pressed={language === "ko"} onClick={() => { onLanguageChange("ko"); closeMenu(); }}>KR</button>
           </div>
-          <a className="button button-outline button-compact" href={`mailto:${CONTACT_EMAIL}`}>{text.contact}</a>
+          <a className="button button-outline button-compact" href={`mailto:${CONTACT_EMAIL}`} onClick={closeMenu}>{text.contact}</a>
         </div>
       </div>
     </header>
