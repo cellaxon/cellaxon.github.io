@@ -54,7 +54,12 @@ Products are shown as full-width rows that alternate copy and media sides, each 
 - Pulse positions in the hero are percentages of `neural-signal.png`; update them if the artwork changes.
 - Decorative imagery is hidden from assistive technology; meaningful product screenshots have descriptive alternative text.
 
+- Product screenshots are buttons that open an enlarged view (`<dialog>`); outbound links live in the text link beside them. On narrow screens the enlarged view fits the screen height and pans sideways.
+- On narrow screens each product's three points are collapsed behind a "show key features" toggle to keep the page short.
+
 ## Localization
+
+- Korean copy is rewritten for Korean readers, not translated sentence by sentence from English. Keep the meaning aligned between languages, not the sentence structure.
 
 - English is served at `/`; Korean is served at `/ko/`.
 - Both language routes expose their own title, description, Open Graph metadata, canonical URL, and `hreflang` alternates.
