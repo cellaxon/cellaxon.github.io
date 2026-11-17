@@ -2,7 +2,7 @@
 
 ## Direction
 
-The company site uses a true-white editorial canvas with the official CELLAXON coral–magenta–violet signature. Product identities stay scoped: Ranvier keeps cyan/orange, while CELLAXON DevPulse keeps its dark dashboard palette. FlightOps is always presented as concept validation rather than a released product.
+The company site uses a true-white editorial canvas with the official CELLAXON coral–magenta–violet signature. Product identities stay scoped: Ranvier keeps cyan/orange, while CELLAXON DevPulse and Haven Desktop keep their own dark UI palettes inside their screenshots and icons. Haven Desktop is presented as "in preparation" until its Microsoft Store listing is live.
 
 ## Brand tokens
 
@@ -41,14 +41,17 @@ The gradient is a signature treatment for primary actions and selected display t
 
 1. Ranvier is presented as one complete product. Supporting developer tooling is intentionally omitted from the company homepage to keep the portfolio legible.
 2. CELLAXON DevPulse is presented as a separate VS Code product covering local-first Git analytics and AI agent work tracking.
-3. FlightOps is presented only as concept validation and never receives fabricated product UI.
+3. Haven Desktop is presented as an unreleased product: an "in preparation" status, real screenshots from the app, no download link or Store badge, and the "not made or endorsed by Microsoft" disclaimer next to it. Copy describes only what the app does today (it manages `wslc` containers; it is not a Docker or Podman front end).
+
+Products are shown as full-width rows that alternate copy and media sides, each with a status, three concrete points, and one action.
 
 ## Interaction and accessibility
 
 - All core actions have visible text labels and keyboard focus rings.
 - Focus rings use opaque brand magenta rather than transparent color so the indicator remains distinct on white surfaces.
 - External destinations use an external-link icon and `target="_blank"` with `rel="noreferrer"`.
-- Motion is subtle and disabled when `prefers-reduced-motion` is active.
+- Motion is subtle and disabled when `prefers-reduced-motion` is active: the hero copy rises in, signal pulses travel along the hero artwork, sections reveal once on scroll, and the Haven Desktop screens cross-fade (auto-rotation stops as soon as a tab is chosen).
+- Pulse positions in the hero are percentages of `neural-signal.png`; update them if the artwork changes.
 - Decorative imagery is hidden from assistive technology; meaningful product screenshots have descriptive alternative text.
 
 ## Localization
