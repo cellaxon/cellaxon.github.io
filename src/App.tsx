@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
+  CaretDown,
   EnvelopeSimple,
   Eye,
   HardDrives,
   List,
+  MagnifyingGlassPlus,
   SealCheck,
   X,
 } from "@phosphor-icons/react";
@@ -27,7 +29,7 @@ const languageMetadata = {
     path: "/ko/",
     locale: "ko_KR",
     title: "CELLAXON — 복잡한 시스템을 한눈에.",
-    description: "CELLAXON은 의사결정, 개발 작업, 컨테이너 환경을 한눈에 보고 검증할 수 있게 하는 개발자 도구를 만듭니다.",
+    description: "CELLAXON은 코드 속 의사결정, 개발 작업 내역, 컨테이너 상태를 화면에서 바로 확인할 수 있게 하는 개발자 도구를 만듭니다.",
   },
 } as const;
 
@@ -187,6 +189,9 @@ type ProductRowProps = {
   subtitle: string;
   statement: string;
   points: readonly string[];
+  /** 좁은 화면에서 요점 목록을 펴고 접는 버튼의 문구. */
+  pointsShowLabel: string;
+  pointsHideLabel: string;
   /** 요점 목록 아래에 오는 링크·안내문. */
   footer: ReactNode;
   media: ReactNode;
@@ -194,6 +199,9 @@ type ProductRowProps = {
 
 function ProductRow(props: ProductRowProps) {
   const logoClassName = props.logoClassName ? `product-logo ${props.logoClassName}` : "product-logo";
+  // 넓은 화면에서는 CSS가 목록을 항상 보여 주고 버튼을 숨긴다. 이 상태는 좁은 화면에서만 뜻이 있다.
+  const [pointsOpen, setPointsOpen] = useState(false);
+  const pointsId = useId();
 
   return (
     <article className={props.reverse ? "product-row product-row-reverse" : "product-row"} id={props.id} data-reveal ref={revealRef}>
@@ -210,7 +218,17 @@ function ProductRow(props: ProductRowProps) {
         </div>
         <p className="product-subtitle">{props.subtitle}</p>
         <p className="product-statement">{props.statement}</p>
-        <ul className="product-points">
+        <button
+          className="points-toggle"
+          type="button"
+          aria-expanded={pointsOpen}
+          aria-controls={pointsId}
+          onClick={() => setPointsOpen((open) => !open)}
+        >
+          {pointsOpen ? props.pointsHideLabel : props.pointsShowLabel}
+          <CaretDown aria-hidden="true" weight="bold" />
+        </button>
+        <ul className={pointsOpen ? "product-points" : "product-points is-collapsed"} id={pointsId}>
           {props.points.map((point) => (
             <li key={point}>{point}</li>
           ))}
@@ -231,18 +249,57 @@ function ExternalLink({ href, children }: { href: string; children: ReactNode })
   );
 }
 
-/** 링크 이름은 스크린샷의 alt가 맡는다. 옆의 글자 링크와 이름이 겹치지 않게 aria-label을 두지 않는다. */
-function ExternalMedia({ href, src, alt, width, height }: { href: string; src: string; alt: string; width: number; height: number }) {
+type ZoomLabels = { zoom: string; close: string };
+
+/** 스크린샷을 화면 가득 보여 주는 창. 어디를 눌러도, Esc를 눌러도 닫힌다. */
+function Lightbox({ src, alt, closeLabel, onClose }: { src: string; alt: string; closeLabel: string; onClose: () => void }) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (dialog && !dialog.open) dialog.showModal();
+  }, []);
+
   return (
-    <a className="product-media" href={href} target="_blank" rel="noreferrer">
-      <img src={src} alt={alt} width={width} height={height} loading="lazy" />
-    </a>
+    <dialog className="lightbox" ref={dialogRef} onClose={onClose} onClick={() => dialogRef.current?.close()}>
+      <button className="lightbox-close" type="button" aria-label={closeLabel}>
+        <X aria-hidden="true" weight="bold" />
+      </button>
+      <div className="lightbox-scroll">
+        <img src={src} alt={alt} />
+      </div>
+    </dialog>
   );
 }
 
-function HavenScreens({ language }: { language: Language }) {
+/** 스크린샷 위에 얹는 "크게 보기" 표시. 버튼 이름은 이 글자와 스크린샷 alt가 함께 만든다. */
+function ZoomHint({ label }: { label: string }) {
+  return (
+    <span className="zoom-hint">
+      <MagnifyingGlassPlus aria-hidden="true" weight="bold" />
+      {label}
+    </span>
+  );
+}
+
+function ZoomMedia({ src, alt, width, height, labels }: { src: string; alt: string; width: number; height: number; labels: ZoomLabels }) {
+  const [zoomed, setZoomed] = useState(false);
+
+  return (
+    <div className="product-media">
+      <button className="media-zoom" type="button" onClick={() => setZoomed(true)}>
+        <img src={src} alt={alt} width={width} height={height} loading="lazy" />
+        <ZoomHint label={labels.zoom} />
+      </button>
+      {zoomed && <Lightbox src={src} alt={alt} closeLabel={labels.close} onClose={() => setZoomed(false)} />}
+    </div>
+  );
+}
+
+function HavenScreens({ language, labels }: { language: Language; labels: ZoomLabels }) {
   const haven = copy[language].products.haven;
   const [active, setActive] = useState(0);
+  const [zoomed, setZoomed] = useState(false);
   // 탭을 직접 고르면 자동 전환을 끝내고, 마우스를 올리거나 포커스가 들어와 있는 동안에는 잠시 멈춘다.
   const [autoRotate, setAutoRotate] = useState(() => !prefersReducedMotion());
   const [hovered, setHovered] = useState(false);
@@ -258,7 +315,8 @@ function HavenScreens({ language }: { language: Language }) {
     return () => observer.disconnect();
   }, []);
 
-  const rotating = autoRotate && inView && !hovered && !focused;
+  const rotating = autoRotate && inView && !hovered && !focused && !zoomed;
+  const activeScreen = havenScreens[active];
 
   useEffect(() => {
     if (!rotating) return;
@@ -293,7 +351,7 @@ function HavenScreens({ language }: { language: Language }) {
           </button>
         ))}
       </div>
-      <div className="haven-screens">
+      <button className="media-zoom haven-screens" type="button" onClick={() => setZoomed(true)}>
         {havenScreens.map((screen, index) => (
           <img
             key={screen.id}
@@ -306,7 +364,16 @@ function HavenScreens({ language }: { language: Language }) {
             loading="lazy"
           />
         ))}
-      </div>
+        <ZoomHint label={labels.zoom} />
+      </button>
+      {zoomed && (
+        <Lightbox
+          src={activeScreen.src}
+          alt={haven.mediaAlt[activeScreen.id]}
+          closeLabel={labels.close}
+          onClose={() => setZoomed(false)}
+        />
+      )}
     </div>
   );
 }
@@ -314,6 +381,8 @@ function HavenScreens({ language }: { language: Language }) {
 function Products({ language }: { language: Language }) {
   const text = copy[language].products;
   const { ranvier, devpulse, haven } = text;
+  const zoomLabels = { zoom: text.zoom, close: text.zoomClose };
+  const pointsLabels = { pointsShowLabel: text.pointsShow, pointsHideLabel: text.pointsHide };
 
   return (
     <section className="products-section" id="products">
@@ -330,11 +399,12 @@ function Products({ language }: { language: Language }) {
             name="Ranvier"
             statusKind="available"
             statusLabel={text.availableStatus}
+            {...pointsLabels}
             subtitle={ranvier.subtitle}
             statement={ranvier.statement}
             points={ranvier.points}
             footer={<ExternalLink href={RANVIER_URL}>{ranvier.action}</ExternalLink>}
-            media={<ExternalMedia href={RANVIER_URL} src="/assets/products/ranvier-home.png" alt={ranvier.mediaAlt} width={1265} height={712} />}
+            media={<ZoomMedia src="/assets/products/ranvier-home.png" alt={ranvier.mediaAlt} width={1265} height={712} labels={zoomLabels} />}
           />
           <ProductRow
             reverse
@@ -342,11 +412,12 @@ function Products({ language }: { language: Language }) {
             name="CELLAXON DevPulse"
             statusKind="available"
             statusLabel={text.availableStatus}
+            {...pointsLabels}
             subtitle={devpulse.subtitle}
             statement={devpulse.statement}
             points={devpulse.points}
             footer={<ExternalLink href={DEVPULSE_URL}>{devpulse.action}</ExternalLink>}
-            media={<ExternalMedia href={DEVPULSE_URL} src="/assets/products/devpulse-dashboard.png" alt={devpulse.mediaAlt} width={1586} height={992} />}
+            media={<ZoomMedia src="/assets/products/devpulse-dashboard.png" alt={devpulse.mediaAlt} width={1586} height={992} labels={zoomLabels} />}
           />
           <ProductRow
             id="haven"
@@ -354,6 +425,7 @@ function Products({ language }: { language: Language }) {
             name="Haven Desktop"
             statusKind="preparing"
             statusLabel={text.preparingStatus}
+            {...pointsLabels}
             subtitle={haven.subtitle}
             statement={haven.statement}
             points={haven.points}
@@ -367,7 +439,7 @@ function Products({ language }: { language: Language }) {
                 <p className="product-disclaimer">{haven.disclaimer}</p>
               </>
             }
-            media={<HavenScreens language={language} />}
+            media={<HavenScreens language={language} labels={zoomLabels} />}
           />
         </div>
       </div>
@@ -429,6 +501,25 @@ function Company({ language }: { language: Language }) {
   );
 }
 
+function ContactCta({ language }: { language: Language }) {
+  const text = copy[language].cta;
+
+  return (
+    <section className="cta-section">
+      <div className="shell cta-inner" data-reveal ref={revealRef}>
+        <div>
+          <h2>{text.title}</h2>
+          <p>{text.body}</p>
+        </div>
+        <a className="button button-primary" href={`mailto:${CONTACT_EMAIL}`}>
+          <EnvelopeSimple aria-hidden="true" weight="bold" />
+          {text.action}
+        </a>
+      </div>
+    </section>
+  );
+}
+
 function Footer({ language }: { language: Language }) {
   const text = copy[language].footer;
   return (
@@ -472,6 +563,7 @@ export default function App() {
         <Products language={language} />
         <Approach language={language} />
         <Company language={language} />
+        <ContactCta language={language} />
       </main>
       <Footer language={language} />
     </>

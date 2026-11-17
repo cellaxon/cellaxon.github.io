@@ -410,19 +410,23 @@ img {
 }
 
 .section-heading {
-  display: grid;
-  grid-template-columns: minmax(0, 6fr) minmax(280px, 4fr);
-  align-items: end;
-  gap: 32px;
   margin-bottom: 40px;
 }
 
+.section-heading .section-label {
+  margin-bottom: 20px;
+}
+
+.section-heading > p:last-child {
+  max-width: 640px;
+  margin-top: 20px;
+}
+
 .section-label {
-  grid-column: 1 / -1;
   margin: 0;
   color: var(--color-magenta);
   font-family: var(--font-display);
-  font-size: 0.76rem;
+  font-size: 0.88rem;
   font-weight: 700;
   letter-spacing: 0.17em;
   text-transform: uppercase;
@@ -440,9 +444,9 @@ img {
 
 .section-heading > p:last-child,
 .company-intro > p:last-child {
-  margin: 0;
+  margin-bottom: 0;
   color: var(--color-muted);
-  font-size: 1rem;
+  font-size: 1.12rem;
   line-height: 1.7;
 }
 
@@ -487,9 +491,15 @@ img {
   object-fit: contain;
 }
 
+/* 글자 로고라서 다른 제품의 앱 아이콘과 줄이 맞도록 같은 크기의 타일에 넣는다. */
 .ranvier-logo {
-  padding: 2px;
-  border-radius: 0;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+}
+
+.points-toggle {
+  display: none;
 }
 
 .product-row h3 {
@@ -507,7 +517,7 @@ img {
   gap: 8px;
   color: var(--color-muted);
   font-family: var(--font-display);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -541,14 +551,14 @@ img {
 .product-subtitle {
   margin: 0;
   color: var(--color-muted);
-  font-size: 1rem;
+  font-size: 1.08rem;
   line-height: 1.6;
 }
 
 .product-statement {
   margin: 10px 0 0;
   font-family: var(--font-display);
-  font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+  font-size: clamp(1.25rem, 1.65vw, 1.5rem);
   font-weight: 560;
   letter-spacing: -0.015em;
   line-height: 1.4;
@@ -566,7 +576,7 @@ img {
   position: relative;
   padding-left: 22px;
   color: var(--color-ink);
-  font-size: 0.95rem;
+  font-size: 1.04rem;
   line-height: 1.6;
 }
 
@@ -587,7 +597,7 @@ img {
   border-radius: var(--radius-sm);
   background: rgba(78, 27, 135, 0.04);
   color: var(--color-violet);
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   font-weight: 550;
   line-height: 1.55;
 }
@@ -595,7 +605,7 @@ img {
 .product-disclaimer {
   margin: 18px 0 0;
   color: var(--color-muted);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   line-height: 1.6;
 }
 
@@ -607,7 +617,7 @@ img {
   border-radius: 4px;
   color: var(--color-magenta);
   font-family: var(--font-display);
-  font-size: 0.98rem;
+  font-size: 1.04rem;
   font-weight: 650;
   text-decoration: none;
 }
@@ -647,23 +657,109 @@ img {
   opacity: 0.26;
 }
 
-a.product-media {
-  text-decoration: none;
+.media-zoom {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  cursor: zoom-in;
+  font: inherit;
+  transition: transform 260ms ease;
+}
+
+.media-zoom:hover {
+  transform: translateY(-4px);
+}
+
+.media-zoom:focus-visible {
+  outline: 3px solid var(--color-magenta);
+  outline-offset: 4px;
 }
 
 .product-media img {
-  position: relative;
-  z-index: 1;
   width: 100%;
   height: auto;
   border: 1px solid rgba(23, 19, 29, 0.13);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-media);
-  transition: transform 260ms ease;
 }
 
-a.product-media:hover img {
-  transform: translateY(-4px);
+.zoom-hint {
+  position: absolute;
+  z-index: 2;
+  right: 12px;
+  bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(23, 19, 29, 0.86);
+  color: var(--color-white);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.zoom-hint svg {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.lightbox {
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-out;
+  overflow: visible;
+}
+
+.lightbox::backdrop {
+  background: rgba(23, 19, 29, 0.86);
+}
+
+.lightbox-scroll {
+  max-width: 96vw;
+  max-height: 92vh;
+  overflow: auto;
+  border-radius: var(--radius-md);
+}
+
+.lightbox-scroll img {
+  width: auto;
+  max-width: 96vw;
+  max-height: 92vh;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.lightbox-close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.lightbox-close:focus-visible {
+  outline: 3px solid var(--color-magenta);
+  outline-offset: 3px;
 }
 
 .haven-tabs {
@@ -776,7 +872,7 @@ a.product-media:hover img {
 .approach-grid h3 {
   margin: 26px 0 12px;
   font-family: var(--font-display);
-  font-size: 1.45rem;
+  font-size: 1.6rem;
   font-weight: 620;
   letter-spacing: -0.02em;
 }
@@ -784,7 +880,7 @@ a.product-media:hover img {
 .approach-grid p {
   margin: 0;
   color: #cfc6d2;
-  font-size: 0.96rem;
+  font-size: 1.06rem;
   line-height: 1.7;
 }
 
@@ -891,6 +987,39 @@ a.product-media:hover img {
   }
 }
 
+.cta-section {
+  border-top: 1px solid #eee5eb;
+  background: linear-gradient(120deg, var(--color-blush-soft), var(--color-blush));
+}
+
+.cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding-block: 72px;
+}
+
+.cta-inner h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 2.6vw, 2.5rem);
+  font-weight: 620;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.cta-inner p {
+  margin: 14px 0 0;
+  color: var(--color-muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.cta-inner .button {
+  flex: 0 0 auto;
+}
+
 .company-section {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -936,7 +1065,7 @@ a.product-media:hover img {
 .company-details span {
   color: var(--color-muted);
   font-family: var(--font-display);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -944,7 +1073,7 @@ a.product-media:hover img {
 
 .company-details p {
   margin: 14px 0 0;
-  font-size: 0.92rem;
+  font-size: 1rem;
   line-height: 1.65;
 }
 
@@ -988,7 +1117,7 @@ a.product-media:hover img {
 .footer-inner p {
   margin: 0;
   color: #d6cfd7;
-  font-size: 0.8rem;
+  font-size: 0.88rem;
 }
 
 @media (max-width: 1180px) {
@@ -1306,5 +1435,76 @@ html[lang="ko"] .company-intro h2 {
   [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+}
+
+@media (max-width: 820px) {
+  /* 좁은 화면에서는 요점 목록을 접어 두어 페이지 길이를 줄인다. */
+  .points-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    padding: 10px 14px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--color-white);
+    color: var(--color-ink);
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .points-toggle svg {
+    width: 1em;
+    height: 1em;
+    transition: transform 180ms ease;
+  }
+
+  .points-toggle[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+
+  .points-toggle:focus-visible {
+    outline: 3px solid var(--color-magenta);
+    outline-offset: 3px;
+  }
+
+  .product-points {
+    margin-top: 18px;
+  }
+
+  .product-points.is-collapsed {
+    display: none;
+  }
+
+  .cta-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-block: 56px;
+  }
+
+  /* 좁은 화면에서는 스크린샷을 화면 높이에 맞추고 좌우로 밀어서 본다. */
+  .lightbox-scroll img {
+    max-width: none;
+    height: 78vh;
+    max-height: 78vh;
+  }
+}
+
+html[lang="ko"] .cta-inner h2 {
+  font-family: "Noto Sans KR Variable", "Noto Sans KR", system-ui, sans-serif;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+
+@media print {
+  .points-toggle,
+  .zoom-hint {
+    display: none;
+  }
+
+  .product-points.is-collapsed {
+    display: grid;
   }
 }
