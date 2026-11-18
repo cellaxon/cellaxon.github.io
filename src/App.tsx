@@ -16,6 +16,7 @@ import { copy, type Language } from "./content";
 const CONTACT_EMAIL = "contact@cellaxon.com";
 const RANVIER_URL = "https://ranvier.studio/";
 const DEVPULSE_URL = "https://marketplace.visualstudio.com/items?itemName=cellaxon.cellaxon-devpulse";
+const DEVPULSE_OPENVSX_URL = "https://open-vsx.org/extension/cellaxon/cellaxon-devpulse";
 const HAVEN_ROTATE_MS = 6000;
 
 const languageMetadata = {
@@ -425,7 +426,12 @@ function Products({ language }: { language: Language }) {
             subtitle={devpulse.subtitle}
             statement={devpulse.statement}
             points={devpulse.points}
-            footer={<ExternalLink href={DEVPULSE_URL}>{devpulse.action}</ExternalLink>}
+            footer={
+              <div className="product-links">
+                <ExternalLink href={DEVPULSE_URL}>{devpulse.action}</ExternalLink>
+                <ExternalLink href={DEVPULSE_OPENVSX_URL}>{devpulse.openVsxAction}</ExternalLink>
+              </div>
+            }
             media={<ZoomMedia src="/assets/products/devpulse-dashboard.png" alt={devpulse.mediaAlt} width={1586} height={992} labels={zoomLabels} />}
           />
           <ProductRow

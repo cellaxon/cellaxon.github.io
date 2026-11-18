@@ -54,6 +54,7 @@ export const copy = {
           "Keep everything local—your repository and agent data never leave your machine.",
         ],
         action: "View on VS Code Marketplace",
+        openVsxAction: "View on Open VSX",
         mediaAlt: "CELLAXON DevPulse Git activity analytics dashboard",
       },
       haven: {
@@ -171,6 +172,7 @@ export const copy = {
           "모든 분석은 로컬에서 이루어지며, 저장소와 에이전트 데이터는 외부로 전송되지 않습니다.",
         ],
         action: "VS Code Marketplace에서 보기",
+        openVsxAction: "Open VSX에서 보기",
         mediaAlt: "CELLAXON DevPulse의 Git 활동 분석 대시보드",
       },
       haven: {
