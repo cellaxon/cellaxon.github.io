@@ -609,6 +609,17 @@ img {
   line-height: 1.6;
 }
 
+.product-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+  margin-top: 26px;
+}
+
+.product-links .text-link {
+  margin-top: 0;
+}
+
 .text-link {
   display: inline-flex;
   align-items: center;
