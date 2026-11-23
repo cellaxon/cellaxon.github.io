@@ -24,6 +24,9 @@ function currentSectionHash() {
   // A TOC jump leaves a section's top at the root scroll-padding plus its scroll-margin; read both from
   // CSS so this stays in step with the styles, and allow some slack for a little extra scrolling.
   const rootPadding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+  // Keep an explicitly selected section even if focus or layout shifts the scroll position.
+  const hash = window.location.hash;
+  if (document.getElementById(hash.slice(1))?.classList.contains("help-section")) return hash;
   let current = "";
   for (const section of document.querySelectorAll<HTMLElement>(".help-section[id]")) {
     const landing = rootPadding + (parseFloat(getComputedStyle(section).scrollMarginTop) || 0);
@@ -79,7 +82,7 @@ function HelpBlock({ block }: { block: HavenHelpBlock }) {
     case "image":
       return (
         <figure className="help-content-image">
-          <img src={block.src} alt={block.alt} width={block.width} height={block.height} loading="lazy" />
+          <img src={block.src} alt={block.alt} width={block.width} height={block.height} loading="lazy" style={{ height: "auto" }} />
           {block.caption ? <figcaption>{block.caption}</figcaption> : null}
         </figure>
       );
@@ -114,7 +117,7 @@ export default function HavenHelpApp() {
           <nav className="help-header-actions" aria-label={content.meta.languageLabel}>
             <a className="help-home-link" href={`${homePath}#haven`}>
               <ArrowLeft aria-hidden="true" weight="bold" />
-              {language === "ko" ? "제품으로 돌아가기" : "Back to products"}
+              {language === "ko" ? "제품 소개로 돌아가기" : "Back to product overview"}
             </a>
             <a className="help-language-link" href={alternatePath} onClick={keepPlace} lang={language === "ko" ? "en" : "ko"}>
               {alternateLabel}
