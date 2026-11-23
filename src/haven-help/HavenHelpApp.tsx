@@ -1,10 +1,70 @@
 import { ArrowLeft, ArrowRight, EnvelopeSimple, ShieldCheck } from "@phosphor-icons/react";
-import { getPublishedSections, havenHelpContent, type HavenHelpLanguage } from "./content";
+import { getPublishedSections, havenHelpContent, type HavenHelpBlock, type HavenHelpLanguage } from "./content";
 
 const CONTACT_EMAIL = "contact@cellaxon.com";
 
 function getLanguage(): HavenHelpLanguage {
   return window.location.pathname.startsWith("/ko/") ? "ko" : "en";
+}
+
+function assertNever(value: never): never {
+  throw new Error(`Unsupported Haven help block: ${JSON.stringify(value)}`);
+}
+
+function HelpBlock({ block }: { block: HavenHelpBlock }) {
+  switch (block.type) {
+    case "paragraph":
+      return <p className="help-section-intro">{block.text}</p>;
+    case "facts":
+      return (
+        <ul className="help-card-grid">
+          {block.items.map((item) => (
+            <li key={item.id}>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </li>
+          ))}
+        </ul>
+      );
+    case "steps":
+      return (
+        <div className="help-steps-block">
+          <h3>{block.title}</h3>
+          <ol className="help-steps">
+            {block.items.map((item) => (
+              <li key={item.id}>
+                <h4>{item.title}</h4>
+                <p>{item.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      );
+    case "note":
+    case "warning":
+      return (
+        <aside className={`help-callout help-callout-${block.type}`}>
+          <h3>{block.title}</h3>
+          <p>{block.text}</p>
+        </aside>
+      );
+    case "code":
+      return (
+        <figure className="help-code-block">
+          {block.caption ? <figcaption>{block.caption}</figcaption> : null}
+          <pre><code data-language={block.language}>{block.code}</code></pre>
+        </figure>
+      );
+    case "image":
+      return (
+        <figure className="help-content-image">
+          <img src={block.src} alt={block.alt} width={block.width} height={block.height} loading="lazy" />
+          {block.caption ? <figcaption>{block.caption}</figcaption> : null}
+        </figure>
+      );
+    default:
+      return assertNever(block);
+  }
 }
 
 export default function HavenHelpApp() {
@@ -51,7 +111,7 @@ export default function HavenHelpApp() {
             <figure className="help-hero-media">
               <img
                 src="/assets/products/haven-containers.png"
-                alt={language === "ko" ? "Haven Desktop의 컨테이너 목록과 상세 화면" : "Haven Desktop container list and details view"}
+                alt={content.hero.mediaAlt}
                 width="1536"
                 height="1061"
               />
@@ -76,17 +136,7 @@ export default function HavenHelpApp() {
               <section className="help-section" id={section.id} key={section.id}>
                 <p className="help-section-label">{section.label}</p>
                 <h2>{section.title}</h2>
-                {section.intro ? <p className="help-section-intro">{section.intro}</p> : null}
-                {section.items ? (
-                  <ul className="help-card-grid">
-                    {section.items.map((item) => (
-                      <li key={item.title}>
-                        <h3>{item.title}</h3>
-                        <p>{item.body}</p>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
+                {section.blocks.map((block) => <HelpBlock block={block} key={block.id} />)}
                 {section.id === "privacy-security-support" ? (
                   <a className="button button-outline help-contact" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(mailSubject)}`}>
                     <EnvelopeSimple aria-hidden="true" weight="bold" />
@@ -99,10 +149,8 @@ export default function HavenHelpApp() {
             <aside className="help-boundary-note">
               <ShieldCheck aria-hidden="true" weight="duotone" />
               <div>
-                <h2>{language === "ko" ? "제품 경계" : "Product boundary"}</h2>
-                <p>{language === "ko"
-                  ? "Haven Desktop은 Microsoft 또는 Docker의 제품이 아니며 두 회사가 보증하거나 지원하지 않습니다."
-                  : "Haven Desktop is not a Microsoft or Docker product and is not endorsed or supported by either company."}</p>
+                <h2>{content.boundary.title}</h2>
+                <p>{content.boundary.body}</p>
               </div>
             </aside>
           </div>
@@ -111,7 +159,7 @@ export default function HavenHelpApp() {
 
       <footer className="help-footer">
         <div className="shell help-footer-inner">
-          <p>{content.meta.footerLine}</p>
+          <p>{content.boundary.footerLine}</p>
           <a href={homePath}>
             cellaxon.com
             <ArrowRight aria-hidden="true" weight="bold" />

@@ -240,6 +240,34 @@
   line-height: 1.86;
 }
 
+.help-callout {
+  margin: 30px 0 0;
+  padding: 22px 24px;
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-violet);
+  border-radius: var(--radius-sm);
+  background: var(--color-blush-soft);
+}
+
+.help-callout-warning {
+  border-left-color: var(--color-coral);
+  background: #fff8f7;
+}
+
+.help-callout h3,
+.help-steps-block > h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 680;
+}
+
+.help-callout p {
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  line-height: 1.72;
+}
+
 .help-card-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -270,6 +298,83 @@
   color: var(--color-muted);
   font-size: 0.94rem;
   line-height: 1.72;
+}
+
+.help-steps-block,
+.help-code-block,
+.help-content-image {
+  margin: 34px 0 0;
+}
+
+.help-steps {
+  display: grid;
+  gap: 18px;
+  margin: 18px 0 0;
+  padding-left: 32px;
+}
+
+.help-steps li {
+  padding-left: 8px;
+}
+
+.help-steps h4,
+.help-steps p {
+  margin: 0;
+}
+
+.help-steps h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+
+.help-steps p {
+  margin-top: 6px;
+  color: var(--color-muted);
+  line-height: 1.72;
+}
+
+.help-code-block {
+  overflow: hidden;
+  border: 1px solid #2f2838;
+  border-radius: var(--radius-md);
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+.help-code-block figcaption,
+.help-content-image figcaption {
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.help-code-block figcaption {
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.help-code-block pre {
+  overflow-x: auto;
+  margin: 0;
+  padding: 20px;
+}
+
+.help-code-block code {
+  font-family: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.help-content-image img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.help-content-image figcaption {
+  margin-top: 10px;
 }
 
 .help-contact {
@@ -435,7 +540,8 @@
   }
 
   .help-card-grid li,
-  .help-boundary-note {
+  .help-boundary-note,
+  .help-callout {
     padding: 21px;
   }
 
