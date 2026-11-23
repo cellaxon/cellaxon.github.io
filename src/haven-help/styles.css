@@ -456,6 +456,7 @@
   position: relative;
   max-height: 94vh;
   padding: 52px 16px 16px;
+  overflow-y: auto;
   border-radius: 16px;
   background: var(--color-white);
   box-shadow: 0 24px 64px rgba(14, 10, 20, 0.35);
@@ -724,13 +725,18 @@
   html {
     scroll-behavior: auto;
   }
+
+  .help-zoom-badge {
+    transition: none;
+  }
 }
 
 @media print {
   .help-header,
   .help-toc,
   .help-footer,
-  .help-contact {
+  .help-contact,
+  .help-zoom-badge {
     display: none;
   }
 

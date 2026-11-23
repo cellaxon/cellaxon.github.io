@@ -43,8 +43,8 @@ function currentSectionHash() {
 
 type ZoomLabels = { zoomLabel: string; closeLabel: string };
 
-// A screenshot that opens at full size in a modal dialog. The native <dialog> traps focus, closes on
-// Escape and returns focus to the button that opened it.
+// A screenshot that opens enlarged in a modal dialog. The native <dialog> traps focus, closes on Escape
+// and returns focus to the button that opened it.
 function ZoomableImage({ image, labels, className }: { image: HavenHelpImage; labels: ZoomLabels; className: string }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const close = () => dialogRef.current?.close();
@@ -83,6 +83,8 @@ function ZoomableImage({ image, labels, className }: { image: HavenHelpImage; la
               alt={image.alt}
               width={image.width}
               height={image.height}
+              // Not shown until the dialog opens, so don't fetch it with the page.
+              loading="lazy"
               style={{ "--zoom-natural-width": `${image.width}px`, "--zoom-ratio": image.width / image.height } as CSSProperties}
             />
           </div>
