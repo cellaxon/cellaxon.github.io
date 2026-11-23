@@ -21,11 +21,13 @@ function scrollToInitialHash() {
 // Carries the reader's place over to the other language: the last section whose top has reached the
 // area under the sticky header. Sections share their IDs across languages.
 function currentSectionHash() {
-  // Matches where a TOC jump lands: the root scroll-padding plus the section scroll-margin, with slack.
-  const offset = 240;
+  // A TOC jump leaves a section's top at the root scroll-padding plus its scroll-margin; read both from
+  // CSS so this stays in step with the styles, and allow some slack for a little extra scrolling.
+  const rootPadding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
   let current = "";
   for (const section of document.querySelectorAll<HTMLElement>(".help-section[id]")) {
-    if (section.getBoundingClientRect().top <= offset) current = `#${section.id}`;
+    const landing = rootPadding + (parseFloat(getComputedStyle(section).scrollMarginTop) || 0);
+    if (section.getBoundingClientRect().top <= landing + 40) current = `#${section.id}`;
   }
   return current;
 }

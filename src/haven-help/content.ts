@@ -343,7 +343,7 @@ export const havenHelpContent: Record<HavenHelpLanguage, HavenHelpPageContent> =
             items: [
               { id: "wslc-ready", title: "wslc 3.0.5 이상", body: "Haven은 PC에 이미 있는 wslc로 동작합니다. wslc가 없거나 버전이 낮으면 앱이 설치 안내를 보여 줍니다." },
               { id: "container-list", title: "다룰 컨테이너", body: "컨테이너 화면에는 멈춘 것까지 모든 컨테이너가 나오므로, 여기서 다룰 컨테이너를 고르면 됩니다." },
-              { id: "docker-engine", title: "WSL의 Docker Engine(선택)", body: "설정 → Docker 엔진에서 WSL 배포판을 켜면 그 배포판의 컨테이너도 이름 표시와 함께 같은 목록에 나오고, 같은 동작을 쓸 수 있습니다. Docker Desktop은 지원하지 않습니다." },
+              { id: "docker-engine", title: "WSL의 Docker Engine(선택)", body: "설정 → Docker 엔진에서 WSL 배포판을 켜면 그 배포판의 컨테이너도 배포판 이름이 붙은 채 같은 목록에 나오고, 같은 동작을 쓸 수 있습니다. Docker Desktop은 지원하지 않습니다." },
             ],
           },
           {
