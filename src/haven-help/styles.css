@@ -366,8 +366,7 @@
   line-height: 1.65;
 }
 
-.help-content-image img {
-  width: 100%;
+.help-content-image .help-zoom-trigger img {
   height: auto;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -375,6 +374,172 @@
 
 .help-content-image figcaption {
   margin-top: 10px;
+}
+
+/* Screenshots keep their own size (most are crops) and never grow past the column. */
+.help-step-image {
+  margin: 14px 0 4px;
+}
+
+.help-step-image figcaption {
+  margin-top: 8px;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.help-zoom-trigger {
+  position: relative;
+  display: block;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  cursor: zoom-in;
+}
+
+.help-step-image .help-zoom-trigger,
+.help-content-image .help-zoom-trigger {
+  width: fit-content;
+}
+
+.help-zoom-trigger img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.help-zoom-trigger:focus-visible {
+  outline: 3px solid var(--color-magenta);
+  outline-offset: 3px;
+}
+
+.help-zoom-badge {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 4px 14px rgba(23, 19, 29, 0.16);
+  color: var(--color-magenta);
+  font-size: 1.05rem;
+  transition: transform 150ms ease;
+}
+
+.help-zoom-trigger:hover .help-zoom-badge,
+.help-zoom-trigger:focus-visible .help-zoom-badge {
+  transform: scale(1.08);
+}
+
+.help-zoom-dialog {
+  max-width: 96vw;
+  max-height: 94vh;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.help-zoom-dialog::backdrop {
+  background: rgba(14, 10, 20, 0.74);
+}
+
+.help-zoom-frame {
+  position: relative;
+  max-height: 94vh;
+  padding: 52px 16px 16px;
+  border-radius: 16px;
+  background: var(--color-white);
+  box-shadow: 0 24px 64px rgba(14, 10, 20, 0.35);
+}
+
+.help-zoom-scroll {
+  overflow: auto;
+}
+
+.help-zoom-frame img {
+  display: block;
+  /* Crops are small, so enlarge them up to 1.75x, but never past the screen's width or, through the
+     aspect ratio, its height. */
+  width: min(
+    calc(var(--zoom-natural-width) * 1.75),
+    calc(96vw - 32px),
+    calc((94vh - 130px) * var(--zoom-ratio))
+  );
+  height: auto;
+  margin-inline: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.help-zoom-caption {
+  max-width: 72ch;
+  margin: 12px 0 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.help-zoom-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.help-zoom-close:hover {
+  border-color: var(--color-magenta);
+  color: var(--color-magenta);
+}
+
+.help-zoom-close:focus-visible {
+  outline: 3px solid var(--color-magenta);
+  outline-offset: 2px;
+}
+
+/* On a phone the fitted image is no larger than the inline one, so show it at its own size and let the
+   reader pan across it. */
+@media (max-width: 640px) {
+  .help-zoom-badge {
+    right: 6px;
+    bottom: 6px;
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+
+  .help-zoom-frame {
+    width: 96vw;
+    padding: 52px 10px 12px;
+  }
+
+  .help-zoom-scroll {
+    max-height: calc(94vh - 130px);
+  }
+
+  .help-zoom-frame img {
+    width: var(--zoom-natural-width);
+    max-width: none;
+    max-height: none;
+    margin-inline: 0;
+  }
 }
 
 .help-contact {

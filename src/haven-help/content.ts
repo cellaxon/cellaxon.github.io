@@ -12,10 +12,19 @@ export type HavenHelpFact = {
   body: string;
 };
 
+export type HavenHelpImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  caption?: string;
+};
+
 export type HavenHelpStep = {
   id: string;
   title: string;
   body: string;
+  image?: HavenHelpImage;
 };
 
 type HavenHelpBlockBase = { id: string };
@@ -27,7 +36,7 @@ export type HavenHelpBlock =
   | (HavenHelpBlockBase & { type: "note"; title: string; text: string })
   | (HavenHelpBlockBase & { type: "warning"; title: string; text: string })
   | (HavenHelpBlockBase & { type: "code"; code: string; language?: string; caption?: string })
-  | (HavenHelpBlockBase & { type: "image"; src: string; alt: string; width: number; height: number; caption?: string });
+  | (HavenHelpBlockBase & HavenHelpImage & { type: "image" });
 
 export type HavenHelpSection = HavenHelpEvidence & {
   id: string;
@@ -62,6 +71,8 @@ export type HavenHelpPageContent = {
     tocLabel: string;
     tocTitle: string;
     contactLabel: string;
+    zoomLabel: string;
+    closeLabel: string;
   };
   hero: HavenHelpHero;
   boundary: HavenHelpBoundary;
@@ -78,6 +89,8 @@ export const havenHelpContent: Record<HavenHelpLanguage, HavenHelpPageContent> =
       tocLabel: "On this page",
       tocTitle: "Help topics",
       contactLabel: "Contact Haven support",
+      zoomLabel: "Enlarge image",
+      closeLabel: "Close",
     },
     hero: {
       id: "hero",
@@ -182,13 +195,14 @@ export const havenHelpContent: Record<HavenHelpLanguage, HavenHelpPageContent> =
             type: "steps",
             title: "Work with a container",
             items: [
-              { id: "find", title: "Find a container", body: "Open Containers. The list updates automatically. Use the “Search by name, image, state, group” field to find a container, or turn on “Group by project” to see related containers together." },
-              { id: "control", title: "Start, stop, restart, or force-stop a container", body: "Use the buttons in a container's row to start, stop, restart, or remove it. To force-stop a container, even if it's the only one, check its box in the list, then select “Kill” on the selection bar." },
-              { id: "logs", title: "View live logs", body: "Open the container details and select Logs. Turn on “Follow” to see new lines as they arrive. Use “Search logs” to find a line. You can also copy the output or save it to a file." },
+              { id: "find", title: "Find a container", body: "Open Containers. The list updates automatically. Use the “Search by name, image, state, group” field to find a container, or turn on “Group by project” to see related containers together.", image: { src: "/assets/products/haven-help/containers-find-en.png", alt: "Top of the Containers page with the search box and the Group by project switch outlined, above a list grouped into the blog and shop projects.", width: 1092, height: 360, caption: "Search the list, or group it by project." } },
+              { id: "control", title: "Start, stop, restart, or force-stop a container", body: "Use the buttons in a container's row to start, stop, restart, or remove it. To force-stop a container, even if it's the only one, check its box in the list, then select “Kill” on the selection bar.", image: { src: "/assets/products/haven-help/containers-control-en.png", alt: "Two selected containers. The selection bar above the list, with Start, Stop, Restart, Kill, Remove, and Clear selection, is outlined, and so are the stop, restart, and remove buttons at the end of each row.", width: 1092, height: 252, caption: "Row buttons act on one container; the selection bar acts on every checked container." } },
+              { id: "logs", title: "View live logs", body: "Open the container details and select Logs. Turn on “Follow” to see new lines as they arrive. Use “Search logs” to find a line. You can also copy the output or save it to a file.", image: { src: "/assets/products/haven-help/containers-logs-en.png", alt: "Container details with the Logs tab outlined, and the row below it outlined: a Search logs box and the Follow, Timestamps, Copy, Save, and Clear buttons.", width: 640, height: 186, caption: "The Logs tab and its toolbar." } },
               { id: "usage", title: "Check resource usage", body: "Select Usage in the container details to see current and recent CPU and memory usage." },
             ],
           },
           { id: "verify", type: "note", title: "Check the result", text: "When the list refreshes, check the container's status and health check result. The Activity page records container starts and stops, along with exit codes when available. Haven can send Windows notifications when a container becomes unhealthy or stops unexpectedly. You can turn off each type of notification separately." },
+          { id: "verify-image", type: "image", src: "/assets/products/haven-help/containers-verify-en.png", alt: "Details of a container that is running but unhealthy. The Health check area is outlined: Unhealthy (3 failures in a row), the check command, and the results of the last two checks.", width: 380, height: 372, caption: "Health check results in the container details. The step screenshots use sample data." },
           { id: "caution", type: "warning", title: "Before removing or cleaning up containers", text: "Haven asks for confirmation before removing containers or cleaning up stopped ones. Back up any data you need first. Cleanup applies only to wslc containers, not to Docker Engine containers in WSL." },
           { id: "recreate-settings", type: "note", title: "Change a container's settings", text: "In the container details, open the ⋯ menu and select “Recreate with the same settings” to change ports, environment variables, or mounts. Haven fills in the settings it can read from the existing container. Check the prefilled values and enter any changes before recreating it." },
           { id: "container-details-actions", type: "note", title: "Other actions in the container details", text: "Open the ⋯ menu in the container details. Choose “Save as image” to create an image from the container, “Change resource limits” to adjust CPU or memory limits without recreating it, or “Attach” to connect to the running container." },
@@ -257,6 +271,8 @@ export const havenHelpContent: Record<HavenHelpLanguage, HavenHelpPageContent> =
       tocLabel: "도움말 목차",
       tocTitle: "도움말 목차",
       contactLabel: "Haven Desktop 문의",
+      zoomLabel: "이미지 크게 보기",
+      closeLabel: "닫기",
     },
     hero: {
       id: "hero",
@@ -361,13 +377,14 @@ export const havenHelpContent: Record<HavenHelpLanguage, HavenHelpPageContent> =
             type: "steps",
             title: "컨테이너 관리 순서",
             items: [
-              { id: "find", title: "컨테이너 찾기", body: "컨테이너 화면을 열면 목록이 자동으로 갱신됩니다. ‘이름·이미지·상태·그룹으로 찾기’ 검색창을 이용하거나 ‘프로젝트별로 묶기’를 켜서 같은 프로젝트의 컨테이너를 모아 볼 수 있습니다." },
-              { id: "control", title: "시작·중지·다시 시작·강제 종료", body: "시작, 중지, 다시 시작, 삭제는 컨테이너 목록에서 해당 행의 버튼을 누릅니다. 강제 종료는 행에 버튼이 없습니다. 컨테이너를 하나만 강제 종료할 때도 목록에서 해당 컨테이너를 체크한 뒤 선택 막대의 ‘강제 종료’ 버튼을 누릅니다." },
-              { id: "logs", title: "실시간 로그 보기", body: "컨테이너 상세 화면에서 ‘로그’를 선택합니다. ‘따라가기’를 켜면 새 로그가 기록되는 대로 표시됩니다. ‘로그 검색’으로 필요한 내용을 찾고, 로그를 복사하거나 파일로 저장할 수 있습니다." },
+              { id: "find", title: "컨테이너 찾기", body: "컨테이너 화면을 열면 목록이 자동으로 갱신됩니다. ‘이름·이미지·상태·그룹으로 찾기’ 검색창을 이용하거나 ‘프로젝트별로 묶기’를 켜서 같은 프로젝트의 컨테이너를 모아 볼 수 있습니다.", image: { src: "/assets/products/haven-help/containers-find-ko.png", alt: "컨테이너 화면 위쪽. 검색창과 ‘프로젝트별로 묶기’ 스위치에 테두리가 있고, 아래 목록은 blog와 shop 프로젝트로 묶여 있습니다.", width: 1092, height: 360, caption: "검색으로 좁히거나 프로젝트별로 묶어 봅니다." } },
+              { id: "control", title: "시작·중지·다시 시작·강제 종료", body: "시작, 중지, 다시 시작, 삭제는 컨테이너 목록에서 해당 행의 버튼을 누릅니다. 강제 종료는 행에 버튼이 없습니다. 컨테이너를 하나만 강제 종료할 때도 목록에서 해당 컨테이너를 체크한 뒤 선택 막대의 ‘강제 종료’ 버튼을 누릅니다.", image: { src: "/assets/products/haven-help/containers-control-ko.png", alt: "컨테이너 두 개를 체크한 화면. 목록 위 선택 막대(시작·중지·재시작·강제 종료·삭제·선택 해제)와 각 행 끝의 중지·재시작·삭제 버튼에 테두리가 있습니다.", width: 1092, height: 252, caption: "행의 버튼은 그 컨테이너 하나에, 선택 막대는 체크한 컨테이너 전부에 적용됩니다." } },
+              { id: "logs", title: "실시간 로그 보기", body: "컨테이너 상세 화면에서 ‘로그’를 선택합니다. ‘따라가기’를 켜면 새 로그가 기록되는 대로 표시됩니다. ‘로그 검색’으로 필요한 내용을 찾고, 로그를 복사하거나 파일로 저장할 수 있습니다.", image: { src: "/assets/products/haven-help/containers-logs-ko.png", alt: "컨테이너 상세 화면. ‘로그’ 탭과 그 아래 줄(로그 검색 칸, 따라가기·시각·복사·저장·지우기 버튼)에 테두리가 있습니다.", width: 640, height: 186, caption: "‘로그’ 탭과 도구 막대입니다." } },
               { id: "usage", title: "자원 사용량 보기", body: "컨테이너 상세 화면에서 ‘사용량’을 선택하면 현재 CPU·메모리 사용량과 최근 기록을 확인할 수 있습니다." },
             ],
           },
           { id: "verify", type: "note", title: "작업 결과 확인", text: "목록이 갱신되면 컨테이너가 실행 중인지, 정상적으로 작동하는지 확인할 수 있습니다. 활동 화면에는 시작·종료 내역이 남고, 종료 코드도 확인할 수 있습니다. 컨테이너에 이상이 생기거나 예기치 않게 중지되면 Windows 알림을 받을 수 있습니다. 알림은 종류별로 끌 수 있습니다." },
+          { id: "verify-image", type: "image", src: "/assets/products/haven-help/containers-verify-ko.png", alt: "실행 중이지만 비정상인 컨테이너의 상세 화면. 상태 검사 영역에 테두리가 있고, ‘비정상(연속 실패 3회)’과 검사 명령, 최근 두 번의 검사 결과가 보입니다.", width: 380, height: 352, caption: "컨테이너 상세 화면의 상태 검사 결과입니다. 단계별 화면은 예시 데이터로 만들었습니다." },
           { id: "caution", type: "warning", title: "컨테이너를 삭제하거나 정리하기 전에", text: "컨테이너를 삭제하거나 중지된 컨테이너를 정리할 때는 Haven이 먼저 확인을 요청합니다. 필요한 데이터는 미리 백업합니다. 정리 기능은 wslc 컨테이너에만 적용되며, WSL에 설치한 Docker Engine의 컨테이너는 정리하지 않습니다." },
           { id: "recreate-settings", type: "note", title: "컨테이너 설정 바꾸기", text: "포트, 환경 변수, 마운트를 바꾸려면 컨테이너 상세 화면에서 ⋯ 메뉴를 열고 ‘같은 설정으로 다시 만들기’를 선택합니다. 앱이 읽어 온 기존 설정이 입력란에 표시됩니다. 다시 만들기 전에 기존 값을 확인하고 변경할 값을 입력합니다." },
           { id: "container-details-actions", type: "note", title: "컨테이너 상세 메뉴의 다른 기능", text: "컨테이너 상세 화면에서 ⋯ 메뉴를 엽니다. ‘이미지로 만들기’를 선택하면 컨테이너를 이미지로 저장할 수 있습니다. ‘자원 제한 바꾸기’를 선택하면 컨테이너를 다시 만들지 않고 CPU나 메모리 제한을 바꿀 수 있습니다. ‘연결(attach)’을 선택하면 실행 중인 컨테이너에 연결할 수 있습니다." },

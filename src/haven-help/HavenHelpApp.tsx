@@ -1,6 +1,12 @@
-import { useEffect, type MouseEvent } from "react";
-import { ArrowLeft, ArrowRight, EnvelopeSimple, ShieldCheck } from "@phosphor-icons/react";
-import { getPublishedSections, havenHelpContent, type HavenHelpBlock, type HavenHelpLanguage } from "./content";
+import { useEffect, useRef, type CSSProperties, type MouseEvent } from "react";
+import { ArrowLeft, ArrowRight, EnvelopeSimple, MagnifyingGlassPlus, ShieldCheck, X } from "@phosphor-icons/react";
+import {
+  getPublishedSections,
+  havenHelpContent,
+  type HavenHelpBlock,
+  type HavenHelpImage,
+  type HavenHelpLanguage,
+} from "./content";
 
 const CONTACT_EMAIL = "contact@cellaxon.com";
 
@@ -35,7 +41,59 @@ function currentSectionHash() {
   return current;
 }
 
-function HelpBlock({ block }: { block: HavenHelpBlock }) {
+type ZoomLabels = { zoomLabel: string; closeLabel: string };
+
+// A screenshot that opens at full size in a modal dialog. The native <dialog> traps focus, closes on
+// Escape and returns focus to the button that opened it.
+function ZoomableImage({ image, labels, className }: { image: HavenHelpImage; labels: ZoomLabels; className: string }) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const close = () => dialogRef.current?.close();
+
+  return (
+    <figure className={className}>
+      <button
+        type="button"
+        className="help-zoom-trigger"
+        aria-haspopup="dialog"
+        aria-label={`${labels.zoomLabel}: ${image.alt}`}
+        onClick={() => dialogRef.current?.showModal()}
+      >
+        <img src={image.src} alt="" width={image.width} height={image.height} loading="lazy" />
+        <span className="help-zoom-badge" aria-hidden="true">
+          <MagnifyingGlassPlus weight="bold" />
+        </span>
+      </button>
+      {image.caption ? <figcaption>{image.caption}</figcaption> : null}
+      <dialog
+        ref={dialogRef}
+        className="help-zoom-dialog"
+        aria-label={image.alt}
+        onClick={(event) => {
+          // A click on the backdrop lands on the dialog element itself.
+          if (event.target === event.currentTarget) close();
+        }}
+      >
+        <div className="help-zoom-frame">
+          <button type="button" className="help-zoom-close" onClick={close} aria-label={labels.closeLabel}>
+            <X aria-hidden="true" weight="bold" />
+          </button>
+          <div className="help-zoom-scroll">
+            <img
+              src={image.src}
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
+              style={{ "--zoom-natural-width": `${image.width}px`, "--zoom-ratio": image.width / image.height } as CSSProperties}
+            />
+          </div>
+          {image.caption ? <p className="help-zoom-caption">{image.caption}</p> : null}
+        </div>
+      </dialog>
+    </figure>
+  );
+}
+
+function HelpBlock({ block, labels }: { block: HavenHelpBlock; labels: ZoomLabels }) {
   switch (block.type) {
     case "paragraph":
       return <p className="help-section-intro">{block.text}</p>;
@@ -59,6 +117,7 @@ function HelpBlock({ block }: { block: HavenHelpBlock }) {
               <li key={item.id}>
                 <h4>{item.title}</h4>
                 <p>{item.body}</p>
+                {item.image ? <ZoomableImage image={item.image} labels={labels} className="help-step-image" /> : null}
               </li>
             ))}
           </ol>
@@ -80,12 +139,7 @@ function HelpBlock({ block }: { block: HavenHelpBlock }) {
         </figure>
       );
     case "image":
-      return (
-        <figure className="help-content-image">
-          <img src={block.src} alt={block.alt} width={block.width} height={block.height} loading="lazy" style={{ height: "auto" }} />
-          {block.caption ? <figcaption>{block.caption}</figcaption> : null}
-        </figure>
-      );
+      return <ZoomableImage image={block} labels={labels} className="help-content-image" />;
     default:
       return assertNever(block);
   }
@@ -166,7 +220,7 @@ export default function HavenHelpApp() {
               <section className="help-section" id={section.id} key={section.id}>
                 <p className="help-section-label">{section.label}</p>
                 <h2>{section.title}</h2>
-                {section.blocks.map((block) => <HelpBlock block={block} key={block.id} />)}
+                {section.blocks.map((block) => <HelpBlock block={block} labels={content.meta} key={block.id} />)}
                 {section.id === "privacy-security-support" ? (
                   <a className="button button-outline help-contact" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(mailSubject)}`}>
                     <EnvelopeSimple aria-hidden="true" weight="bold" />
