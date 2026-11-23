@@ -68,7 +68,7 @@ export type HavenHelpPageContent = {
   sections: readonly HavenHelpSection[];
 };
 
-export const HAVEN_SOURCE_REVISION = "99e368c4986a816cd6606f96829092239c368fdc";
+export const HAVEN_SOURCE_REVISION = "1fd347cb91b0fce96dcac9a5be076c8e07558d3b";
 const reviewedAtSource = HAVEN_SOURCE_REVISION;
 
 export const havenHelpContent: Record<HavenHelpLanguage, HavenHelpPageContent> = {
@@ -145,7 +145,7 @@ export const havenHelpContent: Record<HavenHelpLanguage, HavenHelpPageContent> =
         label: "Help library",
         title: "Documentation planned around real tasks",
         blocks: [
-          { id: "summary", type: "paragraph", text: "The help library will grow alongside the public build. These topics show the planned structure without linking to unfinished articles." },
+          { id: "summary", type: "paragraph", text: "The help library will grow alongside the public build. The first task guide, Containers and logs, follows below; the other topics show the planned scope and will be added once their guides are ready." },
           {
             id: "topic-list",
             type: "facts",
@@ -159,6 +159,39 @@ export const havenHelpContent: Record<HavenHelpLanguage, HavenHelpPageContent> =
           },
         ],
         sourceRefs: ["README.md#features", "docs/docker-users.md"],
+        lastReviewedRevision: reviewedAtSource,
+      },
+      {
+        id: "containers-logs",
+        status: "published",
+        label: "Containers and logs",
+        title: "Check, control, and follow your containers",
+        blocks: [
+          { id: "goal", type: "paragraph", text: "This guide covers the container work you would otherwise do in a terminal: seeing what is running, starting and stopping containers, and following their logs and resource usage. There is no public build yet, so it describes how the app works rather than how to install it. Before you start, check the following." },
+          {
+            id: "prerequisites",
+            type: "facts",
+            items: [
+              { id: "wslc-ready", title: "wslc 3.0.5 or later", body: "Haven works with the wslc already on your PC. If wslc is missing or too old, the app shows a setup guide." },
+              { id: "container-list", title: "A container to work with", body: "The Containers page lists every container, including stopped ones, so you can pick the one you need there." },
+              { id: "docker-engine", title: "Docker Engine in WSL (optional)", body: "If you turn on a WSL distribution under Settings → Docker engines, its containers join the same list, marked with the distribution's name, and the same actions work on them. Docker Desktop is not supported." },
+            ],
+          },
+          {
+            id: "procedure",
+            type: "steps",
+            title: "Work with a container",
+            items: [
+              { id: "find", title: "Find the container", body: "Open the Containers page. The list updates on its own; filter it, or group it by label so the containers of a Compose project stay together." },
+              { id: "control", title: "Start, stop, or restart it", body: "Use the buttons on the container's row, or select several containers and act on them at once. Kill and remove work the same way." },
+              { id: "logs", title: "Follow the logs", body: "Open the container's details and choose Logs. Turn on Follow to see new lines as they arrive, filter what is shown, and copy or save the output." },
+              { id: "usage", title: "Check resource usage", body: "In the same details, choose Usage to see the container's CPU and memory, with a short history." },
+            ],
+          },
+          { id: "verify", type: "note", title: "Check the result", text: "The container's row shows its new state as the list updates, along with its health-check status. The Activity page records starts and exits with their exit codes. Haven can also send a Windows notification when a container turns unhealthy or stops unexpectedly; each kind of notification can be turned off." },
+          { id: "caution", type: "warning", title: "Before you remove or clean up", text: "Removing containers and pruning stopped ones are destructive, so Haven asks for confirmation first; keep backups of data you care about. Pruning only touches wslc, not the Docker Engine in a WSL distribution. To change a container's ports, environment variables, or mounts, choose ⋯ → Recreate with the same settings: the form is filled in and volumes are kept. None of these steps contact a registry — Haven uses the network only for registry work such as pulling images or signing in." },
+        ],
+        sourceRefs: ["README.md#features", "README.md#requirements", "README.md#disclaimer", "docs/docker-users.md#command-names", "docs/docker-users.md#not-there-yet-and-what-to-do-instead", "docs/privacy.md#summary", "docs/privacy.md#what-the-app-connects-to"],
         lastReviewedRevision: reviewedAtSource,
       },
       {
@@ -281,7 +314,7 @@ export const havenHelpContent: Record<HavenHelpLanguage, HavenHelpPageContent> =
         label: "도움말 구성",
         title: "실제 작업을 기준으로 문서를 채워 갑니다",
         blocks: [
-          { id: "summary", type: "paragraph", text: "공개 빌드와 함께 도움말도 차례로 확장할 예정입니다. 아래 항목은 아직 작성하지 않은 문서로 연결하지 않고, 앞으로 다룰 범위만 보여 줍니다." },
+          { id: "summary", type: "paragraph", text: "공개 빌드와 함께 도움말도 차례로 늘려 갈 예정입니다. 첫 작업 안내인 ‘컨테이너와 로그’는 바로 아래에 있고, 나머지 항목은 안내가 준비되는 대로 추가할 범위입니다." },
           {
             id: "topic-list",
             type: "facts",
@@ -295,6 +328,39 @@ export const havenHelpContent: Record<HavenHelpLanguage, HavenHelpPageContent> =
           },
         ],
         sourceRefs: ["README.ko.md#기능", "docs/docker-users.ko.md"],
+        lastReviewedRevision: reviewedAtSource,
+      },
+      {
+        id: "containers-logs",
+        status: "published",
+        label: "컨테이너와 로그",
+        title: "컨테이너 상태를 보고, 켜고 끄고, 로그를 따라가기",
+        blocks: [
+          { id: "goal", type: "paragraph", text: "터미널에서 하던 컨테이너 일을 앱에서 하는 방법을 안내합니다. 무엇이 돌고 있는지 확인하고, 컨테이너를 시작·중지하고, 로그와 자원 사용량을 지켜보는 과정입니다. 아직 공개 빌드는 없으므로 설치 방법이 아니라 앱이 어떻게 동작하는지를 설명합니다. 시작하기 전에 아래 내용을 확인해 주세요." },
+          {
+            id: "prerequisites",
+            type: "facts",
+            items: [
+              { id: "wslc-ready", title: "wslc 3.0.5 이상", body: "Haven은 PC에 이미 있는 wslc로 동작합니다. wslc가 없거나 버전이 낮으면 앱이 설치 안내를 보여 줍니다." },
+              { id: "container-list", title: "다룰 컨테이너", body: "컨테이너 화면에는 멈춘 것까지 모든 컨테이너가 나오므로, 여기서 다룰 컨테이너를 고르면 됩니다." },
+              { id: "docker-engine", title: "WSL의 Docker Engine(선택)", body: "설정 → Docker 엔진에서 WSL 배포판을 켜면 그 배포판의 컨테이너도 이름 표시와 함께 같은 목록에 나오고, 같은 동작을 쓸 수 있습니다. Docker Desktop은 지원하지 않습니다." },
+            ],
+          },
+          {
+            id: "procedure",
+            type: "steps",
+            title: "컨테이너 다루기",
+            items: [
+              { id: "find", title: "컨테이너 찾기", body: "컨테이너 화면을 엽니다. 목록은 자동으로 갱신됩니다. 필터로 좁히거나, 라벨로 묶어 Compose 프로젝트의 컨테이너를 한데 모아 볼 수 있습니다." },
+              { id: "control", title: "시작·중지·다시 시작", body: "컨테이너 행의 단추를 누르거나, 여러 개를 골라 한꺼번에 실행합니다. 강제 종료와 삭제도 같은 방식입니다." },
+              { id: "logs", title: "로그 따라가기", body: "컨테이너 상세에서 로그를 고릅니다. 따라가기를 켜면 새 줄이 들어오는 대로 보이고, 필터로 거르거나 내용을 복사·저장할 수 있습니다." },
+              { id: "usage", title: "자원 사용량 보기", body: "같은 상세에서 사용량을 고르면 컨테이너의 CPU와 메모리를 짧은 기록과 함께 볼 수 있습니다." },
+            ],
+          },
+          { id: "verify", type: "note", title: "결과 확인", text: "목록이 갱신되면 컨테이너 행에 바뀐 상태와 상태 검사 결과가 나옵니다. 활동 화면에는 시작과 종료가 종료 코드와 함께 남습니다. 컨테이너가 비정상이 되거나 뜻밖에 멈추면 Windows 알림으로 알려 줄 수도 있으며, 알림은 종류별로 끌 수 있습니다." },
+          { id: "caution", type: "warning", title: "삭제하거나 정리하기 전에", text: "컨테이너 삭제와 멈춘 컨테이너 정리는 되돌리기 어려워서 Haven이 먼저 확인을 받습니다. 중요한 데이터는 따로 백업해 두세요. 정리는 wslc 컨테이너에만 적용되고 WSL 배포판의 Docker Engine에는 손대지 않습니다. 포트·환경 변수·마운트를 바꾸려면 ⋯ → 같은 설정으로 다시 만들기를 쓰세요. 양식이 채워진 채로 열리고 볼륨은 그대로 남습니다. 이 과정에서는 레지스트리에 접속하지 않습니다. Haven이 네트워크를 쓰는 때는 이미지 받기나 로그인 같은 레지스트리 작업뿐입니다." },
+        ],
+        sourceRefs: ["README.ko.md#기능", "README.ko.md#요구-사항", "README.ko.md#면책-조항", "docs/docker-users.ko.md#명령-이름", "docs/docker-users.ko.md#아직-없는-것과-대신할-방법", "docs/privacy.ko.md#요약", "docs/privacy.ko.md#앱이-접속하는-곳"],
         lastReviewedRevision: reviewedAtSource,
       },
       {

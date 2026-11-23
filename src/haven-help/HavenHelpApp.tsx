@@ -1,3 +1,4 @@
+import { useEffect, type MouseEvent } from "react";
 import { ArrowLeft, ArrowRight, EnvelopeSimple, ShieldCheck } from "@phosphor-icons/react";
 import { getPublishedSections, havenHelpContent, type HavenHelpBlock, type HavenHelpLanguage } from "./content";
 
@@ -9,6 +10,24 @@ function getLanguage(): HavenHelpLanguage {
 
 function assertNever(value: never): never {
   throw new Error(`Unsupported Haven help block: ${JSON.stringify(value)}`);
+}
+
+// The page renders on the client, so the browser cannot scroll to a #section on first load by itself.
+function scrollToInitialHash() {
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  if (id) document.getElementById(id)?.scrollIntoView({ behavior: "instant", block: "start" });
+}
+
+// Carries the reader's place over to the other language: the last section whose top has reached the
+// area under the sticky header. Sections share their IDs across languages.
+function currentSectionHash() {
+  // Matches where a TOC jump lands: the root scroll-padding plus the section scroll-margin, with slack.
+  const offset = 240;
+  let current = "";
+  for (const section of document.querySelectorAll<HTMLElement>(".help-section[id]")) {
+    if (section.getBoundingClientRect().top <= offset) current = `#${section.id}`;
+  }
+  return current;
 }
 
 function HelpBlock({ block }: { block: HavenHelpBlock }) {
@@ -76,6 +95,12 @@ export default function HavenHelpApp() {
   const alternateLabel = language === "ko" ? "EN" : "KR";
   const mailSubject = language === "ko" ? "Haven Desktop 문의" : "Haven Desktop support";
 
+  useEffect(scrollToInitialHash, []);
+
+  const keepPlace = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.currentTarget.href = `${alternatePath}${currentSectionHash()}`;
+  };
+
   return (
     <>
       <a className="skip-link" href="#help-content">{content.meta.skipLabel}</a>
@@ -89,7 +114,7 @@ export default function HavenHelpApp() {
               <ArrowLeft aria-hidden="true" weight="bold" />
               {language === "ko" ? "제품으로 돌아가기" : "Back to products"}
             </a>
-            <a className="help-language-link" href={alternatePath} lang={language === "ko" ? "en" : "ko"}>
+            <a className="help-language-link" href={alternatePath} onClick={keepPlace} lang={language === "ko" ? "en" : "ko"}>
               {alternateLabel}
             </a>
           </nav>
