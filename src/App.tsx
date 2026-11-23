@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
+  BookOpenText,
   CaretDown,
   EnvelopeSimple,
   Eye,
@@ -393,6 +394,7 @@ function Products({ language }: { language: Language }) {
   const { ranvier, devpulse, haven } = text;
   const zoomLabels = { zoom: text.zoom, close: text.zoomClose };
   const pointsLabels = { pointsShowLabel: text.pointsShow, pointsHideLabel: text.pointsHide };
+  const havenHelpUrl = language === "ko" ? "/ko/products/haven-desktop/" : "/products/haven-desktop/";
 
   return (
     <section className="products-section" id="products">
@@ -447,10 +449,16 @@ function Products({ language }: { language: Language }) {
             footer={
               <>
                 <p className="product-note">{haven.note}</p>
-                <a className="text-link" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(haven.mailSubject)}`}>
-                  <EnvelopeSimple aria-hidden="true" weight="bold" />
-                  {haven.action}
-                </a>
+                <div className="product-links">
+                  <a className="text-link" href={havenHelpUrl}>
+                    <BookOpenText aria-hidden="true" weight="bold" />
+                    {haven.helpAction}
+                  </a>
+                  <a className="text-link" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(haven.mailSubject)}`}>
+                    <EnvelopeSimple aria-hidden="true" weight="bold" />
+                    {haven.action}
+                  </a>
+                </div>
                 <p className="product-disclaimer">{haven.disclaimer}</p>
               </>
             }

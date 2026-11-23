@@ -4,10 +4,24 @@
     <loc>https://cellaxon.com/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://cellaxon.com/" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://cellaxon.com/ko/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cellaxon.com/" />
   </url>
   <url>
     <loc>https://cellaxon.com/ko/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://cellaxon.com/" />
     <xhtml:link rel="alternate" hreflang="ko" href="https://cellaxon.com/ko/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cellaxon.com/" />
+  </url>
+  <url>
+    <loc>https://cellaxon.com/products/haven-desktop/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cellaxon.com/products/haven-desktop/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cellaxon.com/ko/products/haven-desktop/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cellaxon.com/products/haven-desktop/" />
+  </url>
+  <url>
+    <loc>https://cellaxon.com/ko/products/haven-desktop/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cellaxon.com/products/haven-desktop/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cellaxon.com/ko/products/haven-desktop/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cellaxon.com/products/haven-desktop/" />
   </url>
 </urlset>

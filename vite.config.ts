@@ -17,6 +17,8 @@ export default defineConfig({
       input: {
         main: resolve(fileURLToPath(new URL(".", import.meta.url)), "index.html"),
         ko: resolve(fileURLToPath(new URL(".", import.meta.url)), "ko/index.html"),
+        havenHelp: resolve(fileURLToPath(new URL(".", import.meta.url)), "products/haven-desktop/index.html"),
+        havenHelpKo: resolve(fileURLToPath(new URL(".", import.meta.url)), "ko/products/haven-desktop/index.html"),
       },
     },
   },
