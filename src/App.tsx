@@ -434,7 +434,7 @@ function Products({ language }: { language: Language }) {
                 <ExternalLink href={DEVPULSE_OPENVSX_URL}>{devpulse.openVsxAction}</ExternalLink>
               </div>
             }
-            media={<ZoomMedia src="/assets/products/devpulse-dashboard.png" alt={devpulse.mediaAlt} width={1586} height={992} labels={zoomLabels} />}
+            media={<ZoomMedia src="/assets/products/devpulse-dashboard.png" alt={devpulse.mediaAlt} width={1680} height={1211} labels={zoomLabels} />}
           />
           <ProductRow
             id="haven"
