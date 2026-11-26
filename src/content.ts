@@ -46,12 +46,12 @@ export const copy = {
         mediaAlt: "Ranvier website showing a typed decision schematic",
       },
       devpulse: {
-        subtitle: "Local-first Git analytics and AI agent tracking for VS Code",
-        statement: "See who changed what, and what your AI agents actually did.",
+        subtitle: "Local-first Git analytics for VS Code",
+        statement: "See how a repository changed over time and who contributed, right inside VS Code.",
         points: [
-          "Explore Git activity dashboards without leaving VS Code.",
-          "Trace Codex and Claude sessions back to the exact files, tests, diffs, and commits they touched.",
-          "Keep everything local—your repository and agent data never leave your machine.",
+          "Compare contributors, custom groups, and calendar periods with trend charts, weekday-by-hour heatmaps, and accessible data tables.",
+          "Export local Markdown, CSV, and two-page PDF reports with exact weekday-by-hour heatmap values and totals.",
+          "Keep all analysis and caching on your machine in six UI languages—your repository data is never uploaded.",
         ],
         action: "View on VS Code Marketplace",
         openVsxAction: "View on Open VSX",
@@ -102,7 +102,7 @@ export const copy = {
     company: {
       label: "Company",
       title: "Making complex software clear.",
-      body: "Based in Hwaseong, South Korea, CELLAXON builds software for developers and engineering teams. We focus on tools that turn opaque workflows—from backend decision logic to AI-assisted coding and local containers—into systems you can clearly see and verify.",
+      body: "Based in Hwaseong, South Korea, CELLAXON builds software for developers and engineering teams. We focus on tools that turn opaque workflows—from backend decision logic to Git history and local containers—into systems you can clearly see and verify.",
       addressLabel: "Address",
       address: "202-2409, 143 Dongtangambaesan-ro, Hwaseong-si, Gyeonggi-do, Republic of Korea",
       emailLabel: "Email",
@@ -138,7 +138,7 @@ export const copy = {
     hero: {
       titleLead: "복잡한 시스템을",
       titleAccent: "한눈에.",
-      body: "코드 속 의사결정 로직부터 개발·AI 작업 이력, 로컬 컨테이너 환경까지. 실행 과정 이면에 가려진 흐름을 눈으로 직접 확인하고 검증하는 개발자 도구를 만듭니다.",
+      body: "코드 속 의사결정 로직부터 Git 활동 이력, 로컬 컨테이너 환경까지. 실행 과정 이면에 가려진 흐름을 눈으로 직접 확인하고 검증하는 개발자 도구를 만듭니다.",
       primary: "제품 살펴보기",
       secondary: "문의하기",
       visualAlt: "CELLAXON을 상징하는 코랄, 마젠타, 바이올렛 색상의 신경 신호 그래픽",
@@ -165,12 +165,12 @@ export const copy = {
         mediaAlt: "타입 기반 의사결정 구조도가 보이는 Ranvier 웹사이트",
       },
       devpulse: {
-        subtitle: "Git 활동과 AI 에이전트 작업을 분석하는 VS Code 확장",
-        statement: "누가 무엇을 바꿨는지, AI 에이전트가 실제로 어떤 작업을 수행했는지 확인하세요.",
+        subtitle: "VS Code용 로컬 우선 Git 활동 분석 확장",
+        statement: "저장소가 기간별로 어떻게 바뀌고 누가 기여했는지 VS Code 안에서 바로 확인합니다.",
         points: [
-          "별도 도구 없이 VS Code 안에서 Git 활동 대시보드를 바로 확인합니다.",
-          "Codex·Claude 세션을 실제 수정한 파일, 테스트, 변경 내역(diff), 커밋 기록과 연결해 추적합니다.",
-          "모든 분석은 로컬에서 이루어지며, 저장소와 에이전트 데이터는 외부로 전송되지 않습니다.",
+          "기간·참여자·사용자 정의 그룹별 커밋과 변경 추이를 차트, 요일·시간대 히트맵, 동등한 데이터 표로 비교합니다.",
+          "요일·시간대 히트맵 수치와 합계를 담은 2페이지 PDF는 물론 Markdown과 CSV 리포트로 로컬에 내보냅니다.",
+          "모든 분석과 캐시는 PC 안에서만 처리되며 저장소 데이터는 외부로 전송되지 않습니다. 한국어를 포함한 6개 언어를 지원합니다.",
         ],
         action: "VS Code Marketplace에서 보기",
         openVsxAction: "Open VSX에서 보기",
@@ -221,7 +221,7 @@ export const copy = {
     company: {
       label: "회사 소개",
       title: "복잡한 개발 문제를 명쾌하게 풀어냅니다.",
-      body: "CELLAXON은 경기도 화성시에 자리한 소프트웨어 기업입니다. 백엔드 의사결정 로직부터 AI 기반 개발 과정, 로컬 컨테이너 환경에 이르기까지, 파악하기 까다로운 개발 현장의 흐름을 직관적으로 확인하고 검증할 수 있는 도구를 만듭니다.",
+      body: "CELLAXON은 경기도 화성시에 자리한 소프트웨어 기업입니다. 백엔드 의사결정 로직부터 Git 활동 이력, 로컬 컨테이너 환경에 이르기까지, 파악하기 까다로운 개발 현장의 흐름을 직관적으로 확인하고 검증할 수 있는 도구를 만듭니다.",
       addressLabel: "주소",
       address: "경기도 화성시 동탄감배산로 143, 202동 2409호",
       emailLabel: "이메일",

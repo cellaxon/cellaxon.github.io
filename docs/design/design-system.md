@@ -40,7 +40,7 @@ The gradient is a signature treatment for primary actions and selected display t
 ## Product hierarchy
 
 1. Ranvier is presented as one complete product. Supporting developer tooling is intentionally omitted from the company homepage to keep the portfolio legible.
-2. CELLAXON DevPulse is presented as a separate VS Code product covering local-first Git analytics and AI agent work tracking.
+2. CELLAXON DevPulse is presented as a separate VS Code product covering local-first Git analytics.
 3. Haven Desktop is presented as an unreleased product: an "in preparation" status, real screenshots from the app, no download link or Store badge, and the "not made or endorsed by Microsoft" disclaimer next to it. Copy describes only what the app does today (it manages `wslc` containers; it is not a Docker or Podman front end).
 
 Products are shown as full-width rows that alternate copy and media sides, each with a status, three concrete points, and one action.
