@@ -199,7 +199,7 @@ export default function HavenHelpApp() {
                 src="/assets/products/haven-containers.png"
                 alt={content.hero.mediaAlt}
                 width="1536"
-                height="1061"
+                height="1040"
               />
             </figure>
           </div>

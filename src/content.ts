@@ -63,7 +63,7 @@ export const copy = {
         points: [
           "Start, stop, and inspect containers with live logs and real-time CPU and memory metrics.",
           "Run Compose files and transfer files directly between Windows and your containers.",
-          "Open an interactive container shell right in the app, with full English and Korean UI support.",
+          "Open an interactive container shell right in the app, in English or Korean, with 15 light and dark color themes.",
         ],
         note: "Coming to the Microsoft Store.",
         disclaimer: "Haven Desktop is an independent CELLAXON product. It is not affiliated with, endorsed, or supported by Microsoft.",
@@ -182,7 +182,7 @@ export const copy = {
         points: [
           "컨테이너를 시작·중지하고 실시간 로그와 CPU·메모리 사용량을 한눈에 확인합니다.",
           "Compose 구성을 바로 실행하고, Windows와 컨테이너 간에 파일을 손쉽게 주고받습니다.",
-          "앱 안에서 컨테이너 셸을 바로 열어 작업할 수 있으며, 한국어와 영어 UI를 모두 지원합니다.",
+          "앱 안에서 컨테이너 셸을 바로 열어 작업할 수 있으며, 한국어·영어 UI와 라이트·다크 색 테마 15가지를 지원합니다.",
         ],
         note: "Microsoft Store 출시를 준비하고 있습니다.",
         disclaimer: "Haven Desktop은 CELLAXON이 독자 개발한 앱으로, Microsoft와 무관하며 Microsoft가 보증하거나 지원하는 제품이 아닙니다.",

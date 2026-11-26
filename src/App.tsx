@@ -371,7 +371,7 @@ function HavenScreens({ language, labels }: { language: Language; labels: ZoomLa
             alt={index === active ? haven.mediaAlt[screen.id] : ""}
             aria-hidden={index === active ? undefined : true}
             width="1536"
-            height="1061"
+            height="1040"
             loading="lazy"
           />
         ))}
