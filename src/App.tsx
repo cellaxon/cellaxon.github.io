@@ -31,7 +31,7 @@ const languageMetadata = {
     path: "/ko/",
     locale: "ko_KR",
     title: "CELLAXON — 복잡한 시스템을 한눈에.",
-    description: "CELLAXON은 의사결정 로직, 개발 및 AI 작업 이력, 로컬 컨테이너 환경을 직관적으로 확인하고 검증하는 개발자 도구를 만듭니다.",
+    description: "CELLAXON은 의사결정 로직, Git 활동 이력, 로컬 컨테이너 환경을 직관적으로 확인하고 검증하는 개발자 도구를 만듭니다.",
   },
 } as const;
 
@@ -434,7 +434,7 @@ function Products({ language }: { language: Language }) {
                 <ExternalLink href={DEVPULSE_OPENVSX_URL}>{devpulse.openVsxAction}</ExternalLink>
               </div>
             }
-            media={<ZoomMedia src="/assets/products/devpulse-dashboard.png" alt={devpulse.mediaAlt} width={1586} height={992} labels={zoomLabels} />}
+            media={<ZoomMedia src="/assets/products/devpulse-dashboard.png" alt={devpulse.mediaAlt} width={1680} height={1211} labels={zoomLabels} />}
           />
           <ProductRow
             id="haven"
