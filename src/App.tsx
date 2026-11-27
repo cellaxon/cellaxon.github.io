@@ -18,6 +18,8 @@ const CONTACT_EMAIL = "contact@cellaxon.com";
 const RANVIER_URL = "https://ranvier.studio/";
 const DEVPULSE_URL = "https://marketplace.visualstudio.com/items?itemName=cellaxon.cellaxon-devpulse";
 const DEVPULSE_OPENVSX_URL = "https://open-vsx.org/extension/cellaxon/cellaxon-devpulse";
+const HAVEN_VSCODE_URL = "https://marketplace.visualstudio.com/items?itemName=cellaxon.haven-vscode";
+const HAVEN_VSCODE_OPENVSX_URL = "https://open-vsx.org/extension/cellaxon/haven-vscode";
 const HAVEN_ROTATE_MS = 6000;
 
 const languageMetadata = {
@@ -39,6 +41,9 @@ const havenScreens = [
   { id: "containers", src: "/assets/products/haven-containers.png" },
   { id: "files", src: "/assets/products/haven-files.png" },
 ] as const;
+
+// 확장 화면은 글자가 언어마다 달라서 언어별 스크린샷을 쓴다(확장 매뉴얼의 데모 데이터 화면).
+const havenVscodeScreenIds = ["containers", "logs", "files"] as const;
 
 const approachIcons = [Eye, HardDrives, SealCheck] as const;
 
@@ -307,8 +312,16 @@ function ZoomMedia({ src, alt, width, height, labels }: { src: string; alt: stri
   );
 }
 
-function HavenScreens({ language, labels }: { language: Language; labels: ZoomLabels }) {
-  const haven = copy[language].products.haven;
+type TabbedScreen = { id: string; src: string; tab: string; alt: string };
+
+/** 탭으로 고르는 스크린샷 묶음. 화면에 보이는 동안 자동으로 넘어가고, 누르면 크게 보인다. */
+function ScreenTabs({ screens, width, height, tabsLabel, labels }: {
+  screens: readonly TabbedScreen[];
+  width: number;
+  height: number;
+  tabsLabel: string;
+  labels: ZoomLabels;
+}) {
   const [active, setActive] = useState(0);
   const [zoomed, setZoomed] = useState(false);
   // 탭을 직접 고르면 자동 전환을 끝내고, 마우스를 올리거나 포커스가 들어와 있는 동안에는 잠시 멈춘다.
@@ -327,13 +340,14 @@ function HavenScreens({ language, labels }: { language: Language; labels: ZoomLa
   }, []);
 
   const rotating = autoRotate && inView && !hovered && !focused && !zoomed;
-  const activeScreen = havenScreens[active];
+  const activeScreen = screens[active];
+  const screenCount = screens.length;
 
   useEffect(() => {
     if (!rotating) return;
-    const timer = window.setInterval(() => setActive((index) => (index + 1) % havenScreens.length), HAVEN_ROTATE_MS);
+    const timer = window.setInterval(() => setActive((index) => (index + 1) % screenCount), HAVEN_ROTATE_MS);
     return () => window.clearInterval(timer);
-  }, [rotating]);
+  }, [rotating, screenCount]);
 
   const choose = (index: number) => {
     setActive(index);
@@ -349,8 +363,8 @@ function HavenScreens({ language, labels }: { language: Language; labels: ZoomLa
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
     >
-      <div className="haven-tabs" role="group" aria-label={haven.tabsLabel}>
-        {havenScreens.map((screen, index) => (
+      <div className="haven-tabs" role="group" aria-label={tabsLabel}>
+        {screens.map((screen, index) => (
           <button
             key={screen.id}
             type="button"
@@ -358,43 +372,49 @@ function HavenScreens({ language, labels }: { language: Language; labels: ZoomLa
             aria-pressed={index === active}
             onClick={() => choose(index)}
           >
-            {haven.tabs[screen.id]}
+            {screen.tab}
           </button>
         ))}
       </div>
       <button className="media-zoom haven-screens" type="button" onClick={() => setZoomed(true)}>
-        {havenScreens.map((screen, index) => (
+        {screens.map((screen, index) => (
           <img
             key={screen.id}
             className={index === active ? "is-active" : ""}
             src={screen.src}
-            alt={index === active ? haven.mediaAlt[screen.id] : ""}
+            alt={index === active ? screen.alt : ""}
             aria-hidden={index === active ? undefined : true}
-            width="1536"
-            height="1040"
+            width={width}
+            height={height}
             loading="lazy"
           />
         ))}
         <ZoomHint label={labels.zoom} />
       </button>
-      {zoomed && (
-        <Lightbox
-          src={activeScreen.src}
-          alt={haven.mediaAlt[activeScreen.id]}
-          closeLabel={labels.close}
-          onClose={() => setZoomed(false)}
-        />
-      )}
+      {zoomed && <Lightbox src={activeScreen.src} alt={activeScreen.alt} closeLabel={labels.close} onClose={() => setZoomed(false)} />}
     </div>
   );
 }
 
 function Products({ language }: { language: Language }) {
   const text = copy[language].products;
-  const { ranvier, devpulse, haven } = text;
+  const { ranvier, devpulse, haven, havenVscode } = text;
   const zoomLabels = { zoom: text.zoom, close: text.zoomClose };
   const pointsLabels = { pointsShowLabel: text.pointsShow, pointsHideLabel: text.pointsHide };
   const havenHelpUrl = language === "ko" ? "/ko/products/haven-desktop/" : "/products/haven-desktop/";
+  const havenVscodeHelpUrl = language === "ko" ? "/ko/products/haven-vscode/" : "/products/haven-vscode/";
+  const havenTabbedScreens = havenScreens.map((screen) => ({
+    id: screen.id,
+    src: screen.src,
+    tab: haven.tabs[screen.id],
+    alt: haven.mediaAlt[screen.id],
+  }));
+  const havenVscodeTabbedScreens = havenVscodeScreenIds.map((id) => ({
+    id,
+    src: `/assets/products/haven-vscode/${id}-${language}.png`,
+    tab: havenVscode.tabs[id],
+    alt: havenVscode.mediaAlt[id],
+  }));
 
   return (
     <section className="products-section" id="products">
@@ -462,7 +482,43 @@ function Products({ language }: { language: Language }) {
                 <p className="product-disclaimer">{haven.disclaimer}</p>
               </>
             }
-            media={<HavenScreens language={language} labels={zoomLabels} />}
+            media={<ScreenTabs screens={havenTabbedScreens} width={1536} height={1040} tabsLabel={haven.tabsLabel} labels={zoomLabels} />}
+          />
+          <ProductRow
+            id="haven-vscode"
+            reverse
+            logoSrc="/assets/products/haven-icon.svg"
+            name="Haven for VS Code"
+            statusKind="available"
+            statusLabel={text.availableStatus}
+            {...pointsLabels}
+            subtitle={havenVscode.subtitle}
+            statement={havenVscode.statement}
+            points={havenVscode.points}
+            footer={
+              <>
+                <div className="product-links">
+                  <ExternalLink href={HAVEN_VSCODE_URL}>{havenVscode.action}</ExternalLink>
+                  <ExternalLink href={HAVEN_VSCODE_OPENVSX_URL}>{havenVscode.openVsxAction}</ExternalLink>
+                  <a className="text-link" href={havenVscodeHelpUrl}>
+                    <BookOpenText aria-hidden="true" weight="bold" />
+                    {havenVscode.helpAction}
+                  </a>
+                </div>
+                <p className="product-disclaimer">{havenVscode.disclaimer}</p>
+              </>
+            }
+            media={
+              // 언어를 바꾸면 스크린샷도 바뀌므로, 고른 탭과 자동 전환 상태를 새로 시작한다.
+              <ScreenTabs
+                key={language}
+                screens={havenVscodeTabbedScreens}
+                width={1600}
+                height={1000}
+                tabsLabel={havenVscode.tabsLabel}
+                labels={zoomLabels}
+              />
+            }
           />
         </div>
       </div>

@@ -1,12 +1,24 @@
 import { useEffect, useRef, type CSSProperties, type MouseEvent } from "react";
-import { ArrowLeft, ArrowRight, EnvelopeSimple, MagnifyingGlassPlus, ShieldCheck, X } from "@phosphor-icons/react";
-import {
-  getPublishedSections,
-  havenHelpContent,
-  type HavenHelpBlock,
-  type HavenHelpImage,
-  type HavenHelpLanguage,
-} from "./content";
+import { ArrowLeft, ArrowRight, ArrowUpRight, EnvelopeSimple, MagnifyingGlassPlus, ShieldCheck, X } from "@phosphor-icons/react";
+import type { HavenHelpBlock, HavenHelpImage, HavenHelpLanguage, HavenHelpPageContent } from "./content";
+
+type Localized = Record<HavenHelpLanguage, string>;
+
+/** One product's help page: its content plus the few things that differ between products. */
+export type HelpProduct = {
+  content: Record<HavenHelpLanguage, HavenHelpPageContent>;
+  /** English path of the page, with slashes on both ends. The Korean page is the same path under /ko. */
+  path: string;
+  /** Anchor of the product on the home page, for the "back" link. */
+  overviewAnchor: string;
+  icon: string;
+  heroImage: Record<HavenHelpLanguage, { src: string; width: number; height: number }>;
+  mailSubject: Localized;
+  /** Section that ends with the contact button. */
+  contactSectionId: string;
+  /** Where to get the product, shown as buttons in the hero. */
+  links?: readonly { href: string; label: Localized }[];
+};
 
 const CONTACT_EMAIL = "contact@cellaxon.com";
 
@@ -142,19 +154,37 @@ function HelpBlock({ block, labels }: { block: HavenHelpBlock; labels: ZoomLabel
       );
     case "image":
       return <ZoomableImage image={block} labels={labels} className="help-content-image" />;
+    case "table":
+      return (
+        <div className="help-table-wrap">
+          <table className="help-table">
+            <thead>
+              <tr>{block.columns.map((column) => <th scope="col" key={column}>{column}</th>)}</tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row) => (
+                <tr key={row[0]}>
+                  {row.map((cell, index) => (index === 0 ? <th scope="row" key={index}>{cell}</th> : <td key={index}>{cell}</td>))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
     default:
       return assertNever(block);
   }
 }
 
-export default function HavenHelpApp() {
+export default function HavenHelpApp({ product }: { product: HelpProduct }) {
   const language = getLanguage();
-  const content = havenHelpContent[language];
-  const sections = getPublishedSections(language);
+  const content = product.content[language];
+  const sections = content.sections.filter((section) => section.status === "published");
   const homePath = language === "ko" ? "/ko/" : "/";
-  const alternatePath = language === "ko" ? "/products/haven-desktop/" : "/ko/products/haven-desktop/";
+  const alternatePath = language === "ko" ? product.path : `/ko${product.path}`;
   const alternateLabel = language === "ko" ? "EN" : "KR";
-  const mailSubject = language === "ko" ? "Haven Desktop 문의" : "Haven Desktop support";
+  const mailSubject = product.mailSubject[language];
+  const heroImage = product.heroImage[language];
 
   useEffect(scrollToInitialHash, []);
 
@@ -171,7 +201,7 @@ export default function HavenHelpApp() {
             <img src="/assets/brand/cellaxon-lockup.png" alt="CELLAXON" width="416" height="74" />
           </a>
           <nav className="help-header-actions" aria-label={content.meta.languageLabel}>
-            <a className="help-home-link" href={`${homePath}#haven`}>
+            <a className="help-home-link" href={`${homePath}${product.overviewAnchor}`}>
               <ArrowLeft aria-hidden="true" weight="bold" />
               {language === "ko" ? "제품 소개로 돌아가기" : "Back to product overview"}
             </a>
@@ -187,20 +217,25 @@ export default function HavenHelpApp() {
           <div className="shell help-hero-inner">
             <div className="help-hero-copy">
               <div className="help-product-mark">
-                <img src="/assets/products/haven-icon.svg" alt="" width="80" height="80" />
+                <img src={product.icon} alt="" width="80" height="80" />
                 <span>{content.hero.status}</span>
               </div>
               <h1>{content.hero.title}</h1>
               <p className="help-hero-lead">{content.hero.lead}</p>
               <p className="help-release-note">{content.hero.note}</p>
+              {product.links ? (
+                <div className="help-hero-links">
+                  {product.links.map((link) => (
+                    <a className="button button-outline" href={link.href} target="_blank" rel="noreferrer" key={link.href}>
+                      {link.label[language]}
+                      <ArrowUpRight aria-hidden="true" weight="bold" />
+                    </a>
+                  ))}
+                </div>
+              ) : null}
             </div>
             <figure className="help-hero-media">
-              <img
-                src="/assets/products/haven-containers.png"
-                alt={content.hero.mediaAlt}
-                width="1536"
-                height="1040"
-              />
+              <img src={heroImage.src} alt={content.hero.mediaAlt} width={heroImage.width} height={heroImage.height} />
             </figure>
           </div>
         </section>
@@ -223,7 +258,7 @@ export default function HavenHelpApp() {
                 <p className="help-section-label">{section.label}</p>
                 <h2>{section.title}</h2>
                 {section.blocks.map((block) => <HelpBlock block={block} labels={content.meta} key={block.id} />)}
-                {section.id === "privacy-security-support" ? (
+                {section.id === product.contactSectionId ? (
                   <a className="button button-outline help-contact" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(mailSubject)}`}>
                     <EnvelopeSimple aria-hidden="true" weight="bold" />
                     {content.meta.contactLabel}

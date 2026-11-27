@@ -36,7 +36,9 @@ export type HavenHelpBlock =
   | (HavenHelpBlockBase & { type: "note"; title: string; text: string })
   | (HavenHelpBlockBase & { type: "warning"; title: string; text: string })
   | (HavenHelpBlockBase & { type: "code"; code: string; language?: string; caption?: string })
-  | (HavenHelpBlockBase & HavenHelpImage & { type: "image" });
+  | (HavenHelpBlockBase & HavenHelpImage & { type: "image" })
+  // The first cell of each row is its header and must be unique within the table.
+  | (HavenHelpBlockBase & { type: "table"; columns: readonly string[]; rows: readonly (readonly string[])[] });
 
 export type HavenHelpSection = HavenHelpEvidence & {
   id: string;
@@ -445,6 +447,3 @@ export const havenHelpContent: Record<HavenHelpLanguage, HavenHelpPageContent> =
   },
 };
 
-export function getPublishedSections(language: HavenHelpLanguage) {
-  return havenHelpContent[language].sections.filter((section) => section.status === "published");
-}

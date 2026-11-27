@@ -24,4 +24,16 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://cellaxon.com/ko/products/haven-desktop/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cellaxon.com/products/haven-desktop/" />
   </url>
+  <url>
+    <loc>https://cellaxon.com/products/haven-vscode/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cellaxon.com/products/haven-vscode/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cellaxon.com/ko/products/haven-vscode/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cellaxon.com/products/haven-vscode/" />
+  </url>
+  <url>
+    <loc>https://cellaxon.com/ko/products/haven-vscode/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cellaxon.com/products/haven-vscode/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://cellaxon.com/ko/products/haven-vscode/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cellaxon.com/products/haven-vscode/" />
+  </url>
 </urlset>

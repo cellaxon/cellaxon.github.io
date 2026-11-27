@@ -80,6 +80,30 @@ export const copy = {
           files: "Haven Desktop files window with a Windows folder next to a container folder",
         },
       },
+      havenVscode: {
+        subtitle: "WSL container management inside VS Code",
+        statement: "Haven Desktop's everyday container work, without leaving the editor.",
+        points: [
+          "Watch containers, images, volumes, networks, and ports in a sidebar that updates live.",
+          "Open a container in an editor tab to follow its logs, track CPU and memory, and copy files between Windows and the container.",
+          "Bring up Compose projects and open container shells in the VS Code terminal. The interface is available in English and Korean.",
+        ],
+        disclaimer: "Haven for VS Code is an independent CELLAXON product. It is not affiliated with, endorsed, or supported by Microsoft.",
+        action: "View on VS Code Marketplace",
+        openVsxAction: "View on Open VSX",
+        helpAction: "Help & documentation",
+        tabsLabel: "Haven for VS Code screens",
+        tabs: {
+          containers: "Containers",
+          logs: "Logs",
+          files: "Files",
+        },
+        mediaAlt: {
+          containers: "VS Code with the Haven sidebar listing containers by project and a container details tab showing a failing health check",
+          logs: "Container logs in a VS Code editor tab next to the Haven sidebar",
+          files: "Haven files tab in VS Code with a Windows folder next to a container folder",
+        },
+      },
     },
     approach: {
       label: "Approach",
@@ -197,6 +221,30 @@ export const copy = {
         mediaAlt: {
           containers: "Haven Desktop의 컨테이너 목록과 상태 검사 결과가 나온 상세 패널",
           files: "Windows 폴더와 컨테이너 폴더가 나란히 나오는 Haven Desktop 파일 창",
+        },
+      },
+      havenVscode: {
+        subtitle: "VS Code에서 쓰는 WSL 컨테이너 관리 확장",
+        statement: "Haven Desktop에서 하던 컨테이너 작업을 편집기를 벗어나지 않고 그대로 이어 갑니다.",
+        points: [
+          "사이드바에서 컨테이너, 이미지, 볼륨, 네트워크, 포트의 상태를 실시간으로 확인합니다.",
+          "컨테이너를 편집기 탭으로 열어 로그를 따라가고, CPU·메모리 사용량을 보고, Windows와 컨테이너 사이에 파일을 주고받습니다.",
+          "Compose 프로젝트를 바로 올리고, VS Code 터미널에서 컨테이너 셸을 엽니다. 한국어와 영어 UI를 지원합니다.",
+        ],
+        disclaimer: "Haven for VS Code는 CELLAXON이 독자 개발한 확장으로, Microsoft와 무관하며 Microsoft가 보증하거나 지원하는 제품이 아닙니다.",
+        action: "VS Code Marketplace에서 보기",
+        openVsxAction: "Open VSX에서 보기",
+        helpAction: "문서 및 도움말",
+        tabsLabel: "Haven for VS Code 화면 선택",
+        tabs: {
+          containers: "컨테이너",
+          logs: "로그",
+          files: "파일",
+        },
+        mediaAlt: {
+          containers: "프로젝트별 컨테이너 목록이 나온 Haven 사이드바와, 상태 검사 실패가 보이는 컨테이너 상세 탭이 열린 VS Code",
+          logs: "Haven 사이드바 옆 편집기 탭에 컨테이너 로그가 나온 VS Code",
+          files: "Windows 폴더와 컨테이너 폴더가 나란히 나오는 VS Code의 Haven 파일 탭",
         },
       },
     },
