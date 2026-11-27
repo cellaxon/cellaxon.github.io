@@ -267,13 +267,15 @@ export default function HavenHelpApp({ product }: { product: HelpProduct }) {
               </section>
             ))}
 
-            <aside className="help-boundary-note">
-              <ShieldCheck aria-hidden="true" weight="duotone" />
-              <div>
-                <h2>{content.boundary.title}</h2>
-                <p>{content.boundary.body}</p>
-              </div>
-            </aside>
+            {content.boundary.title && content.boundary.body ? (
+              <aside className="help-boundary-note">
+                <ShieldCheck aria-hidden="true" weight="duotone" />
+                <div>
+                  <h2>{content.boundary.title}</h2>
+                  <p>{content.boundary.body}</p>
+                </div>
+              </aside>
+            ) : null}
           </div>
         </div>
       </main>

@@ -59,8 +59,9 @@ export type HavenHelpHero = HavenHelpEvidence & {
 
 export type HavenHelpBoundary = HavenHelpEvidence & {
   id: "product-boundary";
-  title: string;
-  body: string;
+  // The notice box at the end of the sections. Leave both out for a product that needs no notice.
+  title?: string;
+  body?: string;
   footerLine: string;
 };
 
