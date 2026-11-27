@@ -55,6 +55,7 @@ export const copy = {
         ],
         action: "View on VS Code Marketplace",
         openVsxAction: "View on Open VSX",
+        helpAction: "Help & documentation",
         mediaAlt: "CELLAXON DevPulse dashboard showing participant groups, daily Git trends, and a weekday-by-hour commit heatmap",
       },
       haven: {
@@ -198,6 +199,7 @@ export const copy = {
         ],
         action: "VS Code Marketplace에서 보기",
         openVsxAction: "Open VSX에서 보기",
+        helpAction: "문서 및 도움말",
         mediaAlt: "참여자 그룹, 일별 Git 추이, 요일·시간대 커밋 히트맵이 표시된 CELLAXON DevPulse 대시보드",
       },
       haven: {

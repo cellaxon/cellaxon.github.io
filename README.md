@@ -5,7 +5,7 @@ CELLAXON의 공식 회사·제품 홈페이지입니다. React와 Vite를 기반
 ## 소개 범위
 
 - **Ranvier** — Rust를 위한 타입 기반 의사결정 엔진
-- **CELLAXON DevPulse** — VS Code를 위한 로컬 우선 Git 활동 분석 확장
+- **CELLAXON DevPulse** — VS Code를 위한 로컬 우선 Git 활동 분석 확장. 도움말(`/products/devpulse/`)은 확장 저장소의 사용 안내(`docs/guide`)를 옮긴 것이며, 화면은 가상의 예제 저장소입니다.
 - **Haven Desktop** — Windows에서 WSL 컨테이너(`wslc`)를 관리하는 데스크톱 앱. Microsoft Store 출시 준비 중이며, 출시 전까지는 "준비 중"으로 표시하고 다운로드 링크를 두지 않습니다.
 - **Haven for VS Code** — Haven Desktop의 컨테이너 작업을 VS Code 안에서 하는 확장. VS Code Marketplace와 Open VSX에 게시되어 있습니다. 스크린샷과 도움말(`/products/haven-vscode/`)은 확장 저장소의 매뉴얼(`docs/guide`)을 옮긴 것이며, 화면은 데모 데이터입니다.
 

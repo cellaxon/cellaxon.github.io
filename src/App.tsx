@@ -402,6 +402,7 @@ function Products({ language }: { language: Language }) {
   const zoomLabels = { zoom: text.zoom, close: text.zoomClose };
   const pointsLabels = { pointsShowLabel: text.pointsShow, pointsHideLabel: text.pointsHide };
   const havenHelpUrl = language === "ko" ? "/ko/products/haven-desktop/" : "/products/haven-desktop/";
+  const devpulseHelpUrl = language === "ko" ? "/ko/products/devpulse/" : "/products/devpulse/";
   const havenVscodeHelpUrl = language === "ko" ? "/ko/products/haven-vscode/" : "/products/haven-vscode/";
   const havenTabbedScreens = havenScreens.map((screen) => ({
     id: screen.id,
@@ -439,6 +440,7 @@ function Products({ language }: { language: Language }) {
             media={<ZoomMedia src="/assets/products/ranvier-home.png" alt={ranvier.mediaAlt} width={1265} height={712} labels={zoomLabels} />}
           />
           <ProductRow
+            id="devpulse"
             reverse
             logoSrc="/assets/products/devpulse-icon.png"
             name="CELLAXON DevPulse"
@@ -452,6 +454,10 @@ function Products({ language }: { language: Language }) {
               <div className="product-links">
                 <ExternalLink href={DEVPULSE_URL}>{devpulse.action}</ExternalLink>
                 <ExternalLink href={DEVPULSE_OPENVSX_URL}>{devpulse.openVsxAction}</ExternalLink>
+                <a className="text-link" href={devpulseHelpUrl}>
+                  <BookOpenText aria-hidden="true" weight="bold" />
+                  {devpulse.helpAction}
+                </a>
               </div>
             }
             media={<ZoomMedia src="/assets/products/devpulse-dashboard.png" alt={devpulse.mediaAlt} width={1680} height={1211} labels={zoomLabels} />}

@@ -21,6 +21,8 @@ export default defineConfig({
         havenHelpKo: resolve(fileURLToPath(new URL(".", import.meta.url)), "ko/products/haven-desktop/index.html"),
         havenVscodeHelp: resolve(fileURLToPath(new URL(".", import.meta.url)), "products/haven-vscode/index.html"),
         havenVscodeHelpKo: resolve(fileURLToPath(new URL(".", import.meta.url)), "ko/products/haven-vscode/index.html"),
+        devpulseHelp: resolve(fileURLToPath(new URL(".", import.meta.url)), "products/devpulse/index.html"),
+        devpulseHelpKo: resolve(fileURLToPath(new URL(".", import.meta.url)), "ko/products/devpulse/index.html"),
       },
     },
   },
