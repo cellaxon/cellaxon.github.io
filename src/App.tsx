@@ -167,7 +167,7 @@ function Hero({ language }: { language: Language }) {
     <section className="hero shell" id="top">
       <div className="hero-copy">
         <h1>
-          <span>{text.titleLead}</span>
+          <span>{text.titleLead}</span>{" "}
           <span className="gradient-text">{text.titleAccent}</span>
         </h1>
         <p>{text.body}</p>

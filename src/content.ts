@@ -61,9 +61,9 @@ export const copy = {
         subtitle: "WSL container management for Windows",
         statement: "Manage containers, images, and logs from a clean desktop UI instead of the terminal.",
         points: [
-          "Start, stop, and inspect containers with live logs and real-time CPU and memory metrics.",
-          "Run Compose files and transfer files directly between Windows and your containers.",
-          "Open an interactive container shell right in the app, in English or Korean, with 15 light and dark color themes.",
+          "Start, stop, and inspect containers while watching their live logs and CPU and memory usage.",
+          "Bring up Compose projects, and copy files directly between Windows and your containers.",
+          "Open an interactive container shell right in the app. The interface comes in English and Korean, with 15 light and dark themes.",
         ],
         note: "Coming to the Microsoft Store.",
         disclaimer: "Haven Desktop is an independent CELLAXON product. It is not affiliated with, endorsed, or supported by Microsoft.",
@@ -115,11 +115,11 @@ export const copy = {
         },
         {
           title: "Local-first",
-          body: "Your data stays on your machine. DevPulse uploads nothing, and Haven Desktop works directly with the local tools you already have installed.",
+          body: "Your data stays on your machine. DevPulse uploads nothing, and both Haven apps drive the wslc already on your PC, going online only for registry tasks you start, such as pulling an image.",
         },
         {
           title: "Verifiable",
-          body: "Static types, commit evidence, and diagnostic logs leave a clear trail you can inspect and audit at any time.",
+          body: "Static types, commit history, and diagnostic logs leave a clear trail you can inspect and audit at any time.",
         },
       ],
     },
@@ -142,7 +142,7 @@ export const copy = {
       action: "Email us",
     },
     footer: {
-      line: "Complex work, made clear.",
+      line: "Complex systems, made visible.",
       copyright: "© 2026 CELLAXON. All rights reserved.",
     },
   },
@@ -162,7 +162,7 @@ export const copy = {
     hero: {
       titleLead: "복잡한 시스템을",
       titleAccent: "한눈에.",
-      body: "코드 속 의사결정 로직부터 Git 활동 이력, 로컬 컨테이너 환경까지. 실행 과정 이면에 가려진 흐름을 눈으로 직접 확인하고 검증하는 개발자 도구를 만듭니다.",
+      body: "코드 속 의사결정 로직부터 Git 활동 이력, 로컬 컨테이너 환경까지, 평소에는 잘 보이지 않던 흐름을 직접 확인하고 검증할 수 있는 개발자 도구를 만듭니다.",
       primary: "제품 살펴보기",
       secondary: "문의하기",
       visualAlt: "CELLAXON을 상징하는 코랄, 마젠타, 바이올렛 색상의 신경 신호 그래픽",
@@ -170,7 +170,7 @@ export const copy = {
     products: {
       label: "제품",
       title: "보이지 않던 것을 보이게.",
-      body: "터미널과 로그를 일일이 뒤져야 알 수 있던 정보를 화면 위로 꺼내 놓았습니다.",
+      body: "터미널과 로그를 일일이 뒤져야 알 수 있던 정보를 화면에서 바로 보여 줍니다.",
       availableStatus: "제공 중",
       preparingStatus: "준비 중",
       pointsShow: "주요 기능 보기",
@@ -179,7 +179,7 @@ export const copy = {
       zoomClose: "크게 보기 닫기",
       ranvier: {
         subtitle: "Rust용 타입 기반 의사결정 엔진",
-        statement: "어떤 결정이 어디서 갈리는지 코드에 그대로 드러납니다.",
+        statement: "모든 결정과 분기가 코드에 드러나, 언제든 검증할 수 있습니다.",
         points: [
           "여러 단계로 이어지는 워크플로를 타입으로 검증되는 Axon 체인으로 구성합니다.",
           "의사결정 구조를 Schematic으로 추출해 변경 사항을 CI에서 diff로 비교·검증합니다.",
@@ -205,8 +205,8 @@ export const copy = {
         statement: "복잡한 터미널 명령어 없이 컨테이너, 이미지, 로그를 한 화면에서 관리합니다.",
         points: [
           "컨테이너를 시작·중지하고 실시간 로그와 CPU·메모리 사용량을 한눈에 확인합니다.",
-          "Compose 구성을 바로 실행하고, Windows와 컨테이너 간에 파일을 손쉽게 주고받습니다.",
-          "앱 안에서 컨테이너 셸을 바로 열어 작업할 수 있으며, 한국어·영어 UI와 라이트·다크 색 테마 15가지를 지원합니다.",
+          "Compose 프로젝트를 바로 올리고, Windows와 컨테이너 사이에 파일을 손쉽게 주고받습니다.",
+          "앱 안에서 컨테이너 셸을 바로 열어 작업합니다. 화면은 한국어와 영어로 나오며, 라이트·다크 테마 15가지를 고를 수 있습니다.",
         ],
         note: "Microsoft Store 출시를 준비하고 있습니다.",
         disclaimer: "Haven Desktop은 CELLAXON이 독자 개발한 앱으로, Microsoft와 무관하며 Microsoft가 보증하거나 지원하는 제품이 아닙니다.",
@@ -258,7 +258,7 @@ export const copy = {
         },
         {
           title: "데이터는 내 PC에",
-          body: "모든 데이터는 사용자의 PC 안에서만 처리됩니다. DevPulse는 어떤 정보도 외부로 보내지 않으며, Haven Desktop은 로컬에 설치된 도구만 사용해 동작합니다.",
+          body: "데이터는 사용자의 PC에 남습니다. DevPulse는 어떤 정보도 외부로 보내지 않습니다. 두 Haven 앱은 PC에 설치된 wslc로 동작하며, 이미지 받기처럼 사용자가 시작한 레지스트리 작업에만 네트워크를 씁니다.",
         },
         {
           title: "확인할 수 있게",
@@ -269,7 +269,7 @@ export const copy = {
     company: {
       label: "회사 소개",
       title: "복잡한 개발 문제를 명쾌하게 풀어냅니다.",
-      body: "CELLAXON은 경기도 화성시에 자리한 소프트웨어 기업입니다. 백엔드 의사결정 로직부터 Git 활동 이력, 로컬 컨테이너 환경에 이르기까지, 파악하기 까다로운 개발 현장의 흐름을 직관적으로 확인하고 검증할 수 있는 도구를 만듭니다.",
+      body: "CELLAXON은 경기도 화성시에 자리한 소프트웨어 기업입니다. 백엔드 의사결정 로직부터 Git 활동 이력, 로컬 컨테이너 환경에 이르기까지, 파악하기 까다로운 개발 과정을 한눈에 확인하고 검증할 수 있는 도구를 만듭니다.",
       addressLabel: "주소",
       address: "경기도 화성시 동탄감배산로 143, 202동 2409호",
       emailLabel: "이메일",
@@ -285,7 +285,7 @@ export const copy = {
       action: "메일 보내기",
     },
     footer: {
-      line: "복잡한 개발을 더 명쾌하게.",
+      line: "복잡한 시스템을 한눈에.",
       copyright: "© 2026 CELLAXON. All rights reserved.",
     },
   },
